@@ -10,5 +10,6 @@ namespace MedApp.ViewModels
     internal class ViewModelLocator
     {
         public MainWindowViewModel MainWindowViewModel => App.Services.GetRequiredService<MainWindowViewModel>();
+        public DebugWindowViewModel DebugWindowViewModel => App.Services.GetRequiredService<DebugWindowViewModel>();
     }
 }

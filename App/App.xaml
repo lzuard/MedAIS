@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MedApp"
              xmlns:vm="clr-namespace:MedApp.ViewModels"
-             StartupUri="Views/MainWindow.xaml">
+             StartupUri="Views/DebugWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator"/>

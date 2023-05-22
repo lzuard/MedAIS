@@ -7,6 +7,7 @@ namespace MedApp.ViewModels
     {
         public static IServiceCollection AddViewModels(this IServiceCollection services) => services
             .AddSingleton<MainWindowViewModel>()
+            .AddSingleton<DebugWindowViewModel>()
             ;
     }
 }
