@@ -1,5 +1,6 @@
 ﻿
 using System;
+using System.Collections.Generic;
 
 namespace MedApp.Models.Entities
 {
@@ -49,5 +50,17 @@ namespace MedApp.Models.Entities
         /// EF navigation property
         /// </summary>
         public MedCard MedCard { get; set; }
+
+        public ICollection<AnamnesisVitae> AnamnesisVitae { get; set;}
+
+        public ICollection<Diagnoses> Diagnoses { get; set; }
+
+        public ICollection<Checkups> Checkups { get; set; }
+
+        public ICollection<Examination> Examinations { get; set; }
+
+        public ICollection<Treatment> Treatments { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }
