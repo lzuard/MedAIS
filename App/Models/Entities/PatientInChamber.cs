@@ -1,6 +1,8 @@
-﻿
+﻿using Microsoft.EntityFrameworkCore;
+
 namespace MedApp.Models.Entities
 {
+    [PrimaryKey("MedCardId", "ChamberId")]
     public class PatientInChamber
     {
         /// <summary>

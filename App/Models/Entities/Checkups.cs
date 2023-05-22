@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace MedApp.Models.Entities
 {
+    [PrimaryKey("HospitalizationId", "CheckUpId")]
     public class Checkups
     {
         /// <summary>

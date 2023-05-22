@@ -1,5 +1,8 @@
-﻿namespace MedApp.Models.Entities
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace MedApp.Models.Entities
 {
+    [PrimaryKey("HospitalizationId", "DiagnosisId")]
     public class Diagnoses
     {
         /// <summary>

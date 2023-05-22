@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,11 +57,13 @@ namespace MedApp.Models.Entities
         /// <summary>
         /// EF navigation property
         /// </summary>
-        public ICollection<Transaction> OldCabinets { get; set; }
+        [InverseProperty("OldChamber")]
+        public ICollection<Transaction> OldChamber { get; set; }
 
         /// <summary>
         /// EF navigation property
         /// </summary>
-        public ICollection<Transaction> NewCabinets { get; set; }
+        [InverseProperty("NewChamber")]
+        public ICollection<Transaction> NewChamber { get; set; }
     }
 }
