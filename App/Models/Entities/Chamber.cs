@@ -52,5 +52,15 @@ namespace MedApp.Models.Entities
         /// EF navigation property
         /// </summary>
         public ICollection<PatientInChamber> PatientsInChamber { get; set; }
+
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
+        public ICollection<Transaction> OldCabinets { get; set; }
+
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
+        public ICollection<Transaction> NewCabinets { get; set; }
     }
 }
