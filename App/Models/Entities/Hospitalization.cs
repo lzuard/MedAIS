@@ -51,16 +51,34 @@ namespace MedApp.Models.Entities
         /// </summary>
         public MedCard MedCard { get; set; }
 
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
         public ICollection<AnamnesisVitae> AnamnesisVitae { get; set;}
 
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
         public ICollection<Diagnoses> Diagnoses { get; set; }
 
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
         public ICollection<Checkups> Checkups { get; set; }
 
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
         public ICollection<Examination> Examinations { get; set; }
 
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
         public ICollection<Treatment> Treatments { get; set; }
 
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
         public ICollection<Transaction> Transactions { get; set; }
     }
 }
