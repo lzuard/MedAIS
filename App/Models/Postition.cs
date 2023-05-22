@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MedApp.Models.Entities
+namespace MedApp.Models
 {
-    public class Position
+    class Position
     {
         public int Id { get; set; }
         public string Name { get; set; }

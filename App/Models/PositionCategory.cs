@@ -1,6 +1,6 @@
 ﻿namespace MedApp.Models
 {
-    public enum PostionCategory
+    enum PostionCategory
     {
         Admin = 0,
         Doctor = 1

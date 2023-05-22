@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MedApp.Models.Entities
+namespace MedApp.Models.Data
 {
     internal partial class ApplicationContext
     {

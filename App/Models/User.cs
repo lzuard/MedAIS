@@ -1,7 +1,7 @@
 ﻿
-namespace MedApp.Models.Entities
+namespace MedApp.Models
 {
-    public class User
+    class User
     {
         public int Id { get; set; }
         public string Surname { get; set; }
