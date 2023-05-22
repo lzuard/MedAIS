@@ -2,7 +2,7 @@
 
 namespace MedApp.Models.Entities
 {
-    class Allergen
+    public class Allergen
     {
         /// <summary>
         /// Id

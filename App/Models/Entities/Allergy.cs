@@ -1,6 +1,6 @@
 ﻿namespace MedApp.Models.Entities
 {
-    class Allergy
+    public class Allergy
     {
         /// <summary>
         /// Medical card ID
