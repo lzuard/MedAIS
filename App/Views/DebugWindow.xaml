@@ -11,6 +11,6 @@
     
          
     <Grid>
-        
+        <TextBlock Text="{Binding Users}"></TextBlock>
     </Grid>
 </Window>

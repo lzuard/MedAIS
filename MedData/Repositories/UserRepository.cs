@@ -1,0 +1,18 @@
+﻿using MedData.Data;
+using MedData.Entities;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace MedData.Repositories
+{
+    internal class UserRepository : DbRepository<User>
+    {
+        public override IQueryable<User> Items => base.Items.Include(i => i.Department);
+
+        public UserRepository(ApplicationContext context) : base(context) { }
+    }
+}

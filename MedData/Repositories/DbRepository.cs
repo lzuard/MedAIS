@@ -3,7 +3,7 @@ using MedData.Entities.Base;
 using MedData.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedData
+namespace MedData.Repositories
 {
     public class DbRepository<T> : IRepository<T> where T : Entity, new()
     {
@@ -15,7 +15,7 @@ namespace MedData
         public virtual IQueryable<T> Items => _set;
 
 
-        public DbRepository(ApplicationContext context) 
+        public DbRepository(ApplicationContext context)
         {
             _context = context;
             _set = context.Set<T>();
@@ -30,7 +30,7 @@ namespace MedData
 
         public T Add(T entity)
         {
-            if(entity is null) throw new ArgumentNullException(nameof(entity));
+            if (entity is null) throw new ArgumentNullException(nameof(entity));
             _context.Entry(entity).State = EntityState.Added;
             if (AutoSaveChanges)
                 _context.SaveChanges();
@@ -66,7 +66,7 @@ namespace MedData
         {
             _context.Remove(new T { Id = id });
 
-            if(AutoSaveChanges)
+            if (AutoSaveChanges)
                 _context.SaveChanges();
         }
 

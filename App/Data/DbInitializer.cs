@@ -22,6 +22,7 @@ namespace MedApp.Data
         {
             _context = context;
             _logger = logger;
+            InitializeAsync(); // TODO: await/async
         }
 
         public async Task InitializeAsync()
@@ -30,7 +31,7 @@ namespace MedApp.Data
             _logger.LogInformation("Инициализация БД...");
 
             _logger.LogInformation("\tУдаление БД...");
-            await _context.Database.EnsureDeletedAsync().ConfigureAwait(false); //Debug delete db
+            //await _context.Database.EnsureDeletedAsync().ConfigureAwait(false); //Debug delete db
             _logger.LogInformation("\tУдаление БД выполнена за {0} мс", timer.ElapsedMilliseconds);
 
             _logger.LogInformation("\tМиграция БД...");
