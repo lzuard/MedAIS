@@ -7,7 +7,6 @@
     <UseWPF>true</UseWPF>
     <RootNamespace>MedApp</RootNamespace>
     <StartupObject>MedApp.Program</StartupObject>
-		<NoWarn>$(NoWarn);CS8618</NoWarn>
   </PropertyGroup>
 
   <ItemGroup>
