@@ -17,6 +17,6 @@ namespace MedApp.Data
             {
                 opt.UseNpgsql(configuration.GetConnectionString("Postgres"));
             })
-            ;
+            .AddTransient<DbInitializer>();
     }
 }
