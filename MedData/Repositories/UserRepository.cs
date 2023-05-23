@@ -11,7 +11,9 @@ namespace MedData.Repositories
 {
     internal class UserRepository : DbRepository<User>
     {
-        public override IQueryable<User> Items => base.Items.Include(i => i.Department);
+        public override IQueryable<User> Items => base.Items
+            .Include(i => i.Department)
+            .Include(i => i.Position);
 
         public UserRepository(ApplicationContext context) : base(context) { }
     }
