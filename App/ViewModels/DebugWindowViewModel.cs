@@ -26,13 +26,13 @@ namespace MedApp.ViewModels
         public DebugWindowViewModel(IRepository<User> userRep)
         {
             var users = userRep.Items.Take(1);
-
+            var text = "";
             foreach (var u in users)
             {
-                _users += $"{u.Id} - ФИО: {u.Surname} {u.Name} {u.Patronymic} - {u.Department.Name}\n";
+                text += u + $" - {u.Department.Name} - {u.Position.Name}";
             }
 
-
+            _users = text;
 
         }
     }
