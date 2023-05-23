@@ -27,14 +27,6 @@ namespace MedData.Data
         public DbSet<Сheckup> Checkup_s { get; set; }
 
 
-        public ApplicationContext()
-        {
-            Database.EnsureCreated(); //Create db if not existing
-        }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=MedDB;Username=postgres;Password=123");
-        }
+        public ApplicationContext(DbContextOptions options) : base(options) { }
     }
 }
