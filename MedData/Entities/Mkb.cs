@@ -6,11 +6,6 @@ namespace MedData.Entities
     public class Mkb : Entity
     {
         /// <summary>
-        /// Id of the MKB-10 code
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Actual MKB-10 code
         /// </summary>
         public string Code { get; set; }

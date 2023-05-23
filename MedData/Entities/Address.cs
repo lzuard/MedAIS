@@ -6,11 +6,6 @@ namespace MedData.Entities
     public class Address : Entity
     {
         /// <summary>
-        /// Id of the cabinet
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Country 
         /// </summary>
         public string Country { get; set; }

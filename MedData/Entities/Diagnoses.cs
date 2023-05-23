@@ -3,14 +3,8 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MedData.Entities
 {
-    [PrimaryKey("HospitalizationId", "DiagnosisId")]
     public class Diagnoses : Entity
     {
-        /// <summary>
-        /// Id of the hospitalization
-        /// </summary>
-        public int HospitalizationId { get; set; }
-
         /// <summary>
         /// Id of the diagnosis
         /// </summary>

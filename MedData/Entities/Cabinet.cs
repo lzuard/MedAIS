@@ -6,11 +6,6 @@ namespace MedData.Entities
     public class Cabinet : Entity
     {
         /// <summary>
-        /// Id of the cabinet
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Id of the department
         /// </summary>
         public int DepartmentId { get; set; }

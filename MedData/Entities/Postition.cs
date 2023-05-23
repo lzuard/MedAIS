@@ -6,11 +6,6 @@ namespace MedData.Entities
     public class Position : Entity
     {
         /// <summary>
-        /// Id of the position
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Name of the position
         /// </summary>
         public string Name { get; set; }

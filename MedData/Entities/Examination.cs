@@ -5,11 +5,6 @@ namespace MedData.Entities
     public class Examination : Entity
     {
         /// <summary>
-        /// Id of the examination
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// id of the hospitalization
         /// </summary>
         public int HospitalizationId { get; set; }

@@ -7,11 +7,6 @@ namespace MedData.Entities
     public class Chamber : Entity
     {
         /// <summary>
-        /// Chambers Id
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Chambers department id
         /// </summary>
         public int DepartmentId { get; set; }

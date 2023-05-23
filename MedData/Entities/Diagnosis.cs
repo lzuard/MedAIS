@@ -6,11 +6,6 @@ namespace MedData.Entities
     public class Diagnosis : Entity
     {
         /// <summary>
-        /// Diagnosis Id
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// MKB-10 code id
         /// </summary>
         public int MkbId { get; set; }

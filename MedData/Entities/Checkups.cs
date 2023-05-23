@@ -3,7 +3,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MedData.Entities
 {
-    [PrimaryKey("HospitalizationId", "CheckUpId")]
     public class Checkups : Entity
     {
         /// <summary>

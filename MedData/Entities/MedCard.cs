@@ -6,11 +6,6 @@ namespace MedData.Entities
     public class MedCard : Entity
     {
         /// <summary>
-        /// Medical Card ID, =Patient ID
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Patients living adress
         /// </summary>
         public int AddressID { get; set; }

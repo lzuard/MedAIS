@@ -6,11 +6,6 @@ namespace MedData.Entities
     public class Сheckup : Entity
     {
         /// <summary>
-        /// Id of the checkup
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// External inspection
         /// </summary>
         public string View { get; set; }

@@ -6,11 +6,6 @@ namespace MedData.Entities
     public class Transaction : Entity
     {
         /// <summary>
-        /// Id of the transaction
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Hospitalization id
         /// </summary>
         public int HospitalizationId { get; set; }

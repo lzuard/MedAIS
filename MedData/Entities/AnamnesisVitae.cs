@@ -6,11 +6,6 @@ namespace MedData.Entities
     public class AnamnesisVitae : Entity
     {
         /// <summary>
-        /// Anamesis ID
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// HospitalizationID
         /// </summary>
         public int HospitalizationId { get; set; }

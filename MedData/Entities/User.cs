@@ -6,11 +6,6 @@ namespace MedData.Entities
     public class User : Entity
     {
         /// <summary>
-        /// User id
-        /// </summary>
-        public int Id { get; set; }
-
-        /// <summary>
         /// Id of the department
         /// </summary>
         public int DepartmentId { get; set; }
