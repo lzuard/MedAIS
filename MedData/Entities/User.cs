@@ -1,13 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using MedData.Entities.Base;
+using System.Collections.Generic;
 
 namespace MedData.Entities
 {
-    public class User
+    public class User : Entity
     {
         /// <summary>
         /// User id
         /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// Id of the department
+        /// </summary>
+        public int DepartmentId { get; set; }
+
+        /// <summary>
+        /// Id of the postion
+        /// </summary>
+        public int PositionId { get; set; }
 
         /// <summary>
         /// User Surname
@@ -38,16 +49,6 @@ namespace MedData.Entities
         /// User phone number
         /// </summary>
         public string Phone { get; set; }
-
-        /// <summary>
-        /// Id of the department
-        /// </summary>
-        public int DepartmentId { get; set; }
-
-        /// <summary>
-        /// Id of the postion
-        /// </summary>
-        public int PositionId { get; set; }
 
         /// <summary>
         /// EF navigation property

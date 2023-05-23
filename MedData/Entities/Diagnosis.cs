@@ -1,9 +1,9 @@
-﻿using System;
+﻿using MedData.Entities.Base;
 using System.Collections.Generic;
 
 namespace MedData.Entities
 {
-    public class Diagnosis
+    public class Diagnosis : Entity
     {
         /// <summary>
         /// Diagnosis Id
@@ -11,14 +11,15 @@ namespace MedData.Entities
         public int Id { get; set; }
 
         /// <summary>
+        /// MKB-10 code id
+        /// </summary>
+        public int MkbId { get; set; }
+
+        /// <summary>
         /// Date when a doctor made this diagnosis
         /// </summary>
         public DateTime Date { get; set; }
 
-        /// <summary>
-        /// MKB-10 code id
-        /// </summary>
-        public int MkbId { get; set; }
 
         /// <summary>
         /// Syndromic diagnosis

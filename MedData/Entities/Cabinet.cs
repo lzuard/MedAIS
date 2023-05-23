@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MedData.Entities.Base;
+using System.Collections.Generic;
 
 namespace MedData.Entities
 {
-    public class Cabinet
+    public class Cabinet : Entity
     {
         /// <summary>
         /// Id of the cabinet

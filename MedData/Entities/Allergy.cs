@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MedData.Entities.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedData.Entities
 {
     [PrimaryKey("MedCardId", "AllergenId")]
-    public class Allergy
+    public class Allergy : Entity
     {
         /// <summary>
         /// Medical card ID

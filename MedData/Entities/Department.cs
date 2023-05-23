@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MedData.Entities.Base;
+using System.Collections.Generic;
 
 namespace MedData.Entities
 {
-    public class Department
+    public class Department : Entity
     {
         /// <summary>
         /// Department Id

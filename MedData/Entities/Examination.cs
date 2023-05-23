@@ -1,8 +1,8 @@
-﻿using System;
+﻿using MedData.Entities.Base;
 
 namespace MedData.Entities
 {
-    public class Examination
+    public class Examination : Entity
     {
         /// <summary>
         /// Id of the examination

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MedData;
+using MedData.Entities.Base;
 
-namespace MedData.Entities
+namespace MedData.Entities 
 {
-    public class Chamber
+    public class Chamber : Entity
     {
         /// <summary>
         /// Chambers Id

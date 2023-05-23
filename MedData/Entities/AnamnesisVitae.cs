@@ -1,7 +1,9 @@
-﻿namespace MedData.Entities
+﻿using MedData.Entities.Base;
+
+namespace MedData.Entities
 {
 
-    public class AnamnesisVitae
+    public class AnamnesisVitae : Entity
     {
         /// <summary>
         /// Anamesis ID
@@ -11,7 +13,7 @@
         /// <summary>
         /// HospitalizationID
         /// </summary>
-        public int HospitalizationID { get; set; }
+        public int HospitalizationId { get; set; }
 
         /// <summary>
         /// Patient's work period description

@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
-using MedData;
+using MedData.Entities.Base;
 
 namespace MedData.Entities
 {
-    public class Transaction
+    public class Transaction : Entity
     {
         /// <summary>
         /// Id of the transaction
@@ -16,16 +16,6 @@ namespace MedData.Entities
         public int HospitalizationId { get; set; }
 
         /// <summary>
-        /// Transaction type
-        /// </summary>
-        public TransactionType TransactionType { get; set; }
-
-        /// <summary>
-        /// Date of the transaction
-        /// </summary>
-        public DateTime Date { get; set; }
-
-        /// <summary>
         /// Chamber from
         /// </summary>
         public int OldChamberId { get; set; }
@@ -34,6 +24,16 @@ namespace MedData.Entities
         /// Chamber to
         /// </summary>
         public int NewChamberId { get; set; }
+
+        /// <summary>
+        /// Transaction type
+        /// </summary>
+        public TransactionType TransactionType { get; set; }
+
+        /// <summary>
+        /// Date of the transaction
+        /// </summary>
+        public DateTime Date { get; set; }
 
         /// <summary>
         /// SPOR string

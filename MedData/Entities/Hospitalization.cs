@@ -1,11 +1,9 @@
-﻿
-using System;
-using System.Collections.Generic;
-using MedData;
+﻿using System.Collections.Generic;
+using MedData.Entities.Base;
 
 namespace MedData.Entities
 {
-    public class Hospitalization
+    public class Hospitalization : Entity
     {
         /// <summary>
         /// Hospitalization ID

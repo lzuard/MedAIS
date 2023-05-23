@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MedData.Entities.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedData.Entities
 {
     [PrimaryKey("MedCardId", "ChamberId")]
-    public class PatientInChamber
+    public class PatientInChamber : Entity
     {
         /// <summary>
         /// Id of the medical card (patient)

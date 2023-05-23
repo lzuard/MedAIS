@@ -1,9 +1,10 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MedData.Entities.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace MedData.Entities
 {
     [PrimaryKey("HospitalizationId", "DiagnosisId")]
-    public class Diagnoses
+    public class Diagnoses : Entity
     {
         /// <summary>
         /// Id of the hospitalization

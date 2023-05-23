@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
-using MedData;
+using MedData.Entities.Base;
 
 namespace MedData.Entities
 {
-    public class Position
+    public class Position : Entity
     {
         /// <summary>
         /// Id of the position

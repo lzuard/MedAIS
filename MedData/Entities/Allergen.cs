@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using MedData.Entities.Base;
+using System.Collections.Generic;
 
 namespace MedData.Entities
 {
-    public class Allergen
+    public class Allergen : Entity
     {
         /// <summary>
-        /// Id
+        /// Id of the cabinet
         /// </summary>
         public int Id { get; set; }
 

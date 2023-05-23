@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MedData.Entities.Base;
+using System.Collections.Generic;
 
 namespace MedData.Entities
 {
-    public class Mkb
+    public class Mkb : Entity
     {
         /// <summary>
         /// Id of the MKB-10 code

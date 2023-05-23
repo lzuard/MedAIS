@@ -1,16 +1,19 @@
-﻿
-using System;
-using System.Collections.Generic;
-using MedData;
+﻿using System.Collections.Generic;
+using MedData.Entities.Base;
 
 namespace MedData.Entities
 {
-    public class MedCard
+    public class MedCard : Entity
     {
         /// <summary>
         /// Medical Card ID, =Patient ID
         /// </summary>
         public int Id { get; set; }
+
+        /// <summary>
+        /// Patients living adress
+        /// </summary>
+        public int AddressID { get; set; }
 
         /// <summary>
         /// Patients surname
@@ -51,11 +54,6 @@ namespace MedData.Entities
         /// Patients passport number
         /// </summary>
         public string PassportNumber { get; set; }
-
-        /// <summary>
-        /// Patients living adress
-        /// </summary>
-        public int AddressID { get; set; }
 
         /// <summary>
         /// Patients phone number
