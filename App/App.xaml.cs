@@ -5,7 +5,7 @@ using System.Windows;
 
 using MedApp.Services;
 using MedApp.ViewModels;
-
+using MedApp.Data;
 
 namespace MedApp
 {
@@ -32,7 +32,8 @@ namespace MedApp
         internal static void ConfigureServices(HostBuilderContext host, IServiceCollection services) => services
             .AddServices() //From services registrator
             .AddViewModels() //From viewmodels registrator
-            ;
+            .AddDatabase(host.Configuration.GetSection("Database"))
+            ; //From db registrator
 
         #region Startup/Exit override
         protected override async void OnStartup(StartupEventArgs e)
