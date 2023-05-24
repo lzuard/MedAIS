@@ -2,12 +2,20 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="RoundButtonTemplate" TargetType="Button">
-        <Border CornerRadius="40" Background="{StaticResource MWhite}">
+        <Border x:Name="border" CornerRadius="30" Background="{StaticResource MWhite}">
             <Border.Effect>
                 <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" BlurRadius="5"/>
             </Border.Effect>
             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
         </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="border" Property="Background" Value="{StaticResource ButtonOnHover}"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter TargetName="border" Property="Background" Value="{StaticResource ButtonPressed}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
 
 </ResourceDictionary>

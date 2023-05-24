@@ -4,5 +4,8 @@
 
     <SolidColorBrush x:Key="MBlue" Color="#5FB7DC"/>
     <SolidColorBrush x:Key="MWhite" Color="#EBF9FC"/>
+    <SolidColorBrush x:Key="ButtonOnHover" Color="#C4D2D6"/>
+    <SolidColorBrush x:Key="ButtonPressed" Color="#8EA8AD"/>
+     
 
 </ResourceDictionary>
