@@ -66,9 +66,10 @@ namespace MedData.Entities
         public ICollection<Chamber> Chambers { get; set; }
 
 
-        public override string ToString()
-        {
-            return Surname+ " " + Name+" "+Patronymic;
-        }
+        public override string ToString() => Surname+ " " + Name+" "+Patronymic;
+
+        public string GetNameAndPosition() => ToString() + " - " + Position.Name;
+
+        public string GetNamePositionAndPhone() => GetNameAndPosition() + " - " + Phone;
     }
 }

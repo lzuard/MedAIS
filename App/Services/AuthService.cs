@@ -1,4 +1,5 @@
 ﻿using MedApp.Services.Interfaces;
+using MedData;
 using MedData.Entities;
 using MedData.Interfaces;
 using System.Linq;
@@ -47,6 +48,27 @@ namespace MedApp.Services
         public void LogOut()
         {
             _currentUser = null;
+        }
+
+        public string GetHelp()
+        {
+            try
+            {
+                var text = "";
+                var admins = _repository.Items.Where(i => i.Department.Name.Contains("IT")==true).ToArray();
+                if (admins.Length == 0 ) throw new System.Exception();
+                foreach (var admin in admins)
+                {
+                    text += admin.GetNamePositionAndPhone() + "\n\n";
+                }
+                return text;
+            }
+            catch 
+            {
+                return "Сотрудники отдела IT не найдены!";
+            }
+            
+
         }
     }
 }

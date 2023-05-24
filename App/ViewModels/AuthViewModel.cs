@@ -51,7 +51,24 @@ namespace MedApp.ViewModels
                 _mainWindow.CurrentViewModel = new DoctorsViewModel();
 
             else
-                MessageBox.Show("Fail");
+                MessageBox.Show("Неверный пароль и/или логин!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+        }
+        #endregion
+
+        #region Help command
+        private ICommand _helpCommand;
+
+        public ICommand HelpCommand => _helpCommand
+            ??= new LambdaCommand(OnHelpCommandExecuted, CanHelpCommandExecute);
+
+
+        private bool CanHelpCommandExecute() => true;
+
+        private void OnHelpCommandExecuted()
+        {
+            var helpMessage = "Если у вас проблемы со входом, обратитесь к сотрудникам IT-отдела:\n\n";
+            helpMessage += _authService.GetHelp();
+            MessageBox.Show(helpMessage,"Помощь",MessageBoxButton.OK, MessageBoxImage.Information);
         }
         #endregion
 

@@ -14,5 +14,7 @@ namespace MedApp.Services.Interfaces
         public User? LogIn(string login, string password);
 
         public void LogOut();
+
+        public string GetHelp();
     }
 }
