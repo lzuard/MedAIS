@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:MedApp"
              xmlns:vm="clr-namespace:MedApp.ViewModels"
-             StartupUri="Views/DebugWindow.xaml">
+             StartupUri="Views/MainWindow.xaml">
     <Application.Resources>
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator"/>
@@ -11,6 +11,7 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Brashes.xaml"/>
                 <ResourceDictionary Source="Resources/Styles/TabControlStyles.xaml"/>
+                <ResourceDictionary Source="Resources/Templates/ViewTemplate.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -12,7 +12,16 @@
         WindowState="Maximized"
         
         >
-    <Grid>
-
-    </Grid>
+    <DockPanel>
+        <Menu IsMainMenu="True" DockPanel.Dock="Top">
+            <MenuItem Header="Prev" Command="{Binding PreviousViewCommand}"/>
+            <MenuItem Header="Next" Command="{Binding NextViewCommand}"/>
+        </Menu>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBarItem> Ready </StatusBarItem>
+        </StatusBar>
+        <Grid>
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
+    </DockPanel>
 </Window>
