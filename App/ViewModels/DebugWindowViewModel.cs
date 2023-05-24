@@ -1,4 +1,5 @@
-﻿using MedApp.ViewModels.Base;
+﻿using MedApp.Services.Interfaces;
+using MedApp.ViewModels.Base;
 using MedData.Entities;
 using MedData.Interfaces;
 using System.Linq;
@@ -23,14 +24,17 @@ namespace MedApp.ViewModels
             set => Set(ref _users, value);
         }
 
-        public DebugWindowViewModel(IRepository<User> userRep)
+        public DebugWindowViewModel(IRepository<User> userRep, IAuthService authService)
         {
-            var users = userRep.Items.Take(1);
             var text = "";
-            foreach (var u in users)
+            var user =authService.LogIn("adminUser", "adminUser");
+
+            if (user is not null)
             {
-                text += u + $" - {u.Department.Name} - {u.Position.Name}";
+                text += user + $" - {user.Department.Name} - {user.Position.Name}";
             }
+            else
+                text = "wrong login/password";
 
             _users = text;
 
