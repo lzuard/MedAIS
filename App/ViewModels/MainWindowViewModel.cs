@@ -1,6 +1,7 @@
 ﻿using MathCore.WPF.Commands;
 using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MedApp.ViewModels
@@ -35,30 +36,30 @@ namespace MedApp.ViewModels
 
         #region Commands
 
-        #region Next view command
-        private ICommand _nextViewCommand;
+        #region Doctor view command
+        private ICommand _doctorViewCommand;
 
-        public ICommand NextViewCommand => _nextViewCommand
-            ??= new LambdaCommand(OnNextViewCommandExecuted, CanNextViewCommandExecute);
+        public ICommand DoctorViewCommand => _doctorViewCommand
+            ??= new LambdaCommand(OnDoctorViewCommandExecuted, CanDoctorViewCommandExecute);
 
 
-        private bool CanNextViewCommandExecute() => true;
+        private bool CanDoctorViewCommandExecute() => true;
 
-        private void OnNextViewCommandExecuted()
+        private void OnDoctorViewCommandExecuted()
         {
-            CurrentViewModel = new DoctorsViewModel();
+            CurrentViewModel = new DoctorsViewModel(_authService);
         }
         #endregion
-        #region Previous view command
-        private ICommand _previousViewCommand;
+        #region Auth view command
+        private ICommand _authViewCommand;
 
-        public ICommand PreviousViewCommand => _previousViewCommand
-            ??= new LambdaCommand(OnPreviousViewCommandExecuted, CanPreviousViewCommandExecute);
+        public ICommand AuthViewCommand => _authViewCommand
+            ??= new LambdaCommand(OnAuthViewCommandExecuted, CanAuthViewCommandExecute);
 
 
-        private bool CanPreviousViewCommandExecute() => true;
+        private bool CanAuthViewCommandExecute() => true;
 
-        private void OnPreviousViewCommandExecuted()
+        private void OnAuthViewCommandExecuted()
         {
             CurrentViewModel = new AuthViewModel(_authService, this);
         }
@@ -69,6 +70,7 @@ namespace MedApp.ViewModels
         public MainWindowViewModel(IAuthService authService)
         {
             _authService = authService;
+
         }
 
     }

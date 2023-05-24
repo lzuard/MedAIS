@@ -48,7 +48,7 @@ namespace MedApp.ViewModels
             var user = _authService.LogIn(_login, _password);
 
             if (user != null)
-                _mainWindow.CurrentViewModel = new DoctorsViewModel();
+                _mainWindow.CurrentViewModel = new DoctorsViewModel(_authService);
 
             else
                 MessageBox.Show("Неверный пароль и/или логин!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);

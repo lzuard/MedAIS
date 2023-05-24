@@ -5,7 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MedApp.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="1027" d:DesignWidth="1920">
+             d:DesignHeight="1027" d:DesignWidth="1920"
+             
+             DataContext="{Binding DoctorsViewModel, Source={StaticResource Locator}}">
     <Grid Margin="-1">
         <Grid.Background>
             <ImageBrush ImageSource="../Resources/Images/Background.png"/>
@@ -34,10 +36,10 @@
                         <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="Black">
                             <WrapPanel Orientation="Vertical">
                                 <Viewbox MaxHeight="44" Stretch="Uniform" Margin="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                    <TextBlock Text="Алексеев И.И."/>
+                                    <TextBlock Text="{Binding UserName}"/>
                                 </Viewbox>
                                 <Viewbox MaxHeight="29" Stretch="Uniform" Margin="6,0,6,6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                                    <TextBlock Text="Кардиолог"/>
+                                    <TextBlock Text="{Binding UserPosition}"/>
                                 </Viewbox>
                             </WrapPanel>
                         </Border>
