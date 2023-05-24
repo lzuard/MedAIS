@@ -9,13 +9,19 @@
             <Border.Effect>
                 <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" BlurRadius="5"/>
             </Border.Effect>
-            <TextBox Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
+            <TextBox x:Name="textBox"
+                     Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
                      VerticalAlignment="Center"
                      HorizontalAlignment="Stretch"
                      Background="{StaticResource MWhite}"
                      BorderThickness="0"
                      Margin="20,0,20,0"/>
         </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter TargetName="textBox" Property="Background" Value="{StaticResource ButtonOnHover}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
     </ControlTemplate>
     
 </ResourceDictionary>

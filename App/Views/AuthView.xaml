@@ -66,7 +66,8 @@
                     <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
                              FontSize="30" Padding="5" 
                              Text="{Binding Login}"
-                             Template="{StaticResource RoundTextBox}"/>
+                             Template="{StaticResource RoundTextBox}"
+                             TabIndex="0"/>
 
                 </Grid>
                 <!--#endregion LoginBox-->
@@ -91,7 +92,8 @@
                     <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
                              FontSize="30" Padding="5" 
                              Text="{Binding Password}"
-                             Template="{StaticResource RoundTextBox}"/>
+                             Template="{StaticResource RoundTextBox}"
+                             TabIndex="1"/>
 
                 </Grid>
                 <!--#endregion PasswordBox-->
@@ -104,11 +106,18 @@
                     <Button Grid.Column="0" Margin="0,40,10,40"
                         Content="Помощь" FontSize="32"
                         Command="{Binding HelpCommand}" 
-                        Template="{StaticResource RoundButtonTemplate}"/>
+                        Template="{StaticResource RoundButtonTemplate}"
+                            IsTabStop="False"/>
                     <Button Grid.Column="1" Margin="10,40,0,40"
-                        Content="Войти"  FontSize="32"
-                        Command="{Binding AuthCommand}" 
-                        Template="{StaticResource RoundButtonTemplate}"/>
+                            Content="Войти"  FontSize="32"
+                            Command="{Binding AuthCommand}" 
+                            Template="{StaticResource RoundButtonTemplate}"
+                            TabIndex="3">
+                        <Button.InputBindings>
+                            <KeyBinding Key="Enter" 
+                                        Command="{Binding AuthCommand}"/>
+                        </Button.InputBindings>
+                    </Button>
 
                 </Grid>
                 

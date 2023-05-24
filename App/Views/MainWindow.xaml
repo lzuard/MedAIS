@@ -19,14 +19,16 @@
     </b:Interaction.Triggers>
     <DockPanel>
         <Menu IsMainMenu="True" DockPanel.Dock="Top">
-            <MenuItem Header="Prev" Command="{Binding PreviousViewCommand}"/>
-            <MenuItem Header="Next" Command="{Binding NextViewCommand}"/>
+            <MenuItem Header="Prev" Command="{Binding PreviousViewCommand}" 
+                      IsTabStop="False"/>
+            <MenuItem Header="Next" Command="{Binding NextViewCommand}"
+                      IsTabStop="False"/>
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem> Ready </StatusBarItem>
         </StatusBar>
         <Grid>
-            <ContentControl Content="{Binding CurrentViewModel}"/>
+            <ContentControl Content="{Binding CurrentViewModel}" IsTabStop="False"/>
         </Grid>
     </DockPanel>
 </Window>
