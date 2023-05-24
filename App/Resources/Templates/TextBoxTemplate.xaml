@@ -1,0 +1,21 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="RoundTextBox" TargetType="{x:Type TextBox}">
+        <Border x:Name="border" 
+                CornerRadius="30" 
+                Background="{StaticResource MWhite}"
+                BorderThickness="1" BorderBrush="{StaticResource MWhite}">
+            <Border.Effect>
+                <DropShadowEffect Color="Black" Direction="320" ShadowDepth="3" BlurRadius="5"/>
+            </Border.Effect>
+            <TextBox Text="{Binding Text, RelativeSource={RelativeSource TemplatedParent}}"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Stretch"
+                     Background="{StaticResource MWhite}"
+                     BorderThickness="0"
+                     Margin="20,0,20,0"/>
+        </Border>
+    </ControlTemplate>
+    
+</ResourceDictionary>

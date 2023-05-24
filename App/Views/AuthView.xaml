@@ -55,14 +55,18 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Border Grid.Column="0" Grid.Row="0" Background="{StaticResource MWhite}" CornerRadius="40,40,0,0">
+                    <Border Grid.Column="0" Grid.Row="0" 
+                            Background="{StaticResource MWhite}" 
+                            CornerRadius="40,40,0,0"
+                            Margin="40,0,0,0">
                         <Viewbox>
                             <TextBlock Text="Ваш Логин:"/>
                         </Viewbox>
                     </Border>
                     <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
-                             Background="White" BorderThickness="1" BorderBrush="{StaticResource MWhite}" 
-                             FontSize="30" TextAlignment="Left" Padding="5" Text="{Binding Login}"/>
+                             FontSize="30" Padding="5" 
+                             Text="{Binding Login}"
+                             Template="{StaticResource RoundTextBox}"/>
 
                 </Grid>
                 <!--#endregion LoginBox-->
@@ -76,14 +80,18 @@
                         <RowDefinition/>
                         <RowDefinition/>
                     </Grid.RowDefinitions>
-                    <Border Grid.Column="0" Grid.Row="0" Background="{StaticResource MWhite}" CornerRadius="40,40,0,0">
+                    <Border Grid.Column="0" Grid.Row="0" 
+                            Background="{StaticResource MWhite}" 
+                            CornerRadius="40,40,0,0"
+                            Margin="40,0,0,0">
                         <Viewbox>
                             <TextBlock Text="Ваш Пароль:"/>
                         </Viewbox>
                     </Border>
                     <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
-                             Background="White" BorderThickness="1" BorderBrush="{StaticResource MWhite}" 
-                             FontSize="30" Padding="5" Text="{Binding Password}"/>
+                             FontSize="30" Padding="5" 
+                             Text="{Binding Password}"
+                             Template="{StaticResource RoundTextBox}"/>
 
                 </Grid>
                 <!--#endregion PasswordBox-->

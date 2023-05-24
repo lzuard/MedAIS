@@ -26,17 +26,17 @@ namespace MedApp.ViewModels
 
         public DebugWindowViewModel(IRepository<User> userRep, IAuthService authService)
         {
-            var text = "";
-            var user =authService.LogIn("adminUser", "adminUser");
+            //var text = "";
+            //var user =authService.LogIn("adminUser", "adminUser");
 
-            if (user is not null)
-            {
-                text += user + $" - {user.Department.Name} - {user.Position.Name}";
-            }
-            else
-                text = "wrong login/password";
+            //if (user is not null)
+            //{
+            //    text += user + $" - {user.Department.Name} - {user.Position.Name}";
+            //}
+            //else
+            //    text = "wrong login/password";
 
-            _users = text;
+            //_users = text;
 
         }
     }

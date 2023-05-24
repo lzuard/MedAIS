@@ -78,12 +78,6 @@ namespace MedApp.ViewModels
         {
             _authService = authService;
             _mainWindow = mainWindow;
-            var user = authService.LogIn(_login, _password);
-
-            if (user != null)
-            {
-                _login = "suc";
-            }
         }
     }
 }
