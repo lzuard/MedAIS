@@ -5,8 +5,160 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MedApp.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="DOCTOR" FontSize="30"/>
+             d:DesignHeight="1027" d:DesignWidth="1920">
+    <Grid Margin="-1">
+        <Grid.Background>
+            <ImageBrush ImageSource="../Resources/Images/Background.png"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="361"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!-- #region LeftMenu-->
+        <Border Grid.Column="0" BorderThickness="1" CornerRadius="0,40,40,0" 
+                Background="{StaticResource MBlue}" Margin="0">
+            <WrapPanel Orientation="Vertical">
+                <!-- #region LoginBox -->
+                <!-- Main border -->
+                <Border Height="98" Width="351" BorderThickness="1" Background="{StaticResource MWhite}" 
+                        CornerRadius="0,40,0,0" Margin="-1,9,9,9" >
+                    <Border.Effect>
+                        <DropShadowEffect Direction="-90" Opacity="2" ShadowDepth="1"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="265"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!-- Text border -->
+                        <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="Black">
+                            <WrapPanel Orientation="Vertical">
+                                <Viewbox MaxHeight="44" Stretch="Uniform" Margin="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <TextBlock Text="Алексеев И.И."/>
+                                </Viewbox>
+                                <Viewbox MaxHeight="29" Stretch="Uniform" Margin="6,0,6,6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <TextBlock Text="Кардиолог"/>
+                                </Viewbox>
+                            </WrapPanel>
+                        </Border>
+                        <!-- Button -->
+                        <Button Grid.Column="1" Background="{StaticResource MWhite}" BorderThickness="0">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="0,40,0,0"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect Direction="260" Opacity="2" ShadowDepth="1"/>
+                            </Button.Effect>
+                            <Image Source="../Resources/Images/ExitIcon.png" Margin="13,19,13,19"/>
+                        </Button>
+                    </Grid>
+                </Border>
+                <!-- #endregion -->
+
+                <!-- #Region List of patients -->
+                <ListBox ItemsSource="{Binding Patients}" 
+                         Background="{StaticResource MBlue}" Margin="-1,0,0,0"
+                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                         ScrollViewer.VerticalScrollBarVisibility="Hidden" 
+                         Height="820" Width="361">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Border>
+                                <Border.Effect>
+                                    <DropShadowEffect Direction="-90" Opacity="2" ShadowDepth="1"/>
+                                </Border.Effect>
+                                <StackPanel Orientation="Horizontal" Background="{StaticResource MWhite}" 
+                                            Height="62" Width="352" Margin="-1,12,0,12">
+                                    <Border BorderThickness="0,0,1,0" BorderBrush="Black">
+                                        <Image Source="/Resources/Icons/UserIcon.png" Margin="8"/>
+                                    </Border>
+                                    <Viewbox MaxHeight="44" Stretch="Uniform" Margin="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                        <TextBlock Text="{Binding}"/>
+                                    </Viewbox>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <!-- #endregion -->
+            </WrapPanel>
+
+        </Border>
+        <!-- #endregion-->
+        <!-- #region WorkArea -->
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="112"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <!-- #region Top panel -->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <!-- Outline border -->
+                <Border Grid.Column="1" BorderThickness="1" CornerRadius="40,40,0,0" 
+                        Background="{StaticResource MBlue}" Margin="23,23,23,-1"
+                        Visibility="{Binding IsWorkAreaVisible}">
+                    <!-- Inline border -->
+                    <Border BorderThickness="1" CornerRadius="40,40,0,0" 
+                            Background="{StaticResource MWhite}" Margin="9,9,9,0"
+                            Visibility="{Binding IsWorkAreaVisible}">
+                        <!-- Patient name -->
+                        <Viewbox MaxHeight="68" Stretch="Uniform" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <TextBlock Text="Смирнов Андрей Петрович"/>
+                        </Viewbox>
+                    </Border>
+                </Border>
+            </Grid>
+            <!-- #endregion -->
+
+            <Border Grid.Row="1" BorderThickness="1" CornerRadius="40,0,0,40" 
+                    Background="#5FB7DC" Margin="23,-1,23,23"
+                    Visibility="{Binding IsWorkAreaVisible}">
+
+                <TabControl Style="{StaticResource TabControlStyle}">
+                    <TabItem x:Name="Card">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Resources/Images/CardIcon.png" Height="60" Margin="10,0,0,0"/>
+                                <TextBlock Text="Карта" FontSize="26" HorizontalAlignment="Center" Margin="9"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                    </TabItem>
+                    <TabItem x:Name="Analyses" >
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Resources/Images/AnalysesIcon.png" Height="60" Margin="10,0,0,0"/>
+                                <TextBlock Text="Исследования" FontSize="26" HorizontalAlignment="Center" Margin="9"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                    </TabItem>
+                    <TabItem x:Name="History">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Resources/Images/HistoryIcon.png" Height="60" Margin="2,0,0,0"/>
+                                <TextBlock Text="История" FontSize="26" HorizontalAlignment="Center" Margin="9"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                    </TabItem>
+                    <TabItem x:Name="Info">
+                        <TabItem.Header>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Resources/Images/InfoIcon.png" Height="60" Margin="10,0,0,0"/>
+                                <TextBlock Text="Информация" FontSize="26" HorizontalAlignment="Center" Margin="9"/>
+                            </StackPanel>
+                        </TabItem.Header>
+                    </TabItem>
+
+                </TabControl>
+            </Border>
+        </Grid>
+        <!-- #endregion -->
+
+
     </Grid>
 </UserControl>

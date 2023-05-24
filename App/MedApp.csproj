@@ -10,7 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Resources\Images\AnalysesIcon.png" />
     <None Remove="Resources\Images\Background.png" />
+    <None Remove="Resources\Images\CardIcon.png" />
+    <None Remove="Resources\Images\ExitIcon.png" />
+    <None Remove="Resources\Images\HistoryIcon.png" />
+    <None Remove="Resources\Images\InfoIcon.png" />
+    <None Remove="Resources\Images\UserIcon.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -44,9 +50,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Resources\Images\AnalysesIcon.png" />
     <Resource Include="Resources\Images\Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
+    <Resource Include="Resources\Images\CardIcon.png" />
+    <Resource Include="Resources\Images\ExitIcon.png" />
+    <Resource Include="Resources\Images\HistoryIcon.png" />
+    <Resource Include="Resources\Images\InfoIcon.png" />
+    <Resource Include="Resources\Images\UserIcon.png" />
   </ItemGroup>
 
 </Project>
