@@ -1,4 +1,5 @@
 ﻿using MathCore.WPF.Commands;
+using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
 using System.Windows.Input;
 
@@ -6,6 +7,8 @@ namespace MedApp.ViewModels
 {
     internal class MainWindowViewModel:ViewModelBase
     {
+        private IAuthService _authService;
+
         #region Properties
 
         #region Window Title
@@ -57,15 +60,15 @@ namespace MedApp.ViewModels
 
         private void OnPreviousViewCommandExecuted()
         {
-            CurrentViewModel = new AuthViewModel();
+            CurrentViewModel = new AuthViewModel(_authService, this);
         }
         #endregion
 
         #endregion
 
-        public MainWindowViewModel()
+        public MainWindowViewModel(IAuthService authService)
         {
-
+            _authService = authService;
         }
 
     }

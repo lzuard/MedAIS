@@ -5,8 +5,96 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MedApp.Views"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             
+             DataContext="{Binding AuthViewModel ,Source={StaticResource Locator}}"
+             >
     <Grid>
-        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="AUTH" FontSize="30"/>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Resources/Images/Background.png"/>
+        </Grid.Background>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1.8*"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0" Grid.Column="1" Background="{StaticResource MBlue}" CornerRadius="40" Margin="20">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.15*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="0.15*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <!--#region TopBox-->
+                <Border Grid.Column="1" Grid.Row="0" Background="{StaticResource MWhite}" CornerRadius="0,0,40,40">
+                    <Border.Effect>
+                        <DropShadowEffect ShadowDepth="1"/>
+                    </Border.Effect>
+                    <Viewbox Margin="10">
+                        <TextBlock Text="Вход в систему" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Viewbox>
+                </Border>
+                <!--#endregion TopBox-->
+                <!--#region LoginBox-->
+                <Grid Grid.Column="1" Grid.Row="1" Margin="0,20,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Column="0" Grid.Row="0" Background="{StaticResource MWhite}" CornerRadius="40,40,0,0">
+                        <Viewbox>
+                            <TextBlock Text="Ваш Логин:"/>
+                        </Viewbox>
+                    </Border>
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
+                             Background="White" BorderThickness="1" BorderBrush="{StaticResource MWhite}" 
+                             FontSize="30" TextAlignment="Left" Padding="5" Text="{Binding Login}"/>
+
+                </Grid>
+                <!--#endregion LoginBox-->
+                <!--#region PasswordBox-->
+                <Grid Grid.Column="1" Grid.Row="2" Margin="0,20,0,20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Border Grid.Column="0" Grid.Row="0" Background="{StaticResource MWhite}" CornerRadius="40,40,0,0">
+                        <Viewbox>
+                            <TextBlock Text="Ваш Пароль:"/>
+                        </Viewbox>
+                    </Border>
+                    <TextBox Grid.Row="1" Grid.ColumnSpan="2" 
+                             Background="White" BorderThickness="1" BorderBrush="{StaticResource MWhite}" 
+                             FontSize="30" Padding="5" Text="{Binding Password}"/>
+
+                </Grid>
+                <!--#endregion PasswordBox-->
+                <!--#region Buttons-->
+
+                <Button Grid.Column="1" Grid.Row="3" Margin="0,20,0,20"
+                        Content="Войти" Command="{Binding AuthCommand}"/>
+
+                <!--#endregion Buttons-->
+            </Grid>
+        </Border>
+        
     </Grid>
 </UserControl>

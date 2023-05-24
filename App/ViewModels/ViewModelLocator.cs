@@ -11,5 +11,9 @@ namespace MedApp.ViewModels
     {
         public MainWindowViewModel MainWindowViewModel => App.Services.GetRequiredService<MainWindowViewModel>();
         public DebugWindowViewModel DebugWindowViewModel => App.Services.GetRequiredService<DebugWindowViewModel>();
+
+        public AuthViewModel AuthViewModel =>App.Services.GetRequiredService<AuthViewModel>();
+
+        public DoctorsViewModel DoctorsViewModel => App.Services.GetRequiredService<DoctorsViewModel>();
     }
 }
