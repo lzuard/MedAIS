@@ -1,4 +1,5 @@
 ﻿using MedApp.Services.Interfaces;
+using MedData.Entities;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace MedApp.Services
@@ -7,7 +8,7 @@ namespace MedApp.Services
     {
         public static IServiceCollection AddServices(this IServiceCollection services) => services
         .AddTransient<IAuthService, AuthService>()
-        .AddTransient<IDepartmentProvider,  DepartmentProvider>()
+        .AddTransient<IEntitiesCollectionProvider<Department>,  EntityCollectionProvider<Department>>()
         ;
     }
 }

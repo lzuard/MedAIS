@@ -1,6 +1,7 @@
 ﻿using MathCore.WPF.Commands;
 using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
+using MedData.Entities;
 using System.Windows.Input;
 
 namespace MedApp.ViewModels
@@ -8,7 +9,7 @@ namespace MedApp.ViewModels
     internal class MainWindowViewModel:ViewModelBase
     {
         private readonly IAuthService _authService;
-        private readonly IDepartmentProvider _departmentProvider;
+        private readonly IEntitiesCollectionProvider<Department> _departmentProvider;
         private readonly AuthViewModel _authViewModel;
         private readonly DoctorsViewModel _doctorsViewModel;
         private readonly PatientViewModel _patientViewModel;
@@ -99,7 +100,7 @@ namespace MedApp.ViewModels
         }
 
         public MainWindowViewModel(IAuthService authService,
-            IDepartmentProvider departmentProvider,
+            IEntitiesCollectionProvider<Department> departmentProvider,
             AuthViewModel authViewModel, 
             DoctorsViewModel doctorsViewModel,
             PatientViewModel patientViewModel,

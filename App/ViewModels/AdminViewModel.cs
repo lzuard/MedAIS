@@ -16,7 +16,7 @@ namespace MedApp.ViewModels
     {
         private MainWindowViewModel _mainWindow;
         private IAuthService _authService;
-        private IDepartmentProvider _departmentProvider;
+        private IEntitiesCollectionProvider<Department> _departmentProvider;
 
         #region Properties
 
@@ -99,7 +99,7 @@ namespace MedApp.ViewModels
 
         public void Activate(MainWindowViewModel mainWindowViewModel, 
             IAuthService authService, 
-            IDepartmentProvider departmentProvider)
+            IEntitiesCollectionProvider<Department> departmentProvider)
         {
             _departmentProvider = departmentProvider;
 

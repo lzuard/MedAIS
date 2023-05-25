@@ -1,5 +1,6 @@
 ﻿using MedApp.Services.Interfaces;
 using MedData.Entities;
+using MedData.Entities.Base;
 using MedData.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -8,19 +9,19 @@ using System.Linq;
 
 namespace MedApp.Services
 {
-    public class DepartmentProvider : IDepartmentProvider
+    public class EntityCollectionProvider<T> : IEntitiesCollectionProvider<T> where T : Entity, new()
     {
-        private readonly IRepository<Department> _departmentsRepo;
+        private readonly IRepository<T> _departmentsRepo;
 
-        public DepartmentProvider(IRepository<Department> departmentsRepo)
+        public EntityCollectionProvider(IRepository<T> departmentsRepo)
         {
             _departmentsRepo = departmentsRepo;
         }
 
-        public IEnumerable<Department> GetValues() => 
+        public IEnumerable<T> GetValues() => 
             _departmentsRepo.Items.ToList();
 
-        public bool WriteValues(IEnumerable<Department> value)
+        public bool WriteValues(IEnumerable<T> value)
         {
             try
             {
