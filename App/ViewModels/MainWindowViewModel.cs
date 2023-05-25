@@ -1,6 +1,10 @@
 ﻿using MathCore.WPF.Commands;
+using MedApp.Data;
+using MedApp.Services;
 using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
+using Microsoft.Extensions.Logging;
+using System;
 using System.Windows;
 using System.Windows.Input;
 
@@ -8,7 +12,11 @@ namespace MedApp.ViewModels
 {
     internal class MainWindowViewModel:ViewModelBase
     {
-        private IAuthService _authService;
+        private readonly IAuthService _authService;
+        private readonly AuthViewModel _authViewModel;
+        private readonly DoctorsViewModel _doctorsViewModel;
+
+        public IAuthService AuthService { get => _authService; }
 
         #region Properties
 
@@ -47,7 +55,7 @@ namespace MedApp.ViewModels
 
         private void OnDoctorViewCommandExecuted()
         {
-            CurrentViewModel = new DoctorsViewModel(_authService);
+            SetCurentViewModel(1);
         }
         #endregion
         #region Auth view command
@@ -61,16 +69,41 @@ namespace MedApp.ViewModels
 
         private void OnAuthViewCommandExecuted()
         {
-            CurrentViewModel = new AuthViewModel(_authService, this);
+            SetCurentViewModel(0);
         }
         #endregion
 
         #endregion
 
-        public MainWindowViewModel(IAuthService authService)
+        /// <summary>
+        /// Changes curent view on MainWindow
+        /// 0 - Auth View;
+        /// 1 - Doctors View;
+        /// </summary>
+        public void SetCurentViewModel(int number)
+        {
+            switch (number)
+            {
+                case 0:
+                    _authViewModel.Activate(this, _authService);
+                    CurrentViewModel = _authViewModel; 
+                    break;
+                case 1:
+                    _doctorsViewModel.Activate(this, _authService);
+                    CurrentViewModel = _doctorsViewModel;
+                    break;
+                default:
+                    throw new System.NotImplementedException();
+            }
+        }
+
+        public MainWindowViewModel(IAuthService authService, AuthViewModel authViewModel, DoctorsViewModel doctorsViewModel)
         {
             _authService = authService;
-
+            _authViewModel = authViewModel;
+            _doctorsViewModel = doctorsViewModel;
+           
+            SetCurentViewModel(0);
         }
 
     }

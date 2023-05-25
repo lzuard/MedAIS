@@ -8,12 +8,12 @@ namespace MedApp.Services
 {
     internal class AuthService : IAuthService
     {
-        private User? _currentUser = null;
         private readonly IRepository<User> _repository;
+        private User? _curentUser;
 
         public User? CurrentUser
         {
-            get => _currentUser;
+            get => _curentUser;
         }
 
         public AuthService (IRepository<User> repository)
@@ -32,8 +32,8 @@ namespace MedApp.Services
                 var user = _repository.Items.First(l => l.Login == login);
                 if (user.Password == password)
                 {
-                    _currentUser = user;
-                    return _currentUser;
+                    _curentUser = user;
+                    return user;
                 }
                 else
                     throw new System.InvalidOperationException();
@@ -47,7 +47,7 @@ namespace MedApp.Services
 
         public void LogOut()
         {
-            _currentUser = null;
+            _curentUser = null;
         }
 
         public string GetHelp()

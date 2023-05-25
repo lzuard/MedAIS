@@ -44,7 +44,10 @@
                             </WrapPanel>
                         </Border>
                         <!-- Button -->
-                        <Button Grid.Column="1" Background="{StaticResource MWhite}" BorderThickness="0">
+                        <Button Grid.Column="1" 
+                                Background="{StaticResource MWhite}" 
+                                BorderThickness="0"
+                                Command="{Binding LogOutCommand}">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="0,40,0,0"/>

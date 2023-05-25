@@ -16,8 +16,8 @@ namespace MedApp.ViewModels
 {
     internal class AuthViewModel:ViewModelBase
     {
+        private MainWindowViewModel? _mainWindow;
         private IAuthService _authService;
-        private MainWindowViewModel _mainWindow;
 
         private string? _login;
         public string Login
@@ -48,7 +48,7 @@ namespace MedApp.ViewModels
             var user = _authService.LogIn(_login, _password);
 
             if (user != null)
-                _mainWindow.CurrentViewModel = new DoctorsViewModel(_authService);
+                _mainWindow.SetCurentViewModel(1);
 
             else
                 MessageBox.Show("Неверный пароль и/или логин!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -72,12 +72,10 @@ namespace MedApp.ViewModels
         }
         #endregion
 
-
-
-        public AuthViewModel(IAuthService authService, MainWindowViewModel mainWindow) 
+        public void Activate(MainWindowViewModel mainWindow, IAuthService authService)
         {
-            _authService = authService;
             _mainWindow = mainWindow;
+            _authService = authService;
         }
     }
 }
