@@ -20,5 +20,9 @@ namespace MedData.Entities
         /// </summary>
         public ICollection<User> Users { get; set; }
 
+        public override string ToString()
+        {
+            return Name;
+        }
     }
 }
