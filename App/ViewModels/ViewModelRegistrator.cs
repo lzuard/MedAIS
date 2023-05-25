@@ -10,6 +10,7 @@ namespace MedApp.ViewModels
             .AddSingleton<DebugWindowViewModel>()
             .AddSingleton<AuthViewModel>()
             .AddSingleton<DoctorsViewModel>()
+            .AddSingleton<PatientViewModel>()
             ;
     }
 }

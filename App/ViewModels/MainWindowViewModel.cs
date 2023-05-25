@@ -10,6 +10,7 @@ namespace MedApp.ViewModels
         private readonly IAuthService _authService;
         private readonly AuthViewModel _authViewModel;
         private readonly DoctorsViewModel _doctorsViewModel;
+        private readonly PatientViewModel _patientViewModel;
 
         #region Properties
 
@@ -83,7 +84,7 @@ namespace MedApp.ViewModels
                     CurrentViewModel = _authViewModel; 
                     break;
                 case 1:
-                    _doctorsViewModel.Activate(this, _authService);
+                    _doctorsViewModel.Activate(this, _authService, _patientViewModel);
                     CurrentViewModel = _doctorsViewModel;
                     break;
                 default:
@@ -91,13 +92,19 @@ namespace MedApp.ViewModels
             }
         }
 
-        public MainWindowViewModel(IAuthService authService, AuthViewModel authViewModel, DoctorsViewModel doctorsViewModel)
+        public MainWindowViewModel(IAuthService authService, 
+            AuthViewModel authViewModel, 
+            DoctorsViewModel doctorsViewModel,
+            PatientViewModel patientViewModel)
         {
             _authService = authService;
             _authViewModel = authViewModel;
             _doctorsViewModel = doctorsViewModel;
-           
-            SetCurentViewModel(0);
+            _patientViewModel = patientViewModel;
+
+            //debug
+            _authService.LogIn("1", "1");
+            SetCurentViewModel(1);
         }
 
     }

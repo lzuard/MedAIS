@@ -19,10 +19,13 @@
         <!-- #region LeftMenu-->
         <Border Grid.Column="0" BorderThickness="1" CornerRadius="0,40,40,0" 
                 Background="{StaticResource MBlue}" Margin="0">
-            <WrapPanel Orientation="Vertical">
+            <DockPanel Margin="0,10,0,10"
+                        VerticalAlignment="Stretch" 
+                        HorizontalAlignment="Center" >
                 <!-- #region LoginBox -->
                 <!-- Main border -->
-                <Border Height="98" Width="351" BorderThickness="1" Background="{StaticResource MWhite}" 
+                <Border DockPanel.Dock="Top"
+                    Height="98" Width="351" BorderThickness="1" Background="{StaticResource MWhite}" 
                         CornerRadius="0,40,0,0" Margin="-1,9,9,9" >
                     <Border.Effect>
                         <DropShadowEffect Direction="-90" Opacity="2" ShadowDepth="1"/>
@@ -62,12 +65,53 @@
                 </Border>
                 <!-- #endregion -->
 
+                 <!-- #region New patient -->
+                <Border DockPanel.Dock="Bottom" 
+                    Height="50" Width="351" BorderThickness="1" Background="{StaticResource MWhite}" 
+                        CornerRadius="0,0,40,0" Margin="-1,9,9,9" >
+                    <Border.Effect>
+                        <DropShadowEffect Direction="-90" Opacity="2" ShadowDepth="1"/>
+                    </Border.Effect>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="265"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <!-- Text border -->
+                        <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="Black">
+                            <WrapPanel Orientation="Vertical">
+                                <Viewbox MaxHeight="44" Stretch="Uniform" Margin="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <TextBlock Text="Новый пациент"/>
+                                </Viewbox>
+                             
+                            </WrapPanel>
+                        </Border>
+                        <!-- Button -->
+                        <Button Grid.Column="1" 
+                                Background="{StaticResource MWhite}" 
+                                BorderThickness="0"
+                                Content="+"
+                                Command="{Binding LogOutCommand}">
+                            <Button.Resources>
+                                <Style TargetType="Border">
+                                    <Setter Property="CornerRadius" Value="0,0,40,0"/>
+                                </Style>
+                            </Button.Resources>
+                            <Button.Effect>
+                                <DropShadowEffect Direction="260" Opacity="2" ShadowDepth="1"/>
+                            </Button.Effect>
+                        </Button>
+                    </Grid>
+                </Border>
+                <!-- #endregion -->
+                
                 <!-- #Region List of patients -->
-                <ListBox ItemsSource="{Binding Patients}" 
-                         Background="{StaticResource MBlue}" Margin="-1,0,0,0"
+                <ListBox DockPanel.Dock="Left"
+                    ItemsSource="{Binding Patients}" 
+                         Background="{StaticResource MBlue}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          ScrollViewer.VerticalScrollBarVisibility="Hidden" 
-                         Height="820" Width="361">
+                         Width="361">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border>
@@ -88,80 +132,19 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
                 <!-- #endregion -->
-            </WrapPanel>
+
+                <!-- #region LoginBox -->
+                <!-- Main border -->
+                
+                <!-- #endregion -->
+            </DockPanel>
 
         </Border>
         <!-- #endregion-->
         <!-- #region WorkArea -->
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="112"/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-            <!-- #region Top panel -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <!-- Outline border -->
-                <Border Grid.Column="1" BorderThickness="1" CornerRadius="40,40,0,0" 
-                        Background="{StaticResource MBlue}" Margin="23,23,23,-1"
-                        Visibility="{Binding IsWorkAreaVisible}">
-                    <!-- Inline border -->
-                    <Border BorderThickness="1" CornerRadius="40,40,0,0" 
-                            Background="{StaticResource MWhite}" Margin="9,9,9,0"
-                            Visibility="{Binding IsWorkAreaVisible}">
-                        <!-- Patient name -->
-                        <Viewbox MaxHeight="68" Stretch="Uniform" Margin="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
-                            <TextBlock Text="Смирнов Андрей Петрович"/>
-                        </Viewbox>
-                    </Border>
-                </Border>
-            </Grid>
-            <!-- #endregion -->
 
-            <Border Grid.Row="1" BorderThickness="1" CornerRadius="40,0,0,40" 
-                    Background="#5FB7DC" Margin="23,-1,23,23"
-                    Visibility="{Binding IsWorkAreaVisible}">
-
-                <TabControl Style="{StaticResource TabControlStyle}">
-                    <TabItem x:Name="Card">
-                        <TabItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="../Resources/Images/CardIcon.png" Height="60" Margin="10,0,0,0"/>
-                                <TextBlock Text="Карта" FontSize="26" HorizontalAlignment="Center" Margin="9"/>
-                            </StackPanel>
-                        </TabItem.Header>
-                    </TabItem>
-                    <TabItem x:Name="Analyses" >
-                        <TabItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="../Resources/Images/AnalysesIcon.png" Height="60" Margin="10,0,0,0"/>
-                                <TextBlock Text="Исследования" FontSize="26" HorizontalAlignment="Center" Margin="9"/>
-                            </StackPanel>
-                        </TabItem.Header>
-                    </TabItem>
-                    <TabItem x:Name="History">
-                        <TabItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="../Resources/Images/HistoryIcon.png" Height="60" Margin="2,0,0,0"/>
-                                <TextBlock Text="История" FontSize="26" HorizontalAlignment="Center" Margin="9"/>
-                            </StackPanel>
-                        </TabItem.Header>
-                    </TabItem>
-                    <TabItem x:Name="Info">
-                        <TabItem.Header>
-                            <StackPanel Orientation="Horizontal">
-                                <Image Source="../Resources/Images/InfoIcon.png" Height="60" Margin="10,0,0,0"/>
-                                <TextBlock Text="Информация" FontSize="26" HorizontalAlignment="Center" Margin="9"/>
-                            </StackPanel>
-                        </TabItem.Header>
-                    </TabItem>
-
-                </TabControl>
-            </Border>
-        </Grid>
+        <ContentControl Grid.Column="1"
+            Content="{Binding PatientViewModel}" IsTabStop="False"/>
         <!-- #endregion -->
 
 

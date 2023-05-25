@@ -11,5 +11,9 @@
     <DataTemplate DataType="{x:Type vm:DoctorsViewModel}">
         <views:DoctorsView DataContext="{Binding}"/>
     </DataTemplate>
+    
+    <DataTemplate DataType="{x:Type vm:PatientViewModel}">
+        <views:PatientView DataContext="{Binding}"/>
+    </DataTemplate>
 
 </ResourceDictionary>
