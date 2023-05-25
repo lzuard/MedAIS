@@ -2,6 +2,7 @@
 using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
 using MedData.Entities;
+using System.Windows;
 using System.Windows.Input;
 
 namespace MedApp.ViewModels
@@ -55,8 +56,16 @@ namespace MedApp.ViewModels
 
         private void OnLogOutCommandExecuted()
         {
+            var answer = MessageBox.Show("Вы уверены, что хотите выйти?", "Выход из системы", 
+                MessageBoxButton.OKCancel, 
+                MessageBoxImage.Question, 
+                MessageBoxResult.Cancel);
+            if (answer == MessageBoxResult.OK)
+            {
             _authService.LogOut();
             _mainWindow.SetCurentViewModel(0);
+            }
+            
         }
         #endregion
 
