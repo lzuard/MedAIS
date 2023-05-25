@@ -80,5 +80,9 @@ namespace MedData.Entities
         /// </summary>
         public ICollection<Hospitalization> Hospitalizations { get; set; }
 
+        public override string ToString()
+        {
+            return Surname + " " + Name[0] + ". " + Patronymic[0] + ".";
+        }
     }
 }
