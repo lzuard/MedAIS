@@ -1,11 +1,6 @@
 ﻿using MathCore.WPF.Commands;
-using MedApp.Data;
-using MedApp.Services;
 using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Windows;
 using System.Windows.Input;
 
 namespace MedApp.ViewModels
@@ -15,8 +10,6 @@ namespace MedApp.ViewModels
         private readonly IAuthService _authService;
         private readonly AuthViewModel _authViewModel;
         private readonly DoctorsViewModel _doctorsViewModel;
-
-        public IAuthService AuthService { get => _authService; }
 
         #region Properties
 
@@ -40,7 +33,7 @@ namespace MedApp.ViewModels
 
         #endregion
 
-        #endregion
+        #endregion Properties
 
         #region Commands
 
@@ -73,12 +66,13 @@ namespace MedApp.ViewModels
         }
         #endregion
 
-        #endregion
+        #endregion Commands
 
         /// <summary>
-        /// Changes curent view on MainWindow
+        /// Changes curent view on MainWindow: (
         /// 0 - Auth View;
         /// 1 - Doctors View;
+        /// )
         /// </summary>
         public void SetCurentViewModel(int number)
         {

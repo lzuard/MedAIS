@@ -1,14 +1,6 @@
 ﻿using MathCore.WPF.Commands;
-using MedApp.Services;
 using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
-using MedData.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 
@@ -19,13 +11,18 @@ namespace MedApp.ViewModels
         private MainWindowViewModel? _mainWindow;
         private IAuthService _authService;
 
+        #region Properties
+
+        #region Login
         private string? _login;
         public string Login
         {
             get => _login;
             set => Set(ref _login, value);
         }
+        #endregion
 
+        #region Password
         private string? _password;
 
         public string Password
@@ -33,13 +30,16 @@ namespace MedApp.ViewModels
             get=> _password;
             set => Set(ref _password, value);
         }
+        #endregion
 
+        #endregion Properties
+
+        #region Commands
         #region Auth command
         private ICommand _authCommand;
 
         public ICommand AuthCommand => _authCommand
             ??= new LambdaCommand(OnAuthCommandExecuted, CanAuthCommandExecute);
-
 
         private bool CanAuthCommandExecute() => true;
 
@@ -48,7 +48,11 @@ namespace MedApp.ViewModels
             var user = _authService.LogIn(_login, _password);
 
             if (user != null)
+            {
+                _login = "";
+                _password = "";
                 _mainWindow.SetCurentViewModel(1);
+            }
 
             else
                 MessageBox.Show("Неверный пароль и/или логин!", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
@@ -72,6 +76,11 @@ namespace MedApp.ViewModels
         }
         #endregion
 
+        #endregion Commands
+
+        /// <summary>
+        /// Need to be called when view is set as a current view in Main Window
+        /// </summary>
         public void Activate(MainWindowViewModel mainWindow, IAuthService authService)
         {
             _mainWindow = mainWindow;
