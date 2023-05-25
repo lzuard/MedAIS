@@ -9,13 +9,14 @@ namespace MedApp.ViewModels
     internal class MainWindowViewModel:ViewModelBase
     {
         private readonly IAuthService _authService;
+        private readonly IPatientsService _patientsService;
+
         private readonly IEntitiesCollectionProvider<Department> _departmentProvider;
         private readonly IEntitiesCollectionProvider<Position> _positionProvider; 
         private readonly IEntitiesCollectionProvider<User> _userProvider;
         private readonly IEntitiesCollectionProvider<Chamber> _chamberProvider;
         private readonly IEntitiesCollectionProvider<Cabinet> _cabinetProvider;
         private readonly IEntitiesCollectionProvider<Mkb> _mkbProvider;             
-
 
         private readonly AuthViewModel _authViewModel;
         private readonly DoctorsViewModel _doctorsViewModel;
@@ -94,7 +95,7 @@ namespace MedApp.ViewModels
                     CurrentViewModel = _authViewModel; 
                     break;
                 case 1:
-                    _doctorsViewModel.Activate(this, _authService, _patientViewModel);
+                    _doctorsViewModel.Activate(this, _authService, _patientViewModel, _patientsService);
                     CurrentViewModel = _doctorsViewModel;
                     break;
                 case 2:
@@ -112,7 +113,10 @@ namespace MedApp.ViewModels
             }
         }
 
-        public MainWindowViewModel(IAuthService authService,
+        public MainWindowViewModel
+            (
+            IAuthService authService,
+            IPatientsService patientsService,
             IEntitiesCollectionProvider<Department> departmentProvider,
             IEntitiesCollectionProvider<Position> positionProvider,
             IEntitiesCollectionProvider<User> userProvider,
@@ -122,9 +126,11 @@ namespace MedApp.ViewModels
             AuthViewModel authViewModel, 
             DoctorsViewModel doctorsViewModel,
             PatientViewModel patientViewModel,
-            AdminViewModel adminViewModel)
+            AdminViewModel adminViewModel
+            )
         {
             _authService = authService;
+            _patientsService = patientsService;
 
             _departmentProvider = departmentProvider;
             _positionProvider = positionProvider;
