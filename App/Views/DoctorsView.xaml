@@ -17,8 +17,11 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <!-- #region LeftMenu-->
-        <Border Grid.Column="0" BorderThickness="1" CornerRadius="0,40,40,0" 
-                Background="{StaticResource MBlue}" Margin="0">
+        <Border Grid.Column="0" 
+                BorderThickness="1" 
+                CornerRadius="0,40,40,0" 
+                Background="{StaticResource MBlue}"
+                Margin="0">
             <DockPanel Margin="0,10,0,10"
                         VerticalAlignment="Stretch" 
                         HorizontalAlignment="Center" >
@@ -65,12 +68,17 @@
                 </Border>
                 <!-- #endregion -->
 
-                 <!-- #region New patient -->
+                <!-- #region New patient -->
                 <Border DockPanel.Dock="Bottom" 
-                    Height="50" Width="351" BorderThickness="1" Background="{StaticResource MWhite}" 
-                        CornerRadius="0,0,40,0" Margin="-1,9,9,9" >
+                        Height="50" Width="351" 
+                        BorderThickness="1" 
+                        Background="{StaticResource MWhite}" 
+                        CornerRadius="0,0,40,0" 
+                        Margin="-1,9,9,9" >
                     <Border.Effect>
-                        <DropShadowEffect Direction="-90" Opacity="2" ShadowDepth="1"/>
+                        <DropShadowEffect Direction="-90" 
+                                          Opacity="2" 
+                                          ShadowDepth="1"/>
                     </Border.Effect>
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -78,9 +86,15 @@
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
                         <!-- Text border -->
-                        <Border Grid.Column="0" BorderThickness="0,0,1,0" BorderBrush="Black">
+                        <Border Grid.Column="0" 
+                                BorderThickness="0,0,1,0" 
+                                BorderBrush="Black">
                             <WrapPanel Orientation="Vertical">
-                                <Viewbox MaxHeight="44" Stretch="Uniform" Margin="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Viewbox MaxHeight="44" 
+                                         Stretch="Uniform" 
+                                         Margin="6" 
+                                         HorizontalAlignment="Stretch" 
+                                         VerticalAlignment="Stretch">
                                     <TextBlock Text="Новый пациент"/>
                                 </Viewbox>
                              
@@ -91,10 +105,12 @@
                                 Background="{StaticResource MWhite}" 
                                 BorderThickness="0"
                                 Content="+"
-                                Command="{Binding LogOutCommand}">
+                                FontSize="32"
+                                Command="{Binding AddNewPatientCommand}">
                             <Button.Resources>
                                 <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="0,0,40,0"/>
+                                    <Setter Property="CornerRadius" 
+                                            Value="0,0,40,0"/>
                                 </Style>
                             </Button.Resources>
                             <Button.Effect>
@@ -107,23 +123,35 @@
                 
                 <!-- #Region List of patients -->
                 <ListBox DockPanel.Dock="Left"
-                    ItemsSource="{Binding Patients}" 
+                         ItemsSource="{Binding Patients}" 
                          Background="{StaticResource MBlue}"
                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                          ScrollViewer.VerticalScrollBarVisibility="Hidden" 
-                         Width="361">
+                         Width="361"
+                         SelectedItem="{Binding CurrentPatient}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <Border>
                                 <Border.Effect>
-                                    <DropShadowEffect Direction="-90" Opacity="2" ShadowDepth="1"/>
+                                    <DropShadowEffect Direction="-90" 
+                                                      Opacity="2" 
+                                                      ShadowDepth="1"/>
                                 </Border.Effect>
-                                <StackPanel Orientation="Horizontal" Background="{StaticResource MWhite}" 
-                                            Height="62" Width="352" Margin="-1,12,0,12">
-                                    <Border BorderThickness="0,0,1,0" BorderBrush="Black">
-                                        <Image Source="/Resources/Icons/UserIcon.png" Margin="8"/>
+                                <StackPanel Orientation="Horizontal" 
+                                            Background="{StaticResource MWhite}" 
+                                            Height="62" Width="352" 
+                                            Margin="-1,12,0,12">
+                                    <Border BorderThickness="0,0,1,0" 
+                                            BorderBrush="Black">
+                                        <Image Source="/Resources/Images/UserIcon.png" 
+                                               Margin="8"/>
                                     </Border>
-                                    <Viewbox MaxHeight="44" Stretch="Uniform" Margin="6" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                    <Viewbox 
+                                        MaxHeight="44" 
+                                        Stretch="Uniform" 
+                                        Margin="6" 
+                                        HorizontalAlignment="Stretch" 
+                                        VerticalAlignment="Stretch">
                                         <TextBlock Text="{Binding}"/>
                                     </Viewbox>
                                 </StackPanel>
@@ -144,7 +172,9 @@
         <!-- #region WorkArea -->
 
         <ContentControl Grid.Column="1"
-            Content="{Binding PatientViewModel}" IsTabStop="False"/>
+            Content="{Binding PatientViewModel}" 
+            IsTabStop="False"
+            Visibility="{Binding MedCardVisibility}"/>
         <!-- #endregion -->
 
 

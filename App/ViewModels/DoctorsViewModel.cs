@@ -1,7 +1,9 @@
 ﻿using MathCore.WPF.Commands;
+using MedApp.Services;
 using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
 using MedData.Entities;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
 using System.Windows.Documents;
@@ -13,17 +15,18 @@ namespace MedApp.ViewModels
     {
         private MainWindowViewModel? _mainWindow;
         private IAuthService _authService;
+        private IPatientsService _patientService;
         
 
         #region Properties
 
         #region Current user
-        private User? _curentUser;
+        private User? _currentUser;
 
-        public User CurentUser
+        public User CurrentUser
         {
-            get => _curentUser;
-            set => Set(ref _curentUser, value);
+            get => _currentUser;
+            set => Set(ref _currentUser, value);
         }
         #endregion
 
@@ -36,24 +39,6 @@ namespace MedApp.ViewModels
         }
         #endregion
 
-        private PatientViewModel? _patientViewModel;
-        public PatientViewModel? PatientViewModel
-        {
-            get => _patientViewModel;
-            set => Set(ref _patientViewModel, value);
-        }
-
-        #region Patients
-        private ObservableCollection<string> _patients;
-
-        public ObservableCollection<string> Patients
-        {
-            get => _patients;
-            set => Set(ref _patients, value);
-        }
-
-        #endregion
-
         #region User position
         private string? _userPosition;
         public string UserPosition
@@ -61,6 +46,53 @@ namespace MedApp.ViewModels
             get => _userPosition; 
             set => Set(ref _userPosition, value);
         }
+        #endregion
+
+        #region CurrentPatient
+
+        private MedCard? _currentPatient;
+
+        public MedCard? CurrentPatient
+        {
+            get => _currentPatient;
+            set
+            {
+                Set(ref _currentPatient, value);
+                MedCardVisibility = _currentPatient is null ? Visibility.Hidden : Visibility.Visible;
+            }
+        }
+        #endregion CurrentPatient
+
+        #region MedCardVisibility
+
+        private Visibility _medCardVisibility;
+
+        public Visibility MedCardVisibility
+        {
+            get => _medCardVisibility;
+            set => Set(ref _medCardVisibility, value);
+        }
+
+        #endregion MedCardVisibility
+
+        #region PatientViewModel
+        private PatientViewModel? _patientViewModel;
+        public PatientViewModel? PatientViewModel
+        {
+            get => _patientViewModel;
+            set => Set(ref _patientViewModel, value);
+        }
+        #endregion
+
+        #region Patients
+        private IEnumerable<MedCard> _patients;
+
+        public IEnumerable<MedCard> Patients
+        {
+            get => _patients;
+            set => Set(ref _patients, value);
+        }
+
         #endregion
 
         #endregion Properties
@@ -81,33 +113,52 @@ namespace MedApp.ViewModels
                 MessageBoxButton.OKCancel, 
                 MessageBoxImage.Question, 
                 MessageBoxResult.Cancel);
-            if (answer == MessageBoxResult.OK)
-            {
+            if (answer != MessageBoxResult.OK) return;
             _authService.LogOut();
             _mainWindow.SetCurentViewModel(0);
-            }
-            
+
         }
         #endregion
 
+        #region AddNewPatient command
+
+        private ICommand _addNewPatientCommand;
+
+        public ICommand AddNewPatientCommand => _addNewPatientCommand
+            ??= new LambdaCommand(OnAddNewPatientCommandExecuted, CanAddNewPatientCommandExecute);
+
+        private bool CanAddNewPatientCommandExecute() => true;
+
+        private void OnAddNewPatientCommandExecuted()
+        {
+            CurrentPatient = new MedCard();
+        }
+
+        #endregion AddNewPatient
         #endregion Commands
 
         /// <summary>
         /// Need to be called when view is set as a current view in Main Window
         /// </summary>
-        public void Activate(MainWindowViewModel mainWindowViewModel, IAuthService authService, PatientViewModel patientViewModel)
+        public void Activate
+            (
+            MainWindowViewModel mainWindowViewModel, 
+            IAuthService authService, 
+            PatientViewModel patientViewModel,
+            IPatientsService patientsService)
         {
             _mainWindow = mainWindowViewModel;
             _authService = authService;
+            _patientService = patientsService;
             _patientViewModel = patientViewModel;
 
-            _curentUser = _authService.CurrentUser;
-            _username = $"{_curentUser.Surname} {_curentUser.Name[0]}. {_curentUser.Patronymic[0]}.";
-            _userPosition = _curentUser.Position.Name;
+            CurrentUser = _authService.CurrentUser;
+            UserName = $"{_currentUser.Surname} {_currentUser.Name[0]}. {_currentUser.Patronymic[0]}.";
+            UserPosition = _currentUser.Position.Name;
 
-            _patients = new();
-            for (int i =0; i<20; i++)
-                _patients.Add("bob "+i);
+            CurrentPatient = null;
+
+            Patients = _patientService.GetDoctorsMedCards(CurrentUser.Id);
         }
     }
 }
