@@ -8,6 +8,7 @@ namespace MedApp.ViewModels
     internal class MainWindowViewModel:ViewModelBase
     {
         private readonly IAuthService _authService;
+        private readonly IDepartmentProvider _departmentProvider;
         private readonly AuthViewModel _authViewModel;
         private readonly DoctorsViewModel _doctorsViewModel;
         private readonly PatientViewModel _patientViewModel;
@@ -89,7 +90,7 @@ namespace MedApp.ViewModels
                     CurrentViewModel = _doctorsViewModel;
                     break;
                 case 2:
-                    _adminViewModel.Activate(this, _authService);
+                    _adminViewModel.Activate(this, _authService, _departmentProvider);
                     CurrentViewModel = _adminViewModel;
                     break;
                 default:
@@ -97,13 +98,16 @@ namespace MedApp.ViewModels
             }
         }
 
-        public MainWindowViewModel(IAuthService authService, 
+        public MainWindowViewModel(IAuthService authService,
+            IDepartmentProvider departmentProvider,
             AuthViewModel authViewModel, 
             DoctorsViewModel doctorsViewModel,
             PatientViewModel patientViewModel,
             AdminViewModel adminViewModel)
         {
             _authService = authService;
+            _departmentProvider = departmentProvider;
+
             _authViewModel = authViewModel;
             _doctorsViewModel = doctorsViewModel;
             _patientViewModel = patientViewModel;
