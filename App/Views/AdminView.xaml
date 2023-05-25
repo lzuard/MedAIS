@@ -121,7 +121,7 @@
                             <DataGridTextColumn Header="Номер" 
                                                 Binding="{Binding Id}"
                                                 IsReadOnly="True"/>
-                            <DataGridCheckBoxColumn Header="Отделение" 
+                            <DataGridTextColumn Header="Отделение" 
                                                 Binding="{Binding Department}"
                                                 IsReadOnly="True"/>
                             <DataGridTextColumn Header="Лечащий врач" 
