@@ -11,6 +11,7 @@ namespace MedApp.ViewModels
             .AddSingleton<AuthViewModel>()
             .AddSingleton<DoctorsViewModel>()
             .AddSingleton<PatientViewModel>()
+            .AddSingleton<AdminViewModel>()
             ;
     }
 }

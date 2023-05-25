@@ -17,5 +17,6 @@ namespace MedApp.ViewModels
         public DoctorsViewModel DoctorsViewModel => App.Services.GetRequiredService<DoctorsViewModel>();
 
         public PatientViewModel PatientViewModel => App.Services.GetRequiredService<PatientViewModel>();
+        public AdminViewModel AdminViewModel => App.Services.GetRequiredService<AdminViewModel>();
     }
 }

@@ -16,4 +16,8 @@
         <views:PatientView DataContext="{Binding}"/>
     </DataTemplate>
 
+    <DataTemplate DataType="{x:Type vm:AdminViewModel}">
+        <views:AdminView DataContext="{Binding}"/>
+    </DataTemplate>
+
 </ResourceDictionary>

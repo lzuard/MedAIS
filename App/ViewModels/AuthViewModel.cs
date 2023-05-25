@@ -51,7 +51,10 @@ namespace MedApp.ViewModels
             {
                 _login = "";
                 _password = "";
-                _mainWindow.SetCurentViewModel(1);
+                if (user.Department.Name.Contains("IT"))
+                    _mainWindow.SetCurentViewModel(2);
+                else
+                    _mainWindow.SetCurentViewModel(1);
             }
 
             else

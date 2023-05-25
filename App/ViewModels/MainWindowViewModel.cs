@@ -11,6 +11,7 @@ namespace MedApp.ViewModels
         private readonly AuthViewModel _authViewModel;
         private readonly DoctorsViewModel _doctorsViewModel;
         private readonly PatientViewModel _patientViewModel;
+        private readonly AdminViewModel _adminViewModel;
 
         #region Properties
 
@@ -87,6 +88,10 @@ namespace MedApp.ViewModels
                     _doctorsViewModel.Activate(this, _authService, _patientViewModel);
                     CurrentViewModel = _doctorsViewModel;
                     break;
+                case 2:
+                    _adminViewModel.Activate(this, _authService);
+                    CurrentViewModel = _adminViewModel;
+                    break;
                 default:
                     throw new System.NotImplementedException();
             }
@@ -95,16 +100,18 @@ namespace MedApp.ViewModels
         public MainWindowViewModel(IAuthService authService, 
             AuthViewModel authViewModel, 
             DoctorsViewModel doctorsViewModel,
-            PatientViewModel patientViewModel)
+            PatientViewModel patientViewModel,
+            AdminViewModel adminViewModel)
         {
             _authService = authService;
             _authViewModel = authViewModel;
             _doctorsViewModel = doctorsViewModel;
             _patientViewModel = patientViewModel;
+            _adminViewModel = adminViewModel;
 
             //debug
-            _authService.LogIn("1", "1");
-            SetCurentViewModel(1);
+            //_authService.LogIn("1", "1");
+            SetCurentViewModel(0);
         }
 
     }
