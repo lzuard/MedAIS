@@ -48,5 +48,10 @@ namespace MedData.Interfaces
         /// Async deletes entity by id
         /// </summary>
         Task DeleteAsync(int id, CancellationToken cancel = default);
+
+        /// <summary>
+        /// Save changes
+        /// </summary>
+        public void SaveChanges();
     }
 }

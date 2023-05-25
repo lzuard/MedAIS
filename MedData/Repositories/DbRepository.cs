@@ -77,5 +77,10 @@ namespace MedData.Repositories
             if (AutoSaveChanges)
                 await _context.SaveChangesAsync(cancel).ConfigureAwait(false);
         }
+
+        public void SaveChanges()
+        {
+            _context.SaveChanges();
+        }
     }
 }
