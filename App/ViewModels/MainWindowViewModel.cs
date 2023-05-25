@@ -10,6 +10,13 @@ namespace MedApp.ViewModels
     {
         private readonly IAuthService _authService;
         private readonly IEntitiesCollectionProvider<Department> _departmentProvider;
+        private readonly IEntitiesCollectionProvider<Position> _positionProvider; 
+        private readonly IEntitiesCollectionProvider<User> _userProvider;
+        private readonly IEntitiesCollectionProvider<Chamber> _chamberProvider;
+        private readonly IEntitiesCollectionProvider<Cabinet> _cabinetProvider;
+        private readonly IEntitiesCollectionProvider<Mkb> _mkbProvider;             
+
+
         private readonly AuthViewModel _authViewModel;
         private readonly DoctorsViewModel _doctorsViewModel;
         private readonly PatientViewModel _patientViewModel;
@@ -91,7 +98,13 @@ namespace MedApp.ViewModels
                     CurrentViewModel = _doctorsViewModel;
                     break;
                 case 2:
-                    _adminViewModel.Activate(this, _authService, _departmentProvider);
+                    _adminViewModel.Activate(this, _authService,
+                        _departmentProvider,
+                        _positionProvider,
+                        _userProvider,
+                        _chamberProvider,
+                        _cabinetProvider,
+                        _mkbProvider);
                     CurrentViewModel = _adminViewModel;
                     break;
                 default:
@@ -101,18 +114,32 @@ namespace MedApp.ViewModels
 
         public MainWindowViewModel(IAuthService authService,
             IEntitiesCollectionProvider<Department> departmentProvider,
+            IEntitiesCollectionProvider<Position> positionProvider,
+            IEntitiesCollectionProvider<User> userProvider,
+            IEntitiesCollectionProvider<Chamber> chambersProvider,
+            IEntitiesCollectionProvider<Cabinet> cabinetProvider,
+            IEntitiesCollectionProvider<Mkb> mkbProvider,
             AuthViewModel authViewModel, 
             DoctorsViewModel doctorsViewModel,
             PatientViewModel patientViewModel,
             AdminViewModel adminViewModel)
         {
             _authService = authService;
+
             _departmentProvider = departmentProvider;
+            _positionProvider = positionProvider;
+            _userProvider = userProvider;
+            _chamberProvider = chambersProvider;
+            _cabinetProvider = cabinetProvider;
+            _mkbProvider = mkbProvider;
+
+
 
             _authViewModel = authViewModel;
             _doctorsViewModel = doctorsViewModel;
             _patientViewModel = patientViewModel;
             _adminViewModel = adminViewModel;
+            
 
             //debug
             //_authService.LogIn("1", "1");

@@ -35,27 +35,127 @@
                               CanUserAddRows="True"
                               CanUserDeleteRows="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Header="Id" 
+                            <DataGridTextColumn Header="Номер" 
                                                 Binding="{Binding Id}"
                                                 Width="200"
                                                 IsReadOnly="True"/>
-                            <DataGridTextColumn Header="Name" 
+                            <DataGridTextColumn Header="Название" 
+                                                Binding="{Binding Name}"
+                                                Width="*"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="Должности">
+                    <DataGrid ItemsSource="{Binding Positions}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="True"
+                              CanUserDeleteRows="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер" 
+                                                Binding="{Binding Id}"
+                                                Width="200"
+                                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Название" 
                                                 Binding="{Binding Name}"
                                                 Width="*"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </TabItem>
                 <TabItem Header="Сотрудники">
-                    
-                </TabItem>
-                <TabItem Header="Палаты">
-
+                    <DataGrid ItemsSource="{Binding Users}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="True"
+                              CanUserDeleteRows="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер" 
+                                                Binding="{Binding Id}"
+                                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Отделенеиe"
+                                                Binding="{Binding Department}"
+                                                />
+                            <DataGridTextColumn Header="Должность"
+                                                Binding="{Binding Position}"
+                                                />
+                            <DataGridTextColumn Header="Фамилия"
+                                                Binding="{Binding Surname}"
+                                                />
+                            <DataGridTextColumn Header="Имя"
+                                                Binding="{Binding Name}"
+                                                />
+                            <DataGridTextColumn Header="Отчество"
+                                                Binding="{Binding Patronymic}"
+                                                />
+                            <DataGridTextColumn Header="Телефон"
+                                                Binding="{Binding Phone}"
+                                                />
+                            <DataGridTextColumn Header="Логин"
+                                                Binding="{Binding Login}"
+                                                />
+                            <DataGridTextColumn Header="Пароль"
+                                                Binding="{Binding Password}"
+                                                />
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
                 <TabItem Header="Кабинеты">
-
+                    <DataGrid ItemsSource="{Binding Cabinets}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="True"
+                              CanUserDeleteRows="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер" 
+                                                Binding="{Binding Id}"
+                                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Название" 
+                                                Binding="{Binding Name}"
+                                                />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </TabItem>
+                <TabItem Header="Палаты">
+                    <DataGrid ItemsSource="{Binding Chambers}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="True"
+                              CanUserDeleteRows="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер" 
+                                                Binding="{Binding Id}"
+                                                IsReadOnly="True"/>
+                            <DataGridCheckBoxColumn Header="Отделение" 
+                                                Binding="{Binding Department}"
+                                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Лечащий врач" 
+                                                Binding="{Binding User}"
+                                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Номер" 
+                                                Binding="{Binding Number}"
+                                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Пол" 
+                                                Binding="{Binding Gender}"
+                                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Койки" 
+                                                Binding="{Binding BedCount}"
+                                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
                 <TabItem Header="МКБ-10">
-                    
+                    <DataGrid ItemsSource="{Binding MKBs}"
+                              AutoGenerateColumns="False"
+                              CanUserAddRows="True"
+                              CanUserDeleteRows="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="Номер" 
+                                                Binding="{Binding Id}"
+                                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Код" 
+                                                Binding="{Binding Code}"
+                                                IsReadOnly="True"/>
+                            <DataGridTextColumn Header="Расшифровка" 
+                                                Binding="{Binding Description}"
+                                                IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </TabItem>
             </TabControl>
             <StackPanel Grid.Row="1" Orientation="Horizontal">
