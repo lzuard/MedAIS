@@ -7,6 +7,7 @@ namespace MedApp.Services
     {
         public static IServiceCollection AddServices(this IServiceCollection services) => services
         .AddTransient<IAuthService, AuthService>()
+        .AddTransient<IDepartmentProvider,  DepartmentProvider>()
         ;
     }
 }
