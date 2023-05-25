@@ -16,7 +16,7 @@
         <b:EventTrigger EventName="Loaded">
             <b:InvokeCommandAction Command="{Binding AuthViewCommand}"/>
         </b:EventTrigger>
-    </b:Interaction.Triggers>-->
+    </b:Interaction.Triggers>--><!--
     <DockPanel>
         <Menu IsMainMenu="True" DockPanel.Dock="Top">
             <MenuItem Header="auth" Command="{Binding AuthViewCommand}" 
@@ -26,9 +26,9 @@
         </Menu>
         <StatusBar DockPanel.Dock="Bottom">
             <StatusBarItem> Ready </StatusBarItem>
-        </StatusBar>
+        </StatusBar>-->
         <Grid>
             <ContentControl Content="{Binding CurrentViewModel}" IsTabStop="False"/>
         </Grid>
-    </DockPanel>
+    <!--</DockPanel>-->
 </Window>
