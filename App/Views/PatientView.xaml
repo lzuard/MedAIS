@@ -207,6 +207,7 @@
                                             Orientation="Horizontal">
                                     <ComboBox HorizontalAlignment="Stretch"
                                               Width="330"
+                                              FontSize="28"
                                               Margin="10,10"
                                               Background="White"
                                               ItemsSource="{Binding MedCardsCollection}"
