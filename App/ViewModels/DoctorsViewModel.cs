@@ -59,6 +59,7 @@ namespace MedApp.ViewModels
             {
                 Set(ref _currentPatient, value);
                 MedCardVisibility = _currentPatient is null ? Visibility.Hidden : Visibility.Visible;
+                UpdatePatientsList();
             }
         }
         #endregion CurrentPatient
@@ -132,10 +133,16 @@ namespace MedApp.ViewModels
         private void OnAddNewPatientCommandExecuted()
         {
             CurrentPatient = new MedCard();
+            _patientViewModel.PopUp(this, _patientService,CurrentPatient, CurrentUser.Id);
         }
 
         #endregion AddNewPatient
         #endregion Commands
+
+        private void UpdatePatientsList()
+        {
+            Patients = _patientService.GetDoctorsMedCards(CurrentUser.Id);
+        }
 
         /// <summary>
         /// Need to be called when view is set as a current view in Main Window
@@ -157,8 +164,6 @@ namespace MedApp.ViewModels
             UserPosition = _currentUser.Position.Name;
 
             CurrentPatient = null;
-
-            Patients = _patientService.GetDoctorsMedCards(CurrentUser.Id);
         }
     }
 }

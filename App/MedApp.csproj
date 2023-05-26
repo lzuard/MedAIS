@@ -13,6 +13,8 @@
     <None Remove="Resources\Images\AnalysesIcon.png" />
     <None Remove="Resources\Images\Background.png" />
     <None Remove="Resources\Images\CardIcon.png" />
+    <None Remove="Resources\Images\CloseIcon.png" />
+    <None Remove="Resources\Images\ConfirmIcon.png" />
     <None Remove="Resources\Images\ExitIcon.png" />
     <None Remove="Resources\Images\HistoryIcon.png" />
     <None Remove="Resources\Images\InfoIcon.png" />
@@ -55,6 +57,8 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\CardIcon.png" />
+    <Resource Include="Resources\Images\CloseIcon.png" />
+    <Resource Include="Resources\Images\ConfirmIcon.png" />
     <Resource Include="Resources\Images\ExitIcon.png" />
     <Resource Include="Resources\Images\HistoryIcon.png" />
     <Resource Include="Resources\Images\InfoIcon.png" />

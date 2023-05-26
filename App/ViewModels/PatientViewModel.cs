@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Input;
+using MathCore.WPF.Commands;
 using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
 using MedData;
@@ -9,7 +12,11 @@ namespace MedApp.ViewModels
     internal class PatientViewModel:ViewModelBase
     {
         private IPatientsService? _patientsService;
+        private DoctorsViewModel _doctorsViewModel;
         private int _doctorId;
+        private bool _isNewPatient;
+
+        #region Properties
 
         #region SelectedTabItem
 
@@ -30,7 +37,18 @@ namespace MedApp.ViewModels
         public MedCard CurrentPatient
         {
             get => _currentPatient;
-            set => Set(ref _currentPatient, value);
+            set
+            {
+                Set(ref _currentPatient, value);
+                if (_currentPatient is null)
+                {
+                    PatientAddress = null;
+                }
+                else
+                {
+                    PatientAddress = _currentPatient.Address;
+                }
+            }
         }
 
         #endregion CurrentPatient
@@ -61,7 +79,7 @@ namespace MedApp.ViewModels
 
         #region Genders
 
-        private IEnumerable<string> _genders = new List<string>{"Мужчина", "Женщина"};
+        private IEnumerable<string> _genders = new List<string> { "Мужчина", "Женщина" };
 
         public IEnumerable<string> Genders
         {
@@ -95,13 +113,120 @@ namespace MedApp.ViewModels
 
         #endregion MedCardsCollection
 
-        public void PopUp(IPatientsService patientsService, MedCard patient, int doctorId)
+        #region IsMedCardsComboBoxReadOnly
+
+        private bool _isMedCardsComboBoxReadOnly;
+
+        public bool IsMedCardsComboBoxReadOnly
         {
+            get => _isMedCardsComboBoxReadOnly;
+            set => Set(ref _isMedCardsComboBoxReadOnly, value);
+        }
+
+        #endregion IsMedCardsComboBoxReadOnly
+
+        #endregion Properties
+
+        #region Commands
+
+        #region Save command
+
+        private ICommand _saveCommand;
+
+        public ICommand SaveCommand => _saveCommand
+            ??= new LambdaCommand(OnSaveCommandExecuted, CanSaveCommandExecute);
+
+        private bool CanSaveCommandExecute() => true;
+
+        private void OnSaveCommandExecuted()
+        {
+            SaveChanges();
+        }
+
+        #endregion Save
+
+        #region Close command
+
+        private ICommand _closeCommand;
+
+        public ICommand CloseCommand => _closeCommand
+            ??= new LambdaCommand(OnCloseCommandExecuted, CanCloseCommandExecute);
+
+        private bool CanCloseCommandExecute() => true;
+
+        private void OnCloseCommandExecuted()
+        {
+            if (_isNewPatient)
+            {
+                var answer = MessageBox.Show("Вы уверены, что хотите закрыть окно создания новой записи? Все изменения удалятся!",
+                    "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
+                if (answer != MessageBoxResult.Yes) return;
+            }
+
+            CloseView();
+        }
+
+        #endregion Close
+
+        #region CancelCurrentUser command
+
+        private ICommand _cancelCurrentPatientCommand;
+
+        public ICommand CancelCurrentPatientCommand => _cancelCurrentPatientCommand
+            ??= new LambdaCommand(OnCancelCurrentPatientCommandExecuted, CanCancelCurrentPatientCommandExecute);
+
+        private bool CanCancelCurrentPatientCommandExecute() => true;
+
+        private void OnCancelCurrentPatientCommandExecuted()
+        {
+            CurrentPatient = null;
+        }
+
+        #endregion CancelCurrentPatient
+
+        #endregion Commands
+
+        private void CloseView()
+        {
+            _doctorsViewModel.CurrentPatient = null;
+        }
+
+        private void SaveChanges()
+        {
+            bool saved = _patientsService.SaveNewPatient(CurrentPatient, PatientAddress);
+            if (saved)
+                CloseView();
+            else
+                MessageBox.Show(
+                    "Не удалось сохранить данные. Не все поля заполнены. В случае проблем обратитесь к сотрудникам отдела IT",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        public void PopUp(
+            DoctorsViewModel doctorsViewModel,
+            IPatientsService patientsService, 
+            MedCard patient, 
+            int doctorId)
+        {
+            _doctorsViewModel = doctorsViewModel;
             _patientsService = patientsService;
             _doctorId = doctorId;
             CurrentPatient = patient;
 
-            SelectedTabItem = CurrentPatient.Id == 0 ? 3 : 0;
+            if (CurrentPatient.Id == 0)
+            {
+                _isNewPatient = true;
+                SelectedTabItem = 3;
+                PatientAddress = new Address();
+                IsMedCardsComboBoxReadOnly = false;
+            }
+            else
+            {
+                _isNewPatient = false;
+                SelectedTabItem = 0;
+                PatientAddress = CurrentPatient.Address;
+                IsMedCardsComboBoxReadOnly = true;
+            }
 
             MedCardsCollection = _patientsService.GetAllMedCards();
         }

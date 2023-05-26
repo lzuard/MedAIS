@@ -12,7 +12,7 @@ namespace MedApp.Services.Interfaces
 
         public IEnumerable<Hospitalization> GetHospitalizations(int medCardId);
 
-        public bool SaveNewPatient(MedCard newPatient);
+        public bool SaveNewPatient(MedCard newPatient, Address newAddress);
        
     }
 }
