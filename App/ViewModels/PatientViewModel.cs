@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
+using MedData;
 using MedData.Entities;
 
 namespace MedApp.ViewModels
@@ -33,6 +34,42 @@ namespace MedApp.ViewModels
         }
 
         #endregion CurrentPatient
+
+        #region PatientAddress
+
+        private Address _patientAddress;
+
+        public Address PatientAddress
+        {
+            get => _patientAddress;
+            set => Set(ref _patientAddress, value);
+        }
+
+        #endregion PatientAddress
+
+        #region SelectedGenderIndex
+
+        private int _selectedGenderIndex = 0;
+
+        public int SelectedGenderIndex
+        {
+            get => _selectedGenderIndex;
+            set => Set(ref _selectedGenderIndex, value);
+        }
+
+        #endregion SelectedGenderIndex
+
+        #region Genders
+
+        private IEnumerable<string> _genders = new List<string>{"Мужчина", "Женщина"};
+
+        public IEnumerable<string> Genders
+        {
+            get => _genders;
+            set => Set(ref _genders, value);
+        }
+
+        #endregion Genders
 
         #region MedCardHeader
 

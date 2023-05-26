@@ -177,7 +177,7 @@
                                          Margin="10,10"
                                          Width="445"
                                          FontSize="28"
-                                         Text="Рыбовошвичтич"/>
+                                         Text="{Binding CurrentPatient.Surname}"/>
                                 <TextBlock Grid.Row="3"
                                            Grid.Column="0" 
                                            Text="Имя"
@@ -189,7 +189,7 @@
                                          Margin="10,10"
                                          Width="445"
                                          FontSize="28"
-                                         Text="Сергей"/>
+                                         Text="{Binding CurrentPatient.Name}"/>
                                 <TextBlock Grid.Row="4"
                                            Grid.Column="0" 
                                            Text="Отчество"
@@ -201,7 +201,7 @@
                                          Margin="10,10"
                                          Width="445"
                                          FontSize="28"
-                                         Text="Арбенович"/>
+                                         Text="{Binding CurrentPatient.Patronymic}"/>
                                 <TextBlock Grid.Row="5"
                                            Grid.Column="0" 
                                            Text="Пол"
@@ -224,7 +224,9 @@
                                             Grid.Column="1"
                                             FontSize="28"
                                             VerticalAlignment="Center"
-                                            Margin="10,10"/>
+                                            Margin="10,10"
+                                            FirstDayOfWeek="Monday"
+                                            Text="{Binding CurrentPatient.Birthday}"/>
 
                             </Grid>
                         </Border>
@@ -267,7 +269,7 @@
                                          Margin="10,10"
                                          Width="500"
                                          FontSize="28"
-                                         Text="Россия"/>
+                                         Text="{Binding PatientAddress.Country}"/>
                                 <TextBlock Grid.Row="2"
                                            Grid.Column="0" 
                                            Text="Регион"
@@ -279,7 +281,7 @@
                                          Margin="10,10"
                                          Width="500"
                                          FontSize="28"
-                                         Text="Московская область"/>
+                                         Text="{Binding PatientAddress.Region}"/>
                                 <TextBlock Grid.Row="3"
                                            Grid.Column="0" 
                                            Text="Город"
@@ -291,7 +293,7 @@
                                          Margin="10,10"
                                          Width="500"
                                          FontSize="28"
-                                         Text="Солнечногорск"/>
+                                         Text="{Binding PatientAddress.City}"/>
                                 <TextBlock Grid.Row="4"
                                            Grid.Column="0" 
                                            Text="Улица"
@@ -303,7 +305,7 @@
                                          Margin="10,10"
                                          Width="500"
                                          FontSize="28"
-                                         Text="Ленина"/>
+                                         Text="{Binding PatientAddress.Street}"/>
                                 <TextBlock Grid.Row="5"
                                            Grid.Column="0" 
                                            Text="Строение"
@@ -315,7 +317,7 @@
                                          Margin="10,10"
                                          Width="500"
                                          FontSize="28"
-                                         Text="Дом 2, Корпус 2"/>
+                                         Text="{Binding PatientAddress.Building}"/>
                                 <TextBlock Grid.Row="6"
                                            Grid.Column="0" 
                                            Text="Квартира"
@@ -326,7 +328,7 @@
                                          Template="{StaticResource RoundTextBox}"
                                          Margin="10,10"
                                          Width="500"
-                                         FontSize="28"
+                                         FontSize="{Binding PatientAddress.Room}"
                                          Text="337"/>
                             </Grid>
                         </Border>
@@ -366,7 +368,7 @@
                                          Margin="10,10"
                                          Width="510"
                                          FontSize="28"
-                                         Text="12368721"/>
+                                         Text="{Binding CurrentPatient.OmsNumber}"/>
                                 <TextBlock Grid.Row="2"
                                            Grid.Column="0" 
                                            Text="Паспорт"
@@ -380,13 +382,13 @@
                                              Margin="10,10"
                                              Width="200"
                                              FontSize="28"
-                                             Text="4518"/>
+                                             Text="{Binding CurrentPatient.PassportSeries}"/>
                                     <TextBox 
                                              Template="{StaticResource RoundTextBox}"
                                              Margin="100,10,10,10"
                                              Width="200"
                                              FontSize="28"
-                                             Text="451822"/>
+                                             Text="{Binding CurrentPatient.PassportNumber}"/>
                                 </StackPanel>
                                 <TextBlock Grid.Row="3"
                                            Grid.Column="0" 
@@ -401,13 +403,13 @@
                                         Margin="10,10"
                                         Width="230"
                                         FontSize="28"
-                                        Text="89067188209"/>
+                                        Text="{Binding CurrentPatient.MainPhone}"/>
                                     <TextBox 
                                         Template="{StaticResource RoundTextBox}"
                                         Margin="40,10,10,10"
                                         Width="230"
                                         FontSize="28"
-                                        Text="89067188209"/>
+                                        Text="{Binding CurrentPatient.ExtraPhone}"/>
                                 </StackPanel>
                             </Grid>
                             </Border>
