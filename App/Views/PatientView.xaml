@@ -96,7 +96,7 @@
             <!--#region Info-->
             <TabControl Style="{StaticResource TabControlStyle}"
                         SelectedIndex="{Binding SelectedTabItem}">
-                <TabItem x:Name="Card">
+                <TabItem x:Name="Card"  IsSelected="True">
                     <TabItem.Header>
                         <StackPanel Orientation="Horizontal">
                             <Image Source="../Resources/Images/CardIcon.png" 
@@ -108,8 +108,257 @@
                                        Margin="9"/>
                         </StackPanel>
                     </TabItem.Header>
-                    
-                    
+                    <Grid Margin="10">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <!-- Top left rectangle-->
+                            <Border Grid.Row="0"
+                                Grid.Column="0"
+                                CornerRadius="40,0,0,0"
+                                Margin="5"
+                                BorderBrush="{StaticResource MBlue}"
+                                BorderThickness="5">
+                                <Grid Margin="5">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="3.6*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="3"
+                                           Text="Госпитализация"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="30"/>
+                                    <TextBlock Grid.Row="1"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="2"
+                                           Text="Дата поступления"
+                                           FontSize="28"
+                                           VerticalAlignment="Center"/>
+                                    <DatePicker Grid.Row="1"
+                                            Grid.Column="2"
+                                            FontSize="24"
+                                            VerticalAlignment="Center"
+                                            Margin="10,10"
+                                            FirstDayOfWeek="Monday"
+                                            Text="1212"/>
+                                    <TextBlock Grid.Row="2"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="2"
+                                           Text="Госпитализация"
+                                           FontSize="28"
+                                           VerticalAlignment="Center"/>
+                                    <ComboBox Grid.Row="2"
+                                              Grid.Column="3"
+                                              FontSize="24"
+                                              Margin="10"/>
+                                    <TextBlock Grid.Row="3"
+                                               Grid.Column="0"
+                                               Grid.ColumnSpan="2"
+                                               Text="Палата"
+                                               FontSize="28"
+                                               VerticalAlignment="Center"/>
+                                    <Button Grid.Row="3"
+                                            Grid.Column="1"
+                                            Template="{StaticResource RoundButtonTemplate}"
+                                            Margin="10"
+                                            FontSize="20"
+                                            Content=">"/>
+                                <ComboBox Grid.Row="3"
+                                              Grid.Column="3"
+                                              FontSize="24"
+                                              Margin="10"/>
+                                    <TextBlock Grid.Row="4"
+                                           Grid.Column="0"
+                                           Text="Диагноз"
+                                           FontSize="28"
+                                           VerticalAlignment="Center"/>
+                                    <Button Grid.Row="4"
+                                            Grid.Column="1"
+                                            Template="{StaticResource RoundButtonTemplate}"
+                                            Margin="10"
+                                            FontSize="20"
+                                            Content="?"/>
+                                    <TextBox Grid.Row="4"
+                                             Grid.Column="2"
+                                             Template="{StaticResource RoundTextBox}"
+                                             Margin="10"
+                                             FontSize="24"
+                                             Text="А43.1"/>
+                                    <TextBlock Grid.Row="5"
+                                           Grid.Column="0"
+                                           Text="Жалобы"
+                                           FontSize="28"
+                                           VerticalAlignment="Center"/>
+                                    <RichTextBox Grid.Row="5" Grid.RowSpan="2"
+                                             Grid.Column="1" Grid.ColumnSpan="2"
+                                             Margin="10"
+                                             FontSize="24"/>
+                                </Grid>
+                            </Border>
+                        <!-- Top right rectangle-->
+                        <Border Grid.Row="0"
+                                Grid.Column="1"
+                                CornerRadius="0"
+                                Margin="5"
+                                BorderBrush="{StaticResource MBlue}"
+                                BorderThickness="5">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition/>
+                                    <ColumnDefinition Width="2*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           Grid.ColumnSpan="2"
+                                           Text="Анамнез жизни"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="30"/>
+                                <StackPanel Grid.Row="1"
+                                            Grid.Column="0"
+                                            Orientation="Vertical"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Text="Анамнез"
+                                               FontSize="28"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock Text="жизни"
+                                               FontSize="28"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <RichTextBox Grid.Row="1" 
+                                             Grid.Column="1"
+                                             Margin="10"
+                                             FontSize="24"/>
+                                <StackPanel Grid.Row="2"
+                                            Grid.Column="0"
+                                            Orientation="Vertical"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Text="Наследственные"
+                                               FontSize="28"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock Text="заболевания"
+                                               FontSize="28"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <RichTextBox Grid.Row="2" 
+                                             Grid.Column="1"
+                                             Margin="10"
+                                             FontSize="24"/>
+                                <StackPanel Grid.Row="3"
+                                            Grid.Column="0"
+                                            Orientation="Vertical"
+                                            VerticalAlignment="Center">
+                                    <TextBlock Text="Перенесенные"
+                                               FontSize="28"
+                                               VerticalAlignment="Center"/>
+                                    <TextBlock Text="заболевания"
+                                               FontSize="28"
+                                               VerticalAlignment="Center"/>
+                                </StackPanel>
+                                <RichTextBox Grid.Row="3" 
+                                             Grid.Column="1"
+                                             Margin="10"
+                                             FontSize="24"/>
+                            </Grid>
+                        </Border>
+                        <!-- Bottom rectangle-->
+                        <Border Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                CornerRadius="0,0,0,40"
+                                Margin="5"
+                                BorderBrush="{StaticResource MBlue}"
+                                BorderThickness="5">
+                            <Grid Margin="5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="50"/>
+                                    <RowDefinition/>
+                                    <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           Text="Осмотры"
+                                           TextAlignment="Center"
+                                           VerticalAlignment="Center"
+                                           FontSize="30"/>
+                                <DataGrid Grid.Row="1"
+                                          FontSize="28"
+                                          AutoGenerateColumns="False"
+                                          CanUserAddRows="False"
+                                          CanUserDeleteRows="False"
+                                          IsReadOnly="True"
+                                          SelectedIndex="{Binding CheckUpsDataGridSelectedIndex}"
+                                          ItemsSource="{Binding Checkups}">
+                                    <DataGrid.Columns>
+                                        <DataGridTemplateColumn Header="Дата">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <DatePicker FontSize="24"
+                                                            VerticalAlignment="Center"
+                                                            Margin="10,10"
+                                                            FirstDayOfWeek="Monday"
+                                                            Text="27.01.2001"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                        <DataGridTextColumn Header="Специализация" 
+                                                            Binding="{Binding Checkup_s.User.Position}"
+                                                            IsReadOnly="False"/>
+                                        <DataGridTextColumn Header="Врач" 
+                                                            Binding="{Binding Checkup_s.User}"
+                                                            IsReadOnly="False"
+                                                            Width="*"/>
+                                        <DataGridTemplateColumn Header="Подробнее">
+                                            <DataGridTemplateColumn.CellTemplate>
+                                                <DataTemplate>
+                                                    <Button Template="{StaticResource RoundButtonTemplate}"
+                                                            Content=">"
+                                                            FontSize="28"
+                                                            Width="200"
+                                                            Margin="10"
+                                                            DataContext="{Binding PatientViewModel, Source={StaticResource Locator}}"
+                                                            Command="{Binding OpenCheckupCommand}"/>
+                                                </DataTemplate>
+                                            </DataGridTemplateColumn.CellTemplate>
+                                        </DataGridTemplateColumn>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <WrapPanel Grid.Row="2"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Right">
+                                    <Button Template="{StaticResource RoundButtonTemplate}"
+                                            Content="Новый осмотр"
+                                            FontSize="28"
+                                            Width="400"
+                                            Margin="5"/>
+                                </WrapPanel>
+                            </Grid>
+                            </Border>
+                        </Grid>
                 </TabItem>
                 <!--#endregion-->
                 
@@ -480,7 +729,7 @@
                                     <RowDefinition/>
                                 </Grid.RowDefinitions>
                                 <TextBlock Grid.Row="0"
-                                           Text="Трудовая деятельность"
+                                           Text="Трудовой период"
                                            TextAlignment="Center"
                                            VerticalAlignment="Center"
                                            FontSize="30"/>

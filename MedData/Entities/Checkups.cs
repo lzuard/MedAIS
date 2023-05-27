@@ -28,7 +28,7 @@ namespace MedData.Entities
         /// <summary>
         /// EF navigation property
         /// </summary>
-        public Checkups Checkup_s { get; set; }
+        public Сheckup Checkup_s { get; set; }
 
     }
 }

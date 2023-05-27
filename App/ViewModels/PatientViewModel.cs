@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Input;
 using MathCore.WPF.Commands;
@@ -16,11 +18,13 @@ namespace MedApp.ViewModels
         private int _doctorId;
         private bool _isNewPatient;
 
+        private Gender _patientGender;
+
         #region Properties
 
         #region SelectedTabItem
 
-        private int _selectedTabItem = 3;
+        private int _selectedTabItem;
 
         public int SelectedTabItem
         {
@@ -72,10 +76,26 @@ namespace MedApp.ViewModels
         public int SelectedGenderIndex
         {
             get => _selectedGenderIndex;
-            set => Set(ref _selectedGenderIndex, value);
+            set
+            {
+                Set(ref _selectedGenderIndex, value);
+                _patientGender = _selectedGenderIndex == 0 ? Gender.Male : Gender.Female;
+            }
         }
 
         #endregion SelectedGenderIndex
+
+        #region Checkups
+
+        private IEnumerable<Checkups> _checkups = new List<Checkups>();
+
+        public IEnumerable<Checkups> Checkups
+        {
+            get => _checkups;
+            set => Set(ref _checkups, value);
+        }
+
+        #endregion Checkups
 
         #region Genders
 
@@ -124,6 +144,18 @@ namespace MedApp.ViewModels
         }
 
         #endregion IsMedCardsComboBoxReadOnly
+
+        #region CheckUpsDataGridSelectedIndex
+
+        private int _checkUpsDataGridSelectedIndex;
+
+        public int CheckUpsDataGridSelectedIndex
+        {
+            get => _checkUpsDataGridSelectedIndex;
+            set => Set(ref _checkUpsDataGridSelectedIndex, value);
+        }
+
+        #endregion CheckUpsDataGridSelectedIndex
 
         #endregion Properties
 
@@ -184,7 +216,28 @@ namespace MedApp.ViewModels
 
         #endregion CancelCurrentPatient
 
+        #region OpenCheckup command
+
+        private ICommand _openCheckupCommand;
+
+        public ICommand OpenCheckupCommand => _openCheckupCommand
+            ??= new LambdaCommand(OnOpenCheckupCommandExecuted, CanOpenCheckupCommandExecute);
+
+        private bool CanOpenCheckupCommandExecute() => true;
+
+        private void OnOpenCheckupCommandExecuted()
+        {
+            OpenCheckup();
+        }
+
+        #endregion OpenCheckup
+
         #endregion Commands
+
+        private void OpenCheckup()
+        {
+            MessageBox.Show("1", "1");
+        }
 
         private void CloseView()
         {
@@ -193,6 +246,7 @@ namespace MedApp.ViewModels
 
         private void SaveChanges()
         {
+            CurrentPatient.Gender = _patientGender;
             bool saved = _patientsService.SaveNewPatient(CurrentPatient, PatientAddress);
             if (saved)
                 CloseView();
@@ -212,6 +266,28 @@ namespace MedApp.ViewModels
             _patientsService = patientsService;
             _doctorId = doctorId;
             CurrentPatient = patient;
+
+            Checkups = Checkups.Append(new Checkups()
+            {
+                Id = 10,
+                CheckUpId = 122,
+                Date = new DateTime(2021, 12, 21),
+                Checkup_s = new Сheckup()
+                {
+                    Id = 111,
+                    User = new User()
+                    {
+                        Name="Алексей",
+                        Surname = "Петшашков",
+                        Patronymic = "Дмитриевич",
+                        Position = new Position()
+                        {
+                            Id=15,
+                            Name= "Невролог"
+                        }
+                    }
+                }
+            });
 
             if (CurrentPatient.Id == 0)
             {
