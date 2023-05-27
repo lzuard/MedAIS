@@ -17,6 +17,7 @@ namespace MedApp.ViewModels
         private DoctorsViewModel _doctorsViewModel;
         private int _doctorId;
         private bool _isNewPatient;
+        private bool _isMedCardSelected;
 
         private Gender _patientGender = 0;
 
@@ -264,6 +265,22 @@ namespace MedApp.ViewModels
 
         #endregion MedCardsCollection
 
+        #region SelectedMedCardIndex
+
+        private int _selectedMedCardIndex;
+
+        public int SelectedMedCardIndex
+        {
+            get => _selectedMedCardIndex;
+            set
+            {
+                Set(ref _selectedMedCardIndex, value);
+                _isMedCardSelected = _selectedGenderIndex>0;
+            }
+        }
+
+        #endregion SelectedMedCardIndex
+
         #endregion InfoTabProperties
 
         #region Commands
@@ -318,7 +335,7 @@ namespace MedApp.ViewModels
 
         private void OnCancelCurrentPatientCommandExecuted()
         {
-            CurrentPatient = new MedCard();
+           ResetMedCard();
         }
 
         #endregion CancelCurrentPatient
@@ -351,6 +368,15 @@ namespace MedApp.ViewModels
             _doctorsViewModel.CurrentPatient = null;
         }
 
+        private void ResetMedCard()
+        {
+            CurrentPatient = new MedCard();
+            CurrentAnamnesisVitae = new AnamnesisVitae();
+            CurrentHospitalization = new Hospitalization();
+            PatientAddress = new Address();
+            SelectedMedCardIndex = -1;
+        }
+
         private void LoadChambers()
         {
             AvailableChambers = _patientsService.GetDoctorsChambers(_doctorId, _patientGender);
@@ -358,6 +384,8 @@ namespace MedApp.ViewModels
 
         private void SaveChanges()
         {
+            if (_isMedCardSelected)
+                CurrentPatient = MedCardsCollection.ElementAt(SelectedMedCardIndex);
             CurrentPatient.Gender = _patientGender;
 
 
@@ -382,12 +410,15 @@ namespace MedApp.ViewModels
             _doctorId = doctorId;
             CurrentPatient = patient;
 
+            MedCardsCollection = _patientsService.GetAllMedCards();
+
             if (CurrentPatient.Id == 0)
             {
                 _isNewPatient = true;
                 SelectedTabItem = 3;
                 PatientAddress = new Address();
                 IsMedCardsComboBoxReadOnly = false;
+                SelectedMedCardIndex = -1;
                 CurrentHospitalization = new Hospitalization();
                 CurrentAnamnesisVitae = new AnamnesisVitae();
                 Checkups = null;
@@ -398,12 +429,11 @@ namespace MedApp.ViewModels
                 SelectedTabItem = 0;
                 PatientAddress = CurrentPatient.Address;
                 IsMedCardsComboBoxReadOnly = true;
+                SelectedMedCardIndex = MedCardsCollection.FirstIndexOf(CurrentPatient);
                 CurrentHospitalization = _patientsService.GetCurrentHospitalization(CurrentPatient.Id);
                 CurrentAnamnesisVitae = CurrentHospitalization.AnamnesisVitae;
                 Checkups = CurrentHospitalization.Checkups;
             }
-
-            MedCardsCollection = _patientsService.GetAllMedCards();
 
             LoadChambers();
         }

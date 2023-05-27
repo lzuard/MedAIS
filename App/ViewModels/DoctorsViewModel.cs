@@ -1,12 +1,9 @@
 ﻿using MathCore.WPF.Commands;
-using MedApp.Services;
 using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
 using MedData.Entities;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace MedApp.ViewModels

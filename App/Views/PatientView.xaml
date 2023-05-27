@@ -93,7 +93,7 @@
                 Background="#5FB7DC" 
                 Margin="23,-1,23,23">
 
-            <!--#region Info-->
+                <!--#region Card-->
             <TabControl Style="{StaticResource TabControlStyle}"
                         SelectedIndex="{Binding SelectedTabItem}">
                 <TabItem x:Name="Card"  IsSelected="True">
@@ -480,7 +480,7 @@
                                               Margin="10,10"
                                               Background="White"
                                               ItemsSource="{Binding MedCardsCollection}"
-                                              SelectedItem="{Binding CurrentPatient}"
+                                              SelectedIndex="{Binding SelectedMedCardIndex}"
                                               IsReadOnly="{Binding IsMedCardsComboBoxReadOnly}"/>
                                     <Button Template="{StaticResource RoundButtonTemplate}"
                                             Content="Сбросить"
