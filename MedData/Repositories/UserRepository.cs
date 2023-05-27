@@ -13,7 +13,8 @@ namespace MedData.Repositories
     {
         public override IQueryable<User> Items => base.Items
             .Include(i => i.Department)
-            .Include(i => i.Position);
+            .Include(i => i.Position)
+            .Include(i=>i.Chambers);
 
         public UserRepository(ApplicationContext context) : base(context) { }
     }
