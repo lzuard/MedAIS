@@ -108,7 +108,7 @@ namespace MedApp.Services
             {
                 var hospitalizations = _medCardRepo.Items
                     .SelectMany(medcard => medcard.Hospitalizations)
-                    .Where(medcard => medcard.Id == medCardId)
+                    .Where(medcard => medcard.MedCardId == medCardId)
                     .ToList();
                 return hospitalizations;
             }

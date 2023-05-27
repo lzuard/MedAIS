@@ -58,8 +58,15 @@ namespace MedApp.ViewModels
             set
             {
                 Set(ref _currentPatient, value);
-                MedCardVisibility = _currentPatient is null ? Visibility.Hidden : Visibility.Visible;
-                //UpdatePatientsList();
+                if (_currentPatient is null)
+                {
+                    MedCardVisibility = Visibility.Hidden;
+                }
+                else
+                {
+                    MedCardVisibility = Visibility.Visible;
+                    _patientViewModel.PopUp(this, _patientService, CurrentPatient, CurrentUser.Id);
+                }
             }
         }
         #endregion CurrentPatient

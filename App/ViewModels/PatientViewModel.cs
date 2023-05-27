@@ -318,7 +318,7 @@ namespace MedApp.ViewModels
 
         private void OnCancelCurrentPatientCommandExecuted()
         {
-            CurrentPatient = null;
+            CurrentPatient = new MedCard();
         }
 
         #endregion CancelCurrentPatient
@@ -382,30 +382,6 @@ namespace MedApp.ViewModels
             _doctorId = doctorId;
             CurrentPatient = patient;
 
-            //Debug
-            Checkups = Checkups.Append(new Checkups()
-            {
-                Id = 10,
-                CheckUpId = 122,
-                Date = new DateTime(2021, 12, 21),
-                Checkup_s = new Сheckup()
-                {
-                    Id = 111,
-                    User = new User()
-                    {
-                        Name="Алексей",
-                        Surname = "Петшашков",
-                        Patronymic = "Дмитриевич",
-                        Position = new Position()
-                        {
-                            Id=15,
-                            Name= "Невролог"
-                        }
-                    }
-                }
-            });
-            //Debug
-
             if (CurrentPatient.Id == 0)
             {
                 _isNewPatient = true;
@@ -425,10 +401,11 @@ namespace MedApp.ViewModels
                 CurrentHospitalization = _patientsService.GetCurrentHospitalization(CurrentPatient.Id);
                 CurrentAnamnesisVitae = CurrentHospitalization.AnamnesisVitae;
                 Checkups = CurrentHospitalization.Checkups;
-                //TODO fix hospitalization-anamnesis vitae 1:N -> 1:1
             }
 
             MedCardsCollection = _patientsService.GetAllMedCards();
+
+            LoadChambers();
         }
     }
 }
