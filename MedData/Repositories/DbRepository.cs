@@ -48,8 +48,9 @@ namespace MedData.Repositories
 
         public void Update(T entity)
         {
-            if (entity is null) throw new ArgumentNullException(nameof(entity));
-            _context.Entry(entity).State = EntityState.Modified;
+            var oldEntity = Items.FirstOrDefault(i => i.Id == entity.Id);
+            if (oldEntity is null) throw new ArgumentNullException(nameof(entity));
+            _context.Entry(oldEntity).CurrentValues.SetValues(entity);
             if (AutoSaveChanges)
                 _context.SaveChanges();
         }
