@@ -6,6 +6,11 @@ namespace MedData.Entities
     public class Сheckup : Entity
     {
         /// <summary>
+        /// Doctor who made this checkup
+        /// </summary>
+        public int UserId { get; set; }
+
+        /// <summary>
         /// External inspection
         /// </summary>
         public string View { get; set; }
@@ -39,6 +44,11 @@ namespace MedData.Entities
         /// Nervous System
         /// </summary>
         public string Nervous { get; set; }
+
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
+        public User User { get; set; }
 
         /// <summary>
         /// EF navigation property

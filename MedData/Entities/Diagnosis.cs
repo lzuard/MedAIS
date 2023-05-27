@@ -24,7 +24,7 @@ namespace MedData.Entities
         /// <summary>
         /// Clinical diagnosis
         /// </summary>
-        public string ClinaclDiagnosis { get; set; }
+        public string ClinicalDiagnosis { get; set; }
 
         /// <summary>
         /// The reason why this diagnosis has been chosen
@@ -32,7 +32,7 @@ namespace MedData.Entities
         public string Rationale { get; set; }
 
         /// <summary>
-        /// Etiology and patogenesis
+        /// Etiology and pathogenesis
         /// </summary>
         public string EtiologyPathogenesis { get; set; }
 

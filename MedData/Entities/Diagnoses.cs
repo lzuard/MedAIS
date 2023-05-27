@@ -11,7 +11,7 @@ namespace MedData.Entities
         public int DiagnosisId { get; set; }
 
         /// <summary>
-        /// If cur diagnisis is active
+        /// If cur diagnosis is active
         /// </summary>
         public bool IsActive { get; set; }
 

@@ -16,17 +16,17 @@ namespace MedData.Entities
         public DateTime HospitalizationDate { get; set; }
 
         /// <summary>
-        /// Method how hospitallization happend
+        /// Method how hospitalization happened
         /// </summary>
         public HospitalizationMethod HospitalizationMethod { get; set; }
 
         /// <summary>
         /// Patient's Complaints
         /// </summary>
-        public string Сomplaints { get; set; }
+        public string Complaints { get; set; }
 
         /// <summary>
-        /// Patient's illnes anamnesis
+        /// Patient's illness anamnesis
         /// </summary>
         public string AnamnesisMorbi { get; set; }
 
@@ -38,7 +38,7 @@ namespace MedData.Entities
         /// <summary>
         /// Is cur hospitalization active
         /// </summary>
-        public bool IsAcrive { get; set; }
+        public bool IsActive { get; set; }
 
         /// <summary>
         /// EF navigation property

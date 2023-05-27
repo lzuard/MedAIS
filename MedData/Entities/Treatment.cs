@@ -31,7 +31,7 @@ namespace MedData.Entities
         public double Volume { get; set; }
 
         /// <summary>
-        /// Frequency of medciation 
+        /// Frequency of medication 
         /// </summary>
         public string Frequency { get; set; }
 

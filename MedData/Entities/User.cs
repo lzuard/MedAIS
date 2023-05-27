@@ -11,7 +11,7 @@ namespace MedData.Entities
         public int DepartmentId { get; set; }
 
         /// <summary>
-        /// Id of the postion
+        /// Id of the position
         /// </summary>
         public int PositionId { get; set; }
 
@@ -59,6 +59,11 @@ namespace MedData.Entities
         /// EF navigation property
         /// </summary>
         public ICollection<Examination> Examinations { get; set; }
+
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
+        public ICollection<Сheckup> Сheckup_s { get; set; }
 
         /// <summary>
         /// EF navigation property

@@ -21,7 +21,7 @@ namespace MedData.Entities
         public string Name { get; set; }
 
         /// <summary>
-        /// Patients Patronumic
+        /// Patients patronymic
         /// </summary>
         public string Patronymic { get; set; }
 
