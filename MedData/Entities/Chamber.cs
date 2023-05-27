@@ -57,5 +57,8 @@ namespace MedData.Entities
         /// </summary>
         [InverseProperty("NewChamber")]
         public ICollection<Transaction> NewChamber { get; set; }
+
+
+        public override string ToString() => Number;
     }
 }
