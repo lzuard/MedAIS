@@ -398,7 +398,7 @@ namespace MedApp.ViewModels
                     "Не удалось сохранить данные. Не все поля заполнены. В случае проблем обратитесь к сотрудникам отдела IT",
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-
+         
         public void PopUp(
             DoctorsViewModel doctorsViewModel,
             IPatientsService patientsService, 
