@@ -18,7 +18,7 @@ namespace MedApp.ViewModels
         private int _doctorId;
         private bool _isNewPatient;
 
-        private Gender _patientGender;
+        private Gender _patientGender = 0;
 
         #region Properties
 
@@ -57,6 +57,148 @@ namespace MedApp.ViewModels
 
         #endregion CurrentPatient
 
+        #region MedCardHeader
+
+        private string _medCardHeader = "Новый пациент";
+
+        public string MedCardHeader
+        {
+            get => _medCardHeader;
+            set => Set(ref _medCardHeader, value);
+        }
+
+        #endregion MedCardHeader
+
+        #region ShortDiagnosis
+
+        private string _shortDiagnosis = "Не установлен";
+
+        public string ShortDiagnosis
+        {
+            get => _shortDiagnosis;
+            set => Set(ref _shortDiagnosis, value);
+        }
+
+        #endregion ShortDiagnosis
+
+        #region Complaints
+
+        private string _complaints;
+
+        public string Complaints
+        {
+            get => _complaints;
+            set => Set(ref _complaints, value);
+        }
+
+        #endregion Complaints
+
+        #region CurrentAnamnesisVitae
+
+        private AnamnesisVitae _currentAnamnesisVitae;
+
+        public AnamnesisVitae CurrentAnamnesisVitae
+        {
+            get => _currentAnamnesisVitae;
+            set => Set(ref _currentAnamnesisVitae, value);
+        }
+
+        #endregion CurrentAnamnesisVitae
+
+        #endregion Properties
+
+
+        #region CardTabProperies
+
+        #region CurrentHospitalization
+
+        private Hospitalization _currentHospitalization;
+
+        public Hospitalization CurrentHospitalization
+        {
+            get => _currentHospitalization;
+            set => Set(ref _currentHospitalization, value);
+        }
+
+        #endregion CurrentHospitalization
+
+        #region Checkups
+
+        private IEnumerable<Checkups> _checkups = new List<Checkups>();
+
+        public IEnumerable<Checkups> Checkups
+        {
+            get => _checkups;
+            set => Set(ref _checkups, value);
+        }
+
+        #endregion Checkups
+
+        #region CheckUpsDataGridSelectedIndex
+
+        private int _checkUpsDataGridSelectedIndex;
+
+        public int CheckUpsDataGridSelectedIndex
+        {
+            get => _checkUpsDataGridSelectedIndex;
+            set => Set(ref _checkUpsDataGridSelectedIndex, value);
+        }
+
+        #endregion CheckUpsDataGridSelectedIndex
+
+        #region HospitalizationTypesList
+
+        private IEnumerable<string> _hospitalizationTypesList = new List<string>{"Направление", "СМП"};
+
+        public IEnumerable<string> HospitalizationTypesList
+        {
+            get => _hospitalizationTypesList;
+            set => Set(ref _hospitalizationTypesList, value);
+        }
+
+        #endregion HospitalizationTypesList
+
+        #region SelectedHospitalizationType
+
+        private int _selectedHospitalizationType;
+
+        public int SelectedHospitalizationType
+        {
+            get => _selectedHospitalizationType;
+            set => Set(ref _selectedHospitalizationType, value);
+        }
+
+        #endregion SelectedHospitalizationType
+
+        #region AvailableChambers
+
+        private IEnumerable<Chamber> _availableChambers;
+
+        public IEnumerable<Chamber> AvailableChambers
+        {
+            get => _availableChambers;
+            set => Set(ref _availableChambers, value);
+        }
+
+        #endregion AvaliableChambers
+
+        #region SelectedChamber
+
+        private int _selectedChamber;
+
+        public int SelectedChamber
+        {
+            get => _selectedChamber;
+            set => Set(ref _selectedChamber, value);
+        }
+
+        #endregion SelectedChamber
+
+        #endregion
+
+
+        #region InfoTabProperties
+
         #region PatientAddress
 
         private Address _patientAddress;
@@ -68,6 +210,18 @@ namespace MedApp.ViewModels
         }
 
         #endregion PatientAddress
+
+        #region Genders collection
+
+        private IEnumerable<string> _genders = new List<string> { "Мужчина", "Женщина" };
+
+        public IEnumerable<string> Genders
+        {
+            get => _genders;
+            set => Set(ref _genders, value);
+        }
+
+        #endregion Genders Collection
 
         #region SelectedGenderIndex
 
@@ -85,41 +239,17 @@ namespace MedApp.ViewModels
 
         #endregion SelectedGenderIndex
 
-        #region Checkups
+        #region IsMedCardsComboBoxReadOnly
 
-        private IEnumerable<Checkups> _checkups = new List<Checkups>();
+        private bool _isMedCardsComboBoxReadOnly;
 
-        public IEnumerable<Checkups> Checkups
+        public bool IsMedCardsComboBoxReadOnly
         {
-            get => _checkups;
-            set => Set(ref _checkups, value);
+            get => _isMedCardsComboBoxReadOnly;
+            set => Set(ref _isMedCardsComboBoxReadOnly, value);
         }
 
-        #endregion Checkups
-
-        #region Genders
-
-        private IEnumerable<string> _genders = new List<string> { "Мужчина", "Женщина" };
-
-        public IEnumerable<string> Genders
-        {
-            get => _genders;
-            set => Set(ref _genders, value);
-        }
-
-        #endregion Genders
-
-        #region MedCardHeader
-
-        private string _medCardHeader = "Новый пациент";
-
-        public string MedCardHeader
-        {
-            get => _medCardHeader;
-            set => Set(ref _medCardHeader, value);
-        }
-
-        #endregion MedCardHeader
+        #endregion IsMedCardsComboBoxReadOnly
 
         #region MedCardsCollection
 
@@ -133,31 +263,7 @@ namespace MedApp.ViewModels
 
         #endregion MedCardsCollection
 
-        #region IsMedCardsComboBoxReadOnly
-
-        private bool _isMedCardsComboBoxReadOnly;
-
-        public bool IsMedCardsComboBoxReadOnly
-        {
-            get => _isMedCardsComboBoxReadOnly;
-            set => Set(ref _isMedCardsComboBoxReadOnly, value);
-        }
-
-        #endregion IsMedCardsComboBoxReadOnly
-
-        #region CheckUpsDataGridSelectedIndex
-
-        private int _checkUpsDataGridSelectedIndex;
-
-        public int CheckUpsDataGridSelectedIndex
-        {
-            get => _checkUpsDataGridSelectedIndex;
-            set => Set(ref _checkUpsDataGridSelectedIndex, value);
-        }
-
-        #endregion CheckUpsDataGridSelectedIndex
-
-        #endregion Properties
+        #endregion InfoTabProperties
 
         #region Commands
 
@@ -267,6 +373,7 @@ namespace MedApp.ViewModels
             _doctorId = doctorId;
             CurrentPatient = patient;
 
+            //Debug
             Checkups = Checkups.Append(new Checkups()
             {
                 Id = 10,
@@ -288,6 +395,7 @@ namespace MedApp.ViewModels
                     }
                 }
             });
+            //Debug
 
             if (CurrentPatient.Id == 0)
             {
@@ -295,6 +403,9 @@ namespace MedApp.ViewModels
                 SelectedTabItem = 3;
                 PatientAddress = new Address();
                 IsMedCardsComboBoxReadOnly = false;
+                CurrentHospitalization = new Hospitalization();
+                CurrentAnamnesisVitae = new AnamnesisVitae();
+                Checkups = null;
             }
             else
             {
@@ -302,9 +413,14 @@ namespace MedApp.ViewModels
                 SelectedTabItem = 0;
                 PatientAddress = CurrentPatient.Address;
                 IsMedCardsComboBoxReadOnly = true;
+                CurrentHospitalization = _patientsService.GetCurrentHospitalization(CurrentPatient.Id);
+                CurrentAnamnesisVitae = CurrentHospitalization.AnamnesisVitae.First();
+                Checkups = CurrentHospitalization.Checkups;
+                //TODO fix hospitalization-anamnesis vitae 1:N -> 1:1
             }
 
             MedCardsCollection = _patientsService.GetAllMedCards();
+            AvailableChambers = _patientsService.GetDoctorsChambers(_doctorId, _patientGender);
         }
     }
 }
