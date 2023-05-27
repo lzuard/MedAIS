@@ -234,6 +234,7 @@ namespace MedApp.ViewModels
             {
                 Set(ref _selectedGenderIndex, value);
                 _patientGender = _selectedGenderIndex == 0 ? Gender.Male : Gender.Female;
+                LoadChambers();
             }
         }
 
@@ -350,10 +351,18 @@ namespace MedApp.ViewModels
             _doctorsViewModel.CurrentPatient = null;
         }
 
+        private void LoadChambers()
+        {
+            AvailableChambers = _patientsService.GetDoctorsChambers(_doctorId, _patientGender);
+        }
+
         private void SaveChanges()
         {
             CurrentPatient.Gender = _patientGender;
-            bool saved = _patientsService.SaveNewPatient(CurrentPatient, PatientAddress);
+
+
+            bool saved = _patientsService.SaveNewPatient(CurrentPatient, PatientAddress, CurrentHospitalization, 
+                CurrentAnamnesisVitae, AvailableChambers.ElementAt(SelectedChamber));
             if (saved)
                 CloseView();
             else
@@ -414,13 +423,12 @@ namespace MedApp.ViewModels
                 PatientAddress = CurrentPatient.Address;
                 IsMedCardsComboBoxReadOnly = true;
                 CurrentHospitalization = _patientsService.GetCurrentHospitalization(CurrentPatient.Id);
-                CurrentAnamnesisVitae = CurrentHospitalization.AnamnesisVitae.First();
+                CurrentAnamnesisVitae = CurrentHospitalization.AnamnesisVitae;
                 Checkups = CurrentHospitalization.Checkups;
                 //TODO fix hospitalization-anamnesis vitae 1:N -> 1:1
             }
 
             MedCardsCollection = _patientsService.GetAllMedCards();
-            AvailableChambers = _patientsService.GetDoctorsChambers(_doctorId, _patientGender);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace MedApp.Services.Interfaces
 
         public IEnumerable<Chamber> GetDoctorsChambers(int doctorId, Gender patientGender);
 
-        public bool SaveNewPatient(MedCard newPatient, Address newAddress);
+        public bool SaveNewPatient(MedCard newPatient, Address newAddress, Hospitalization newHospitalization, AnamnesisVitae newAnamnesisVitae, Chamber oldChamber);
        
     }
 }

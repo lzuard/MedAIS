@@ -59,7 +59,7 @@ namespace MedApp.ViewModels
             {
                 Set(ref _currentPatient, value);
                 MedCardVisibility = _currentPatient is null ? Visibility.Hidden : Visibility.Visible;
-                UpdatePatientsList();
+                //UpdatePatientsList();
             }
         }
         #endregion CurrentPatient
@@ -164,6 +164,7 @@ namespace MedApp.ViewModels
             UserPosition = _currentUser.Position.Name;
 
             CurrentPatient = null;
+            UpdatePatientsList();
         }
     }
 }
