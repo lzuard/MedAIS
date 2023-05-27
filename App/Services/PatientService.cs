@@ -78,11 +78,58 @@ namespace MedApp.Services
             {
                 return false;
             }
-        } 
+        }
 
         /// <summary>
-        /// Returns all active doctors patients 
+        /// Saves existing patient information in db
         /// </summary>
+        public bool SaveOldPatient(MedCard newPatient,
+            Address newAddress,
+            Hospitalization newHospitalization,
+            AnamnesisVitae newAnamnesisVitae,
+            Chamber newChamber)
+        {
+            try
+            {
+                _hospitalizationRepo.Update(newHospitalization);
+                _addressRepo.Update(newAddress);
+                _anamnesisRepo.Update(newAnamnesisVitae);
+                var newPatientInChambers = new PatientInChamber()
+                {
+                    MedCard = newPatient,
+                    Chamber = newChamber
+                };
+                _patientInChamberRepo.Add(newPatientInChambers);
+                _medCardRepo.Update(newPatient);
+
+                _medCardRepo.SaveChanges();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Returns anamnesis vitae object by hospitalization id
+        /// </summary>
+        public AnamnesisVitae GetAnamnesisVitae(int hospitalizationId)
+        {
+            try
+            {
+                var anamnesis = _anamnesisRepo.Items.FirstOrDefault(a => a.HospitalizationId == hospitalizationId);
+                return anamnesis;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+            /// Returns all active doctors patients 
+            /// </summary>
         public IEnumerable<MedCard> GetDoctorsMedCards(int doctorId)
         {
             try

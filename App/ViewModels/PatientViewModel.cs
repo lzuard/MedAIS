@@ -384,13 +384,23 @@ namespace MedApp.ViewModels
 
         private void SaveChanges()
         {
-            if (_isMedCardSelected)
-                CurrentPatient = MedCardsCollection.ElementAt(SelectedMedCardIndex);
+            bool saved = false;
+
             CurrentPatient.Gender = _patientGender;
+            if (_isNewPatient)
+            {
+                if (_isMedCardSelected)
+                    CurrentPatient = MedCardsCollection.ElementAt(SelectedMedCardIndex);
 
+                saved = _patientsService.SaveNewPatient(CurrentPatient, PatientAddress, CurrentHospitalization,
+                    CurrentAnamnesisVitae, AvailableChambers.ElementAt(SelectedChamber));
+            }
+            else
+            {
+                saved = _patientsService.SaveOldPatient(CurrentPatient, PatientAddress, CurrentHospitalization, 
+                    CurrentAnamnesisVitae, AvailableChambers.ElementAt(SelectedChamber));
+            }
 
-            bool saved = _patientsService.SaveNewPatient(CurrentPatient, PatientAddress, CurrentHospitalization, 
-                CurrentAnamnesisVitae, AvailableChambers.ElementAt(SelectedChamber));
             if (saved)
                 CloseView();
             else
@@ -422,6 +432,7 @@ namespace MedApp.ViewModels
                 CurrentHospitalization = new Hospitalization();
                 CurrentAnamnesisVitae = new AnamnesisVitae();
                 Checkups = null;
+                MedCardHeader = "Новый пациент";
             }
             else
             {
@@ -431,8 +442,9 @@ namespace MedApp.ViewModels
                 IsMedCardsComboBoxReadOnly = true;
                 SelectedMedCardIndex = MedCardsCollection.FirstIndexOf(CurrentPatient);
                 CurrentHospitalization = _patientsService.GetCurrentHospitalization(CurrentPatient.Id);
-                CurrentAnamnesisVitae = CurrentHospitalization.AnamnesisVitae;
+                CurrentAnamnesisVitae = _patientsService.GetAnamnesisVitae(CurrentHospitalization.Id);
                 Checkups = CurrentHospitalization.Checkups;
+                MedCardHeader = CurrentPatient.ToString();
             }
 
             LoadChambers();
