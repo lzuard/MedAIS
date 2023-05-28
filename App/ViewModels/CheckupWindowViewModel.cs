@@ -1,4 +1,6 @@
-﻿using MedApp.ViewModels.Base;
+﻿using System.Windows.Documents;
+using System.Windows.Markup;
+using MedApp.ViewModels.Base;
 using MedData.Entities;
 
 namespace MedApp.ViewModels
@@ -7,9 +9,9 @@ namespace MedApp.ViewModels
     {
         #region CurrentCheckup
 
-        private Checkup? _currentCheckup;
+        private Checkup _currentCheckup;
 
-        public Checkup? CurrentCheckup
+        public Checkup CurrentCheckup
         {
             get => _currentCheckup;
             set => Set(ref _currentCheckup, value);

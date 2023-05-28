@@ -4,12 +4,90 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Осмотр" Height="450" Width="800"
+        Title="Осмотр" Height="800" Width="600"
         ResizeMode="NoResize"
         WindowStyle="ToolWindow"
-
+        Background="{StaticResource MWhite}"
         DataContext="{Binding CheckupWindowViewModel, Source={StaticResource Locator}}">
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Height" Value="150"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="AcceptsTab" Value="True"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Border DockPanel.Dock="Bottom"
+                Height="50"
+                BorderBrush="{StaticResource MBlue}"
+                BorderThickness="2">
+            <Grid Margin="40,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Content="Закрыть"
+                        Template="{StaticResource RoundButtonTemplate}"
+                        Width="150"
+                        Height="40"
+                        HorizontalAlignment="Left"/>
+                <Button Grid.Column="1" 
+                        Content="Сохранить"
+                        Template="{StaticResource RoundButtonTemplate}"
+                        Width="150"
+                        Height="40"
+                        HorizontalAlignment="Right"/>
+            </Grid>
+        </Border>
+        <ScrollViewer>
+            <Grid Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Text="Внешний осмотр"/>
+                <TextBox Grid.Row="1"
+                         Text="{Binding CurrentCheckup.View }"/>
+                <TextBlock Grid.Row="3" Text="Кожные покровы и внешние слизистые оболочки"/>
+                <TextBox Grid.Row="4"
+                         Text="{Binding CurrentCheckup.Skin }"/>
+                <TextBlock Grid.Row="5" Text="Сердечно-сосудистая система"/>
+                <TextBox Grid.Row="6"
+                         Text="{Binding CurrentCheckup.Skin }"/>
+                <TextBlock Grid.Row="7" Text="Пищеварительная система"/>
+                <TextBox Grid.Row="8"
+                         Text="{Binding CurrentCheckup.Stomach }"/>
+                <TextBlock Grid.Row="9" Text="Эндокринная система"/>
+                <TextBox Grid.Row="10"
+                         Text="{Binding CurrentCheckup.Hormones }"/>
+                <TextBlock Grid.Row="11" Text="Мочеполовая система"/>
+                <TextBox Grid.Row="12"
+                         Text="{Binding CurrentCheckup.Genitourinary }"/>
+                <TextBlock Grid.Row="13" Text="Нервная система"/>
+                <TextBox Grid.Row="14"
+                         Text="{Binding CurrentCheckup.Nervous }"/>
+            </Grid>
+        </ScrollViewer>
+    </DockPanel>
 </Window>
