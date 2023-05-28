@@ -17,6 +17,8 @@ namespace MedApp.Services.Interfaces
 
         public AnamnesisVitae GetAnamnesisVitae(int hospitalizationId);
 
+        public IEnumerable<Checkup>? GetPatientCheckups(int hospitalizationId);
+
         public IEnumerable<Chamber> GetDoctorsChambers(int doctorId, Gender patientGender);
 
         public bool SaveNewPatient(MedCard newPatient, Address newAddress, Hospitalization newHospitalization, AnamnesisVitae newAnamnesisVitae, Chamber oldChamber);

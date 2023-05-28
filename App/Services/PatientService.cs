@@ -206,6 +206,24 @@ namespace MedApp.Services
             }
         }
 
+        /// <summary>
+        /// Returns list of "Checkup" entities for hospitalization
+        /// </summary>
+        public IEnumerable<Checkup>? GetPatientCheckups(int hospitalizationId)
+        {
+            try
+            {
+                var checkups = _hospitalizationRepo.Items.SelectMany(h => h.Checkups)
+                    .Where(c => c.HospitaliztionId == hospitalizationId);
+                var checkupList = checkups.Select(cs => cs.Checkup_s).Distinct().ToList();
+                return checkupList;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
         public PatientService(IRepository<MedCard> medCardRepo,
             IRepository<Address> addressRepo,
             IRepository<AnamnesisVitae> anamnesisRepo,
