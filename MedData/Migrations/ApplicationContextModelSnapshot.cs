@@ -626,7 +626,7 @@ namespace MedData.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MedData.Entities.Сheckup", b =>
+            modelBuilder.Entity("MedData.Entities.Checkup", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -734,7 +734,7 @@ namespace MedData.Migrations
 
             modelBuilder.Entity("MedData.Entities.Checkups", b =>
                 {
-                    b.HasOne("MedData.Entities.Сheckup", "Checkup_s")
+                    b.HasOne("MedData.Entities.Checkup", "Checkup_s")
                         .WithMany("Checkups")
                         .HasForeignKey("Checkup_sId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -906,7 +906,7 @@ namespace MedData.Migrations
                     b.Navigation("Position");
                 });
 
-            modelBuilder.Entity("MedData.Entities.Сheckup", b =>
+            modelBuilder.Entity("MedData.Entities.Checkup", b =>
                 {
                     b.HasOne("MedData.Entities.User", "User")
                         .WithMany("Сheckup_s")
@@ -999,7 +999,7 @@ namespace MedData.Migrations
                     b.Navigation("Сheckup_s");
                 });
 
-            modelBuilder.Entity("MedData.Entities.Сheckup", b =>
+            modelBuilder.Entity("MedData.Entities.Checkup", b =>
                 {
                     b.Navigation("Checkups");
                 });

@@ -24,7 +24,7 @@ namespace MedData.Data
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Treatment> Treatments { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Сheckup> Checkup_s { get; set; }
+        public DbSet<Checkup> Checkup_s { get; set; }
 
 
         public ApplicationContext(DbContextOptions options) : base(options) { }

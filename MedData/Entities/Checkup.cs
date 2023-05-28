@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace MedData.Entities
 {
-    public class Сheckup : Entity
+    public class Checkup : Entity
     {
         /// <summary>
         /// Doctor who made this checkup
