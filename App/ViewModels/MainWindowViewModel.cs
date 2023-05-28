@@ -10,6 +10,7 @@ namespace MedApp.ViewModels
     {
         private readonly IAuthService _authService;
         private readonly IPatientsService _patientsService;
+        private readonly IWindowService _windowService;
 
         private readonly IEntitiesCollectionProvider<Department> _departmentProvider;
         private readonly IEntitiesCollectionProvider<Position> _positionProvider; 
@@ -95,7 +96,7 @@ namespace MedApp.ViewModels
                     CurrentViewModel = _authViewModel; 
                     break;
                 case 1:
-                    _doctorsViewModel.Activate(this, _authService, _patientViewModel, _patientsService);
+                    _doctorsViewModel.Activate(this, _authService, _patientViewModel, _patientsService, _windowService);
                     CurrentViewModel = _doctorsViewModel;
                     break;
                 case 2:
@@ -117,6 +118,7 @@ namespace MedApp.ViewModels
             (
             IAuthService authService,
             IPatientsService patientsService,
+            IWindowService windowService,
             IEntitiesCollectionProvider<Department> departmentProvider,
             IEntitiesCollectionProvider<Position> positionProvider,
             IEntitiesCollectionProvider<User> userProvider,
@@ -131,6 +133,7 @@ namespace MedApp.ViewModels
         {
             _authService = authService;
             _patientsService = patientsService;
+            _windowService = windowService;
 
             _departmentProvider = departmentProvider;
             _positionProvider = positionProvider;

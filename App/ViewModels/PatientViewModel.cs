@@ -15,6 +15,7 @@ namespace MedApp.ViewModels
     internal class PatientViewModel:ViewModelBase
     {
         private IPatientsService? _patientsService;
+        private IWindowService _windowService;
         private DoctorsViewModel _doctorsViewModel;
         private int _doctorId;
         private bool _isNewPatient;
@@ -127,9 +128,9 @@ namespace MedApp.ViewModels
 
         #region Checkups
 
-        private ObservableCollection<Checkups> _checkups = new ObservableCollection<Checkups>();
+        private ObservableCollection<Checkup> _checkups = new ObservableCollection<Checkup>();
 
-        public ObservableCollection<Checkups> Checkups
+        public ObservableCollection<Checkup> Checkups
         {
             get => _checkups;
             set => Set(ref _checkups, value);
@@ -439,7 +440,7 @@ namespace MedApp.ViewModels
 
         private void OnAddCheckupCommandExecuted()
         {
-
+            CreateCheckup();
         }
 
         #endregion AddCheckup
@@ -465,7 +466,13 @@ namespace MedApp.ViewModels
 
         private void OpenCheckup()
         {
-            MessageBox.Show("1", "1");
+            _windowService.OpenExistingCheckupWindow(new Checkup());
+        }
+
+        private void CreateCheckup()
+        {
+            _windowService.OpenNewCheckupWindow(CurrentHospitalization.Id);
+            LoadCheckups();
         }
 
         private void CloseView()
@@ -485,6 +492,14 @@ namespace MedApp.ViewModels
         private void LoadChambers()
         {
             AvailableChambers = _patientsService.GetDoctorsChambers(_doctorId, _patientGender);
+        }
+
+        private void LoadCheckups()
+        {
+            var checkups = _patientsService.GetPatientCheckups(CurrentHospitalization.Id);
+            Checkups = checkups is null
+                ? new ObservableCollection<Checkup>()
+                : new ObservableCollection<Checkup>(checkups);
         }
 
         private void SaveChanges()
@@ -518,10 +533,12 @@ namespace MedApp.ViewModels
             DoctorsViewModel doctorsViewModel,
             IPatientsService patientsService, 
             MedCard patient, 
-            int doctorId)
+            int doctorId,
+            IWindowService windowService)
         {
             _doctorsViewModel = doctorsViewModel;
             _patientsService = patientsService;
+            _windowService = windowService;
             _doctorId = doctorId;
             CurrentPatient = patient;
 
@@ -551,17 +568,11 @@ namespace MedApp.ViewModels
                 SelectedMedCardIndex = MedCardsCollection.FirstIndexOf(CurrentPatient);
                 CurrentHospitalization = _patientsService.GetCurrentHospitalization(CurrentPatient.Id);
                 CurrentAnamnesisVitae = _patientsService.GetAnamnesisVitae(CurrentHospitalization.Id);
-                IEnumerable<Checkups>? checkups = CurrentHospitalization.Checkups;
-                if (checkups is null)
-                {
-                    Checkups = new ObservableCollection<Checkups>();
-                }
-                else
-                {
-                    Checkups = new ObservableCollection<Checkups>(checkups);
-                }
+                LoadCheckups();
                 //Examinations = CurrentHospitalization.Examinations;
                 //Treatments = CurrentHospitalization.Treatments;
+
+                //Debug
                 Examinations = new ObservableCollection<Examination>
                 {
                     new Examination()
@@ -592,6 +603,8 @@ namespace MedApp.ViewModels
                         Result = "Голова больше не болит"
                     }
                 };
+                //Debug
+                
                 MedCardHeader = CurrentPatient.ToString();
             }
 
