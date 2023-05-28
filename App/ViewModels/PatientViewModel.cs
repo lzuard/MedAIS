@@ -94,17 +94,18 @@ namespace MedApp.ViewModels
 
         #endregion Complaints
 
-        #region CurrentAnamnesisVitae
+        #region OldPatientElementsVisibility
 
-        private AnamnesisVitae _currentAnamnesisVitae;
+        private Visibility _oldPatientElementsVisibility;
 
-        public AnamnesisVitae CurrentAnamnesisVitae
+        public Visibility OldPatientElementsVisibility
         {
-            get => _currentAnamnesisVitae;
-            set => Set(ref _currentAnamnesisVitae, value);
+            get => _oldPatientElementsVisibility;
+            set => Set(ref _oldPatientElementsVisibility, value);
         }
 
-        #endregion CurrentAnamnesisVitae
+        #endregion OldPatientElementsVisibility
+
 
         #endregion Properties
 
@@ -195,6 +196,18 @@ namespace MedApp.ViewModels
 
         #endregion SelectedChamber
 
+        #region CurrentAnamnesisVitae
+
+        private AnamnesisVitae _currentAnamnesisVitae;
+
+        public AnamnesisVitae CurrentAnamnesisVitae
+        {
+            get => _currentAnamnesisVitae;
+            set => Set(ref _currentAnamnesisVitae, value);
+        }
+
+        #endregion CurrentAnamnesisVitae
+
         #endregion
 
 
@@ -283,6 +296,48 @@ namespace MedApp.ViewModels
 
         #endregion InfoTabProperties
 
+
+        #region ExaminatioTabProperties
+
+        #region Examinations
+
+        private IEnumerable<Examination> _examinations;
+
+        public IEnumerable<Examination> Examinations
+        {
+            get => _examinations;
+            set => Set(ref _examinations, value);
+        }
+
+        #endregion Examinations
+
+        #region Treatments
+
+        private IEnumerable<Treatment> _treatments;
+
+        public IEnumerable<Treatment> Treatments
+        {
+            get => _treatments;
+            set => Set(ref _treatments, value);
+        }
+
+        #endregion Treatments
+
+        #region SelectedExaminationIndex
+
+        private int _selectedExaminationIndex;
+
+        public int SelectedExaminationIndex
+        {
+            get => _selectedExaminationIndex;
+            set => Set(ref _selectedExaminationIndex, value);
+        }
+
+        #endregion SelectedExaminationIndex
+
+        #endregion ExaminatioTabProperties
+
+
         #region Commands
 
         #region Save command
@@ -356,6 +411,55 @@ namespace MedApp.ViewModels
 
         #endregion OpenCheckup
 
+        #region OpenExamination command
+
+        private ICommand _openExaminationCommand;
+
+        public ICommand OpenExaminationCommand => _openExaminationCommand
+            ??= new LambdaCommand(OnOpenExaminationCommandExecuted, CanOpenExaminationCommandExecute);
+
+        private bool CanOpenExaminationCommandExecute() => true;
+
+        private void OnOpenExaminationCommandExecuted()
+        {
+
+        }
+
+        #endregion OpenExamination
+
+        #region AddCheckup command
+
+        private ICommand _addCheckupCommand;
+
+        public ICommand AddCheckupCommand => _addCheckupCommand
+            ??= new LambdaCommand(OnAddCheckupCommandExecuted, CanAddCheckupCommandExecute);
+
+        private bool CanAddCheckupCommandExecute() => true;
+
+        private void OnAddCheckupCommandExecuted()
+        {
+
+        }
+
+        #endregion AddCheckup
+
+        #region AddExamination command
+
+        private ICommand _addExaminationCommand;
+
+        public ICommand AddExaminationCommand => _addExaminationCommand
+            ??= new LambdaCommand(OnAddExaminationCommandExecuted, CanAddExaminationCommandExecute);
+
+        private bool CanAddExaminationCommandExecute() => true;
+
+        private void OnAddExaminationCommandExecuted()
+        {
+
+        }
+
+        #endregion AddExamination
+
+
         #endregion Commands
 
         private void OpenCheckup()
@@ -384,7 +488,7 @@ namespace MedApp.ViewModels
 
         private void SaveChanges()
         {
-            bool saved = false;
+            bool saved;
 
             CurrentPatient.Gender = _patientGender;
             if (_isNewPatient)
@@ -425,18 +529,21 @@ namespace MedApp.ViewModels
             if (CurrentPatient.Id == 0)
             {
                 _isNewPatient = true;
+                OldPatientElementsVisibility = Visibility.Hidden;
                 SelectedTabItem = 3;
                 PatientAddress = new Address();
                 IsMedCardsComboBoxReadOnly = false;
                 SelectedMedCardIndex = -1;
                 CurrentHospitalization = new Hospitalization();
                 CurrentAnamnesisVitae = new AnamnesisVitae();
+                Examinations = new List<Examination>();
                 Checkups = null;
                 MedCardHeader = "Новый пациент";
             }
             else
             {
                 _isNewPatient = false;
+                OldPatientElementsVisibility = Visibility.Visible;
                 SelectedTabItem = 0;
                 PatientAddress = CurrentPatient.Address;
                 IsMedCardsComboBoxReadOnly = true;
@@ -444,6 +551,32 @@ namespace MedApp.ViewModels
                 CurrentHospitalization = _patientsService.GetCurrentHospitalization(CurrentPatient.Id);
                 CurrentAnamnesisVitae = _patientsService.GetAnamnesisVitae(CurrentHospitalization.Id);
                 Checkups = CurrentHospitalization.Checkups;
+                //Examinations = CurrentHospitalization.Examinations;
+                //Treatments = CurrentHospitalization.Treatments;
+                Examinations = new List<Examination>().Append(new Examination()
+                {
+                    Date = new DateTime(2023, 08, 10),
+                    User = new User()
+                    {
+                        Name = "Василий",
+                        Surname = "Иванов",
+                        Patronymic = "Петрович"
+                    },
+                    Cabinet = new Cabinet()
+                    {
+                        Name = "Кабинет рентгенографии"
+                    }
+                });
+                Treatments = new List<Treatment>().Append(new Treatment()
+                {
+                    StartDate = new DateTime(2023, 01, 10),
+                    EndDate = new DateTime(2023, 01, 15),
+                    Medication = "Аспирин",
+                    Volume = 200,
+                    Frequency = "1 таблетка в день",
+                    IsStopped = true,
+                    Result = "Голова больше не болит"
+                });
                 MedCardHeader = CurrentPatient.ToString();
             }
 
