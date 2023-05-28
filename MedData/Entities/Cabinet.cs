@@ -29,5 +29,7 @@ namespace MedData.Entities
         /// EF navigation property
         /// </summary>
         public ICollection<Examination> Examinations { get; set; }
+
+        public override string ToString() => Name;
     }
 }
