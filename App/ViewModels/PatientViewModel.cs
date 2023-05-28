@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
@@ -126,9 +127,9 @@ namespace MedApp.ViewModels
 
         #region Checkups
 
-        private IEnumerable<Checkups> _checkups = new List<Checkups>();
+        private ObservableCollection<Checkups> _checkups = new ObservableCollection<Checkups>();
 
-        public IEnumerable<Checkups> Checkups
+        public ObservableCollection<Checkups> Checkups
         {
             get => _checkups;
             set => Set(ref _checkups, value);
@@ -301,9 +302,9 @@ namespace MedApp.ViewModels
 
         #region Examinations
 
-        private IEnumerable<Examination> _examinations;
+        private ObservableCollection<Examination> _examinations;
 
-        public IEnumerable<Examination> Examinations
+        public ObservableCollection<Examination> Examinations
         {
             get => _examinations;
             set => Set(ref _examinations, value);
@@ -313,9 +314,9 @@ namespace MedApp.ViewModels
 
         #region Treatments
 
-        private IEnumerable<Treatment> _treatments;
+        private ObservableCollection<Treatment> _treatments;
 
-        public IEnumerable<Treatment> Treatments
+        public ObservableCollection<Treatment> Treatments
         {
             get => _treatments;
             set => Set(ref _treatments, value);
@@ -536,7 +537,7 @@ namespace MedApp.ViewModels
                 SelectedMedCardIndex = -1;
                 CurrentHospitalization = new Hospitalization();
                 CurrentAnamnesisVitae = new AnamnesisVitae();
-                Examinations = new List<Examination>();
+                Examinations = new ObservableCollection<Examination>();
                 Checkups = null;
                 MedCardHeader = "Новый пациент";
             }
@@ -550,33 +551,47 @@ namespace MedApp.ViewModels
                 SelectedMedCardIndex = MedCardsCollection.FirstIndexOf(CurrentPatient);
                 CurrentHospitalization = _patientsService.GetCurrentHospitalization(CurrentPatient.Id);
                 CurrentAnamnesisVitae = _patientsService.GetAnamnesisVitae(CurrentHospitalization.Id);
-                Checkups = CurrentHospitalization.Checkups;
+                IEnumerable<Checkups>? checkups = CurrentHospitalization.Checkups;
+                if (checkups is null)
+                {
+                    Checkups = new ObservableCollection<Checkups>();
+                }
+                else
+                {
+                    Checkups = new ObservableCollection<Checkups>(checkups);
+                }
                 //Examinations = CurrentHospitalization.Examinations;
                 //Treatments = CurrentHospitalization.Treatments;
-                Examinations = new List<Examination>().Append(new Examination()
+                Examinations = new ObservableCollection<Examination>
                 {
-                    Date = new DateTime(2023, 08, 10),
-                    User = new User()
+                    new Examination()
                     {
-                        Name = "Василий",
-                        Surname = "Иванов",
-                        Patronymic = "Петрович"
-                    },
-                    Cabinet = new Cabinet()
-                    {
-                        Name = "Кабинет рентгенографии"
+                        Date = new DateTime(2023, 08, 10),
+                        User = new User()
+                        {
+                            Name = "Василий",
+                            Surname = "Иванов",
+                            Patronymic = "Петрович"
+                        },
+                        Cabinet = new Cabinet()
+                        {
+                            Name = "Кабинет рентгенографии"
+                        }
                     }
-                });
-                Treatments = new List<Treatment>().Append(new Treatment()
+                };
+                Treatments = new ObservableCollection<Treatment>
                 {
-                    StartDate = new DateTime(2023, 01, 10),
-                    EndDate = new DateTime(2023, 01, 15),
-                    Medication = "Аспирин",
-                    Volume = 200,
-                    Frequency = "1 таблетка в день",
-                    IsStopped = true,
-                    Result = "Голова больше не болит"
-                });
+                    new Treatment()
+                    {
+                        StartDate = new DateTime(2023, 01, 10),
+                        EndDate = new DateTime(2023, 01, 15),
+                        Medication = "Аспирин",
+                        Volume = 200,
+                        Frequency = "1 таблетка в день",
+                        IsStopped = true,
+                        Result = "Голова больше не болит"
+                    }
+                };
                 MedCardHeader = CurrentPatient.ToString();
             }
 

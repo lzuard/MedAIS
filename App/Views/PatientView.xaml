@@ -780,7 +780,8 @@
                                           CanUserDeleteRows="False"
                                           AutoGenerateColumns="False"
                                           FontSize="28"
-                                          ItemsSource="{Binding Examinations}">
+                                          ItemsSource="{Binding Examinations}"
+                                          IsReadOnly="True">
                                     <DataGrid.Columns>
                                             <DataGridTemplateColumn Header="Дата">
                                                 <DataGridTemplateColumn.CellTemplate>
