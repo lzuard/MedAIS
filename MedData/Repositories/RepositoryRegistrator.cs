@@ -13,7 +13,6 @@ namespace MedData.Repositories
             .AddTransient<IRepository<AnamnesisVitae>, DbRepository<AnamnesisVitae>>()
             .AddTransient<IRepository<Cabinet>, DbRepository<Cabinet>>()
             .AddTransient<IRepository<Chamber>, DbRepository<Chamber>>()
-            .AddTransient<IRepository<Checkups>, DbRepository<Checkups>>()
             .AddTransient<IRepository<Checkup>, DbRepository<Checkup>>()
             .AddTransient<IRepository<Department>, DbRepository<Department>>()
             .AddTransient<IRepository<Diagnoses>, DbRepository<Diagnoses>>()

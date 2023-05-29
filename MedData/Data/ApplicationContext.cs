@@ -11,7 +11,6 @@ namespace MedData.Data
         public DbSet<AnamnesisVitae> AnamnesisVitae { get; set; }
         public DbSet<Cabinet> Cabinets { get; set; }
         public DbSet<Chamber> Chambers { get; set; }
-        public DbSet<Checkups> Checkups { get; set; }
         public DbSet<Department> Departments { get; set; }
         public DbSet<Diagnoses> Diagnoses { get; set; }
         public DbSet<Diagnosis> Diagnosis_s { get; set; }

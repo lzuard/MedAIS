@@ -58,7 +58,7 @@ namespace MedData.Entities
         /// <summary>
         /// EF navigation property
         /// </summary>
-        public ICollection<Checkups> Checkups { get; set; }
+        public ICollection<Checkup> Checkups { get; set; }
 
         /// <summary>
         /// EF navigation property

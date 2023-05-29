@@ -11,6 +11,16 @@ namespace MedData.Entities
         public int UserId { get; set; }
 
         /// <summary>
+        /// Hospitalization Id
+        /// </summary>
+        public int HospitalizationId { get; set; }
+
+        /// <summary>
+        /// Date of checkup
+        /// </summary>
+        public DateTime Date { get; set; }
+
+        /// <summary>
         /// External inspection
         /// </summary>
         public string View { get; set; }
@@ -53,6 +63,6 @@ namespace MedData.Entities
         /// <summary>
         /// EF navigation property
         /// </summary>
-        public ICollection<Checkups> Checkups { get; set; }
+        public Hospitalization Hospitalization { get; set; }
     }
 }
