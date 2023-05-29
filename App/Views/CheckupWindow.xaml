@@ -32,19 +32,30 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0"
                         Content="Закрыть"
                         Template="{StaticResource RoundButtonTemplate}"
                         Width="150"
                         Height="40"
-                        HorizontalAlignment="Left"/>
+                        HorizontalAlignment="Left"
+                        Command="{Binding CloseWindowCommand}"/>
                 <Button Grid.Column="1" 
+                        Content="Предыдущий"
+                        Template="{StaticResource RoundButtonTemplate}"
+                        Width="150"
+                        Height="40"
+                        HorizontalAlignment="Center"
+                        Command="{Binding LoadPreviousCheckupCommand}"
+                        IsEnabled="{Binding IsLoadButtonEnabled}"/>
+                <Button Grid.Column="2"
                         Content="Сохранить"
                         Template="{StaticResource RoundButtonTemplate}"
                         Width="150"
                         Height="40"
-                        HorizontalAlignment="Right"/>
+                        HorizontalAlignment="Right"
+                        Command="{Binding SaveDataCommand}"/>
             </Grid>
         </Border>
         <ScrollViewer>
@@ -74,7 +85,7 @@
                          Text="{Binding CurrentCheckup.Skin }"/>
                 <TextBlock Grid.Row="5" Text="Сердечно-сосудистая система"/>
                 <TextBox Grid.Row="6"
-                         Text="{Binding CurrentCheckup.Skin }"/>
+                         Text="{Binding CurrentCheckup.Heart }"/>
                 <TextBlock Grid.Row="7" Text="Пищеварительная система"/>
                 <TextBox Grid.Row="8"
                          Text="{Binding CurrentCheckup.Stomach }"/>
