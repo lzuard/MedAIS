@@ -193,6 +193,52 @@ namespace MedData.Migrations
                     b.ToTable("Chambers");
                 });
 
+            modelBuilder.Entity("MedData.Entities.Checkup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Genitourinary")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Heart")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Hormones")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Nervous")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Skin")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Stomach")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("View")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Checkup");
+                });
+
             modelBuilder.Entity("MedData.Entities.Checkups", b =>
                 {
                     b.Property<int>("Id")
@@ -201,10 +247,7 @@ namespace MedData.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("CheckUpId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("Checkup_sId")
+                    b.Property<int>("CheckupId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("Date")
@@ -213,12 +256,9 @@ namespace MedData.Migrations
                     b.Property<int>("HospitalizationId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("HospitaliztionId")
-                        .HasColumnType("integer");
-
                     b.HasKey("Id");
 
-                    b.HasIndex("Checkup_sId");
+                    b.HasIndex("CheckupId");
 
                     b.HasIndex("HospitalizationId");
 
@@ -347,10 +387,6 @@ namespace MedData.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("AnamnesisMorbi")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("Complaints")
                         .IsRequired()
@@ -626,52 +662,6 @@ namespace MedData.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("MedData.Entities.Checkup", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Genitourinary")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Heart")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Hormones")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Nervous")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Skin")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Stomach")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("UserId")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("View")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Checkup_s");
-                });
-
             modelBuilder.Entity("MedData.Entities.Allergy", b =>
                 {
                     b.HasOne("MedData.Entities.Allergen", "Allergen")
@@ -732,11 +722,22 @@ namespace MedData.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("MedData.Entities.Checkup", b =>
+                {
+                    b.HasOne("MedData.Entities.User", "User")
+                        .WithMany("Checkup")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("MedData.Entities.Checkups", b =>
                 {
-                    b.HasOne("MedData.Entities.Checkup", "Checkup_s")
+                    b.HasOne("MedData.Entities.Checkup", "Checkup")
                         .WithMany("Checkups")
-                        .HasForeignKey("Checkup_sId")
+                        .HasForeignKey("CheckupId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -746,7 +747,7 @@ namespace MedData.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Checkup_s");
+                    b.Navigation("Checkup");
 
                     b.Navigation("Hospitalization");
                 });
@@ -906,17 +907,6 @@ namespace MedData.Migrations
                     b.Navigation("Position");
                 });
 
-            modelBuilder.Entity("MedData.Entities.Checkup", b =>
-                {
-                    b.HasOne("MedData.Entities.User", "User")
-                        .WithMany("Сheckup_s")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("MedData.Entities.Address", b =>
                 {
                     b.Navigation("Cards");
@@ -939,6 +929,11 @@ namespace MedData.Migrations
                     b.Navigation("OldChamber");
 
                     b.Navigation("PatientsInChamber");
+                });
+
+            modelBuilder.Entity("MedData.Entities.Checkup", b =>
+                {
+                    b.Navigation("Checkups");
                 });
 
             modelBuilder.Entity("MedData.Entities.Department", b =>
@@ -996,12 +991,7 @@ namespace MedData.Migrations
 
                     b.Navigation("Examinations");
 
-                    b.Navigation("Сheckup_s");
-                });
-
-            modelBuilder.Entity("MedData.Entities.Checkup", b =>
-                {
-                    b.Navigation("Checkups");
+                    b.Navigation("Checkup");
                 });
 #pragma warning restore 612, 618
         }
