@@ -11,7 +11,7 @@ namespace MedApp.Services.Interfaces
     {
         public void OpenExistingCheckupWindow(Checkup checkup);
 
-        public void OpenNewCheckupWindow(int hospitalizationId);
+        public void OpenNewCheckupWindow(int hospitalizationId, int doctorId, Checkup? previousCheckup = null);
 
         public void OpenExistingExamination(Examination examination);
 

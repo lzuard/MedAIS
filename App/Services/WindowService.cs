@@ -17,14 +17,14 @@ namespace MedApp.Services
         public void OpenExistingCheckupWindow(Checkup checkup)
         {
             var window = new CheckupWindow();
-            _checkupWindowViewModel.OpenExistingCheckup(checkup);
+            _checkupWindowViewModel.OpenExistingCheckup(window,checkup);
             window.ShowDialog();
         }
 
-        public void OpenNewCheckupWindow(int hospitalizationId)
+        public void OpenNewCheckupWindow(int hospitalizationId, int doctorId, Checkup? previousCheckup = null)
         {
             var window = new CheckupWindow();
-            _checkupWindowViewModel.OpenNewCheckup(hospitalizationId);
+            _checkupWindowViewModel.OpenNewCheckup(window, hospitalizationId, doctorId, previousCheckup);
             window.ShowDialog();
         }
 
