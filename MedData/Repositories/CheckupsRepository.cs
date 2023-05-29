@@ -12,7 +12,7 @@ namespace MedData.Repositories
     internal class CheckupsRepository : DbRepository<Checkups>
     {
         public override IQueryable<Checkups> Items => base.Items
-            .Include(i => i.Checkup_s)
+            .Include(i => i.Checkup)
             .Include(i => i.Hospitalization);
 
         public CheckupsRepository(ApplicationContext context) : base(context)
