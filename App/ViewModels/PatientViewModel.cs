@@ -339,7 +339,6 @@ namespace MedApp.ViewModels
 
         #endregion ExaminatioTabProperties
 
-
         #region Commands
 
         #region Save command
@@ -466,12 +465,13 @@ namespace MedApp.ViewModels
 
         private void OpenCheckup()
         {
-            _windowService.OpenExistingCheckupWindow(new Checkup());
+            _windowService.OpenExistingCheckupWindow(Checkups[CheckUpsDataGridSelectedIndex]);
         }
 
         private void CreateCheckup()
         {
-            _windowService.OpenNewCheckupWindow(CurrentHospitalization.Id);
+            var previousCheckup = Checkups.Last();
+            _windowService.OpenNewCheckupWindow(CurrentHospitalization.Id, _doctorId, previousCheckup);
             LoadCheckups();
         }
 

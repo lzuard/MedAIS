@@ -339,15 +339,15 @@
                                                                 VerticalAlignment="Center"
                                                                 Margin="10,10"
                                                                 FirstDayOfWeek="Monday"
-                                                                Text="27.01.2001"/>
+                                                                Text="{Binding Date}"/>
                                                     </DataTemplate>
                                                 </DataGridTemplateColumn.CellTemplate>
                                             </DataGridTemplateColumn>
                                             <DataGridTextColumn Header="Специализация" 
-                                                                Binding="{Binding Checkup_s.User.Position}"
+                                                                Binding="{Binding User.Position}"
                                                                 IsReadOnly="False"/>
                                             <DataGridTextColumn Header="Врач" 
-                                                                Binding="{Binding Checkup_s.User}"
+                                                                Binding="{Binding User}"
                                                                 IsReadOnly="False"
                                                                 Width="*"/>
                                             <DataGridTemplateColumn Header="Подробнее">
