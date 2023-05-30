@@ -48,10 +48,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Infrastructure\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Resource Include="Resources\Images\AnalysesIcon.png" />
     <Resource Include="Resources\Images\Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

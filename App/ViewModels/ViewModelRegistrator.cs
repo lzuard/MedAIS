@@ -13,6 +13,7 @@ namespace MedApp.ViewModels
             .AddSingleton<PatientViewModel>()
             .AddSingleton<AdminViewModel>()
             .AddSingleton<CheckupWindowViewModel>()
-            ;
+            .AddSingleton<ExaminationWindowViewModel>()
+        ;
     }
 }
