@@ -20,6 +20,11 @@ namespace MedData.Entities
         public int UserId { get; set; }
 
         /// <summary>
+        /// Id of the examination type
+        /// </summary>
+        public int ExaminationTypeId { get; set; }
+
+        /// <summary>
         /// Date of examination
         /// </summary>
         public DateTime Date { get; set; }
@@ -43,5 +48,10 @@ namespace MedData.Entities
         /// EF navigation property
         /// </summary>
         public User User { get; set; }
+
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
+        public ExaminationType ExaminationType { get; set; }
     }
 }
