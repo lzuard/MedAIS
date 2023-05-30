@@ -13,8 +13,7 @@ namespace MedApp.ViewModels
         private MainWindowViewModel? _mainWindow;
         private IAuthService _authService;
         private IPatientsService _patientService;
-        private IWindowService _windowService;
-        
+
 
         #region Properties
 
@@ -63,7 +62,7 @@ namespace MedApp.ViewModels
                 else
                 {
                     MedCardVisibility = Visibility.Visible;
-                    _patientViewModel.PopUp(this, _patientService, CurrentPatient, CurrentUser.Id, _windowService);
+                    _patientViewModel.PopUp(this, _patientService, CurrentPatient, CurrentUser.Id);
                 }
             }
         }
@@ -138,7 +137,7 @@ namespace MedApp.ViewModels
         private void OnAddNewPatientCommandExecuted()
         {
             CurrentPatient = new MedCard();
-            _patientViewModel.PopUp(this, _patientService,CurrentPatient, CurrentUser.Id, _windowService);
+            _patientViewModel.PopUp(this, _patientService,CurrentPatient, CurrentUser.Id);
         }
 
         #endregion AddNewPatient
@@ -157,13 +156,11 @@ namespace MedApp.ViewModels
             MainWindowViewModel mainWindowViewModel, 
             IAuthService authService, 
             PatientViewModel patientViewModel,
-            IPatientsService patientsService,
-            IWindowService windowService)
+            IPatientsService patientsService)
         {
             _mainWindow = mainWindowViewModel;
             _authService = authService;
             _patientService = patientsService;
-            _windowService = windowService;
             _patientViewModel = patientViewModel;
 
             CurrentUser = _authService.CurrentUser;

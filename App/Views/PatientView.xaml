@@ -558,7 +558,7 @@
                                              Margin="10,10"
                                              Width="500"
                                              FontSize="28"
-                                             Text="{Binding PatientAddress.Country}"/>
+                                             Text="{Binding CurrentPatient.Address.Country}"/>
                                     <TextBlock Grid.Row="2"
                                                Grid.Column="0" 
                                                Text="Регион"
@@ -570,7 +570,7 @@
                                              Margin="10,10"
                                              Width="500"
                                              FontSize="28"
-                                             Text="{Binding PatientAddress.Region}"/>
+                                             Text="{Binding CurrentPatient.Address.Region}"/>
                                     <TextBlock Grid.Row="3"
                                                Grid.Column="0" 
                                                Text="Город"
@@ -582,7 +582,7 @@
                                              Margin="10,10"
                                              Width="500"
                                              FontSize="28"
-                                             Text="{Binding PatientAddress.City}"/>
+                                             Text="{Binding CurrentPatient.Address.City}"/>
                                     <TextBlock Grid.Row="4"
                                                Grid.Column="0" 
                                                Text="Улица"
@@ -594,7 +594,7 @@
                                              Margin="10,10"
                                              Width="500"
                                              FontSize="28"
-                                             Text="{Binding PatientAddress.Street}"/>
+                                             Text="{Binding CurrentPatient.Address.Street}"/>
                                     <TextBlock Grid.Row="5"
                                                Grid.Column="0" 
                                                Text="Строение"
@@ -606,7 +606,7 @@
                                              Margin="10,10"
                                              Width="500"
                                              FontSize="28"
-                                             Text="{Binding PatientAddress.Building}"/>
+                                             Text="{Binding CurrentPatient.Address.Building}"/>
                                     <TextBlock Grid.Row="6"
                                                Grid.Column="0" 
                                                Text="Квартира"
@@ -618,7 +618,7 @@
                                              Margin="10,10"
                                              Width="500"
                                              FontSize="28"
-                                             Text="{Binding PatientAddress.Room}"/>
+                                             Text="{Binding CurrentPatient.Address.Room}"/>
                                 </Grid>
                             </Border>
                             <!-- Bottom left rectangle -->

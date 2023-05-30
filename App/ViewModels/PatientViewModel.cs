@@ -14,6 +14,7 @@ namespace MedApp.ViewModels
 {
     internal class PatientViewModel:ViewModelBase
     {
+        private readonly IMessageService _messageService;
         private IPatientsService? _patientsService;
         private IWindowService _windowService;
         private DoctorsViewModel _doctorsViewModel;
@@ -250,7 +251,15 @@ namespace MedApp.ViewModels
             {
                 Set(ref _selectedGenderIndex, value);
                 _patientGender = _selectedGenderIndex == 0 ? Gender.Male : Gender.Female;
-                LoadChambers();
+                try
+                {
+                    UpdateData();
+                }
+                catch (Exception e)
+                {
+                    _messageService.ShowError($"Ошибка загрузки данных: {e.Message}", "Ошибка");
+                    CloseView();
+                }
             }
         }
 
@@ -470,9 +479,17 @@ namespace MedApp.ViewModels
 
         private void CreateCheckup()
         {
-            var previousCheckup = Checkups.Last();
+            var previousCheckup = Checkups.Count > 0 ? Checkups.Last() : null;
             _windowService.OpenNewCheckupWindow(CurrentHospitalization.Id, _doctorId, previousCheckup);
-            LoadCheckups();
+            try
+            {
+                UpdateData();
+            }
+            catch (Exception e)
+            {
+                _messageService.ShowError($"Ошибка загрузки данных: {e.Message}", "Ошибка");
+                CloseView();
+            }
         }
 
         private void CloseView()
@@ -489,19 +506,72 @@ namespace MedApp.ViewModels
             SelectedMedCardIndex = -1;
         }
 
-        private void LoadChambers()
+
+        /// <summary>
+        /// Initialize data for modelview work
+        /// </summary>
+        private void InitData()
         {
-            AvailableChambers = _patientsService.GetDoctorsChambers(_doctorId, _patientGender);
+            // If new patient appears - his id always 0
+            _isNewPatient = CurrentPatient.Id == 0;
+
+            //Setting up the Address
+            CurrentPatient.Address ??= new Address(); //TODO: CurrentAddress is useless now
+
+            //Setting up current hospitalization
+            CurrentHospitalization = _isNewPatient
+                ? new Hospitalization()
+                : _patientsService.GetCurrentHospitalization(CurrentPatient.Id);
+
+            //Setting up current anamnesis vitae
+            CurrentAnamnesisVitae = _isNewPatient
+                ? new AnamnesisVitae()
+                : _patientsService.GetAnamnesisVitae(CurrentHospitalization.Id);
         }
 
-        private void LoadCheckups()
+        /// <summary>
+        /// Update data that can be changed during work
+        /// </summary>
+        private void UpdateData()
         {
-            var checkups = _patientsService.GetPatientCheckups(CurrentHospitalization.Id);
+            //Setting up Examinations
+            CurrentHospitalization.Examinations ??= new List<Examination>(); //TODO: examination var is NOT useless need Observable collection
+
+            //Setting up Treatments
+            CurrentHospitalization.Treatments ??= new List<Treatment>();
+            Treatments = new ObservableCollection<Treatment>(CurrentHospitalization.Treatments);
+
+            //Load chambers for patient
+            AvailableChambers = _patientsService.GetDoctorsChambers(_doctorId, _patientGender);
+
+            //Setting up checkups
+            var checkups = _isNewPatient ? null : _patientsService.GetPatientCheckups(CurrentHospitalization.Id);
             Checkups = checkups is null
                 ? new ObservableCollection<Checkup>()
                 : new ObservableCollection<Checkup>(checkups);
+
         }
 
+        /// <summary>
+        /// Initialize view
+        /// </summary>
+        private void InitView()
+        {
+            //Hide useless view elements on new patient creation
+            OldPatientElementsVisibility = _isNewPatient ? Visibility.Hidden : Visibility.Visible;
+
+            //Getting all cards for "card" tab combobox
+            MedCardsCollection = _patientsService.GetAllMedCards(); //TODO: can be made only on creation
+
+            //Make medcard combobox to select current patient or nothing on new patient
+            SelectedMedCardIndex = _isNewPatient ? -1 : MedCardsCollection.FirstIndexOf(CurrentPatient);
+
+            //Set medcard combobox readonly if not creating new patient
+            IsMedCardsComboBoxReadOnly = !_isNewPatient;
+
+            //Med card view header title
+            MedCardHeader = _isNewPatient ? "Новый пациент" : CurrentPatient.ToString();
+        }
         private void SaveChanges()
         {
             bool saved;
@@ -518,7 +588,7 @@ namespace MedApp.ViewModels
             else
             {
                 saved = _patientsService.SaveOldPatient(CurrentPatient, PatientAddress, CurrentHospitalization, 
-                    CurrentAnamnesisVitae, AvailableChambers.ElementAt(SelectedChamber));
+                    CurrentAnamnesisVitae, AvailableChambers.ElementAt(SelectedChamber), Treatments);
             }
 
             if (saved)
@@ -528,87 +598,38 @@ namespace MedApp.ViewModels
                     "Не удалось сохранить данные. Не все поля заполнены. В случае проблем обратитесь к сотрудникам отдела IT",
                     "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
         }
-         
+        
+        /// <summary>
+        /// Initialize modelView
+        /// </summary>
         public void PopUp(
             DoctorsViewModel doctorsViewModel,
             IPatientsService patientsService, 
             MedCard patient, 
-            int doctorId,
-            IWindowService windowService)
+            int doctorId)
         {
             _doctorsViewModel = doctorsViewModel;
             _patientsService = patientsService;
-            _windowService = windowService;
             _doctorId = doctorId;
             CurrentPatient = patient;
 
-            MedCardsCollection = _patientsService.GetAllMedCards();
-
-            if (CurrentPatient.Id == 0)
+            try
             {
-                _isNewPatient = true;
-                OldPatientElementsVisibility = Visibility.Hidden;
-                SelectedTabItem = 3;
-                PatientAddress = new Address();
-                IsMedCardsComboBoxReadOnly = false;
-                SelectedMedCardIndex = -1;
-                CurrentHospitalization = new Hospitalization();
-                CurrentAnamnesisVitae = new AnamnesisVitae();
-                Examinations = new ObservableCollection<Examination>();
-                Checkups = null;
-                MedCardHeader = "Новый пациент";
+                InitData();
+                InitView();
+                UpdateData();
             }
-            else
+            catch (Exception e)
             {
-                _isNewPatient = false;
-                OldPatientElementsVisibility = Visibility.Visible;
-                SelectedTabItem = 0;
-                PatientAddress = CurrentPatient.Address;
-                IsMedCardsComboBoxReadOnly = true;
-                SelectedMedCardIndex = MedCardsCollection.FirstIndexOf(CurrentPatient);
-                CurrentHospitalization = _patientsService.GetCurrentHospitalization(CurrentPatient.Id);
-                CurrentAnamnesisVitae = _patientsService.GetAnamnesisVitae(CurrentHospitalization.Id);
-                LoadCheckups();
-                //Examinations = CurrentHospitalization.Examinations;
-                //Treatments = CurrentHospitalization.Treatments;
-
-                //Debug
-                Examinations = new ObservableCollection<Examination>
-                {
-                    new Examination()
-                    {
-                        Date = new DateTime(2023, 08, 10),
-                        User = new User()
-                        {
-                            Name = "Василий",
-                            Surname = "Иванов",
-                            Patronymic = "Петрович"
-                        },
-                        Cabinet = new Cabinet()
-                        {
-                            Name = "Кабинет рентгенографии"
-                        }
-                    }
-                };
-                Treatments = new ObservableCollection<Treatment>
-                {
-                    new Treatment()
-                    {
-                        StartDate = new DateTime(2023, 01, 10),
-                        EndDate = new DateTime(2023, 01, 15),
-                        Medication = "Аспирин",
-                        Volume = 200,
-                        Frequency = "1 таблетка в день",
-                        IsStopped = true,
-                        Result = "Голова больше не болит"
-                    }
-                };
-                //Debug
-                
-                MedCardHeader = CurrentPatient.ToString();
+                _messageService.ShowError($"Ошибка загрузки данных: {e.Message}", "Ошибка");
+                CloseView();
             }
+        }
 
-            LoadChambers();
+        public PatientViewModel(IMessageService messageService, IWindowService windowService)
+        {
+            _messageService = messageService;
+            _windowService = windowService;
         }
     }
 }
