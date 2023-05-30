@@ -4,10 +4,100 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Исследование" Height="450" Width="800"
-        
+        Title="Исследование" Height="600" Width="500"
+        ResizeMode="NoResize"
+        WindowStyle="ToolWindow"
+        Background="{StaticResource MWhite}"
         DataContext="{Binding ExaminationWindowViewModel, Source={StaticResource Locator}}">
-    <Grid>
-        
-    </Grid>
+    <Window.Resources>
+        <Style TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Height" Value="150"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="AcceptsTab" Value="True"/>
+            <Setter Property="Height" Value="400"/>
+        </Style>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <Style TargetType="{x:Type DatePicker}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="300"/>
+        </Style>
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="Width" Value="300"/>
+        </Style>
+    </Window.Resources>
+    <DockPanel>
+        <Border DockPanel.Dock="Bottom"
+                Height="50"
+                BorderBrush="{StaticResource MBlue}"
+                BorderThickness="2">
+            <Grid Margin="40,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0"
+                        Content="Закрыть"
+                        Template="{StaticResource RoundButtonTemplate}"
+                        Width="150"
+                        Height="40"
+                        HorizontalAlignment="Left"
+                        Command="{Binding CloseWindowCommand}"/>
+                <Button Grid.Column="2"
+                        Content="Сохранить"
+                        Template="{StaticResource RoundButtonTemplate}"
+                        Width="150"
+                        Height="40"
+                        HorizontalAlignment="Right"
+                        Command="{Binding SaveDataCommand}"/>
+            </Grid>
+        </Border>
+        <ScrollViewer>
+            <Grid Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                
+                <TextBlock Grid.Row="0" Grid.Column="0" 
+                           Text="Дата"/>
+                <DatePicker Grid.Row="0" Grid.Column="1"
+                            Text="01.01.2001"/>
+                <TextBlock Grid.Row="1" Grid.Column="0"
+                           Text="Отделение"/>
+                <ComboBox Grid.Row="1" Grid.Column="1"/>
+                <TextBlock Grid.Row="2" Grid.Column="0"
+                           Text="Специалист"/>
+                <ComboBox Grid.Row="2" Grid.Column="1"/>
+                <TextBlock Grid.Row="3" Grid.Column="0"
+                           Text="Кабинет"/>
+                <ComboBox Grid.Row="3" Grid.Column="1"/>
+                <TextBlock Grid.Row="4" Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           Text="Результат"
+                           HorizontalAlignment="Center"/>
+                <TextBox Grid.Row="5" Grid.Column="0"
+                         Grid.ColumnSpan="2"/>
+            </Grid>
+        </ScrollViewer>
+    </DockPanel>
 </Window>
