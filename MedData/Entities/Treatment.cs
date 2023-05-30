@@ -38,7 +38,7 @@ namespace MedData.Entities
         /// <summary>
         /// The result of the treatment
         /// </summary>
-        public string Result { get; set; }
+        public string? Result { get; set; }
 
         /// <summary>
         /// If treatment has been stopped
