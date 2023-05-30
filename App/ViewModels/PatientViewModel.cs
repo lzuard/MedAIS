@@ -1,28 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+using MedData;
 using System.Linq;
 using System.Windows;
+using MedData.Entities;
 using System.Windows.Input;
 using MathCore.WPF.Commands;
-using MedApp.Services.Interfaces;
 using MedApp.ViewModels.Base;
-using MedData;
-using MedData.Entities;
+using System.Collections.Generic;
+using MedApp.Services.Interfaces;
+using System.Collections.ObjectModel;
 
 namespace MedApp.ViewModels
 {
     internal class PatientViewModel:ViewModelBase
     {
+        /*------------------------------------------------------------Private properties------------------*/
+
         private readonly IMessageService _messageService;
+        private readonly IWindowService _windowService;
         private IPatientsService? _patientsService;
-        private IWindowService _windowService;
         private DoctorsViewModel _doctorsViewModel;
         private int _doctorId;
         private bool _isNewPatient;
         private bool _isMedCardSelected;
-
         private Gender _patientGender = 0;
+
+        /*Private properties------------------------------------------------------------------------------*/
+        /*------------------------------------------------------------Binding Properties------------------*/
 
         #region Properties
 
@@ -348,6 +352,9 @@ namespace MedApp.ViewModels
 
         #endregion ExaminatioTabProperties
 
+        /*Binding Properties------------------------------------------------------------------------------*/
+        /*------------------------------------------------------------Commands------------------*/
+
         #region Commands
 
         #region Save command
@@ -472,6 +479,9 @@ namespace MedApp.ViewModels
 
         #endregion Commands
 
+        /*Commands------------------------------------------------------------------------------*/
+        /*------------------------------------------------------------Commands methods------------------*/
+
         private void OpenCheckup()
         {
             _windowService.OpenExistingCheckupWindow(Checkups[CheckUpsDataGridSelectedIndex]);
@@ -506,6 +516,35 @@ namespace MedApp.ViewModels
             SelectedMedCardIndex = -1;
         }
 
+        private void SaveChanges()
+        {
+            bool saved;
+
+            CurrentPatient.Gender = _patientGender;
+            if (_isNewPatient)
+            {
+                if (_isMedCardSelected)
+                    CurrentPatient = MedCardsCollection.ElementAt(SelectedMedCardIndex);
+
+                saved = _patientsService.SaveNewPatient(CurrentPatient, PatientAddress, CurrentHospitalization,
+                    CurrentAnamnesisVitae, AvailableChambers.ElementAt(SelectedChamber));
+            }
+            else
+            {
+                saved = _patientsService.SaveOldPatient(CurrentPatient, PatientAddress, CurrentHospitalization,
+                    CurrentAnamnesisVitae, AvailableChambers.ElementAt(SelectedChamber), Treatments);
+            }
+
+            if (saved)
+                CloseView();
+            else
+                MessageBox.Show(
+                    "Не удалось сохранить данные. Не все поля заполнены. В случае проблем обратитесь к сотрудникам отдела IT",
+                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        /*Commands methods------------------------------------------------------------------------------*/
+        /*------------------------------------------------------------Private methods------------------*/
 
         /// <summary>
         /// Initialize data for modelview work
@@ -572,33 +611,10 @@ namespace MedApp.ViewModels
             //Med card view header title
             MedCardHeader = _isNewPatient ? "Новый пациент" : CurrentPatient.ToString();
         }
-        private void SaveChanges()
-        {
-            bool saved;
 
-            CurrentPatient.Gender = _patientGender;
-            if (_isNewPatient)
-            {
-                if (_isMedCardSelected)
-                    CurrentPatient = MedCardsCollection.ElementAt(SelectedMedCardIndex);
+        /*Private methods------------------------------------------------------------------------------*/
+        /*------------------------------------------------------------Public methods------------------*/
 
-                saved = _patientsService.SaveNewPatient(CurrentPatient, PatientAddress, CurrentHospitalization,
-                    CurrentAnamnesisVitae, AvailableChambers.ElementAt(SelectedChamber));
-            }
-            else
-            {
-                saved = _patientsService.SaveOldPatient(CurrentPatient, PatientAddress, CurrentHospitalization, 
-                    CurrentAnamnesisVitae, AvailableChambers.ElementAt(SelectedChamber), Treatments);
-            }
-
-            if (saved)
-                CloseView();
-            else
-                MessageBox.Show(
-                    "Не удалось сохранить данные. Не все поля заполнены. В случае проблем обратитесь к сотрудникам отдела IT",
-                    "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
-        }
-        
         /// <summary>
         /// Initialize modelView
         /// </summary>
@@ -626,10 +642,14 @@ namespace MedApp.ViewModels
             }
         }
 
+        /*Public methods------------------------------------------------------------------------------*/
+        /*------------------------------------------------------------Ctor------------------*/
+
         public PatientViewModel(IMessageService messageService, IWindowService windowService)
         {
             _messageService = messageService;
             _windowService = windowService;
         }
+        /*Ctor------------------------------------------------------------------------------*/
     }
 }
