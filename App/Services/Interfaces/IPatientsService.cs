@@ -23,7 +23,7 @@ namespace MedApp.Services.Interfaces
 
         public bool SaveNewPatient(MedCard newPatient, Address newAddress, Hospitalization newHospitalization, AnamnesisVitae newAnamnesisVitae, Chamber oldChamber);
 
-        public bool SaveOldPatient(MedCard newPatient, Address newAddress, Hospitalization newHospitalization, AnamnesisVitae newAnamnesisVitae, Chamber newChamber);
+        public bool SaveOldPatient(MedCard newPatient, Address newAddress, Hospitalization newHospitalization, AnamnesisVitae newAnamnesisVitae, Chamber newChamber, IEnumerable<Treatment> newTreatments);
 
         public bool SaveNewCheckup(Checkup checkup, int hospitalizationId);
 
