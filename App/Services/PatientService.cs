@@ -44,6 +44,7 @@ namespace MedApp.Services
 
                 //Add anamnesis vitae to new hospitalization
                 newHospitalization.AnamnesisVitae = savedAnamnesisVitae;
+                newHospitalization.Treatments = new List<Treatment>();
 
                 //Set isActive property for hospitalization true
                 newHospitalization.IsActive = true;
@@ -88,10 +89,13 @@ namespace MedApp.Services
             Address newAddress,
             Hospitalization newHospitalization,
             AnamnesisVitae newAnamnesisVitae,
-            Chamber newChamber)
+            Chamber newChamber,
+            IEnumerable<Treatment> newTreatments)
         {
             try
             {
+                //TODO: implement treatment saving
+                newHospitalization.Treatments.AddItems(newTreatments.Where(t => t.Id ==0));
                 _hospitalizationRepo.Update(newHospitalization);
                 _addressRepo.Update(newAddress);
                 _anamnesisRepo.Update(newAnamnesisVitae);
