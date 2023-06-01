@@ -12,15 +12,16 @@ using System.Collections.ObjectModel;
 
 namespace MedApp.ViewModels
 {
-    internal class PatientViewModel:ViewModelBase
+    internal class PatientViewModel : ViewModelBase
     {
         /*------------------------------------------------------------Private properties------------------*/
 
         private readonly IMessageService _messageService;
         private readonly IWindowService _windowService;
+        private readonly IAuthService _authService;
+        private readonly ICheckupService _checkupService;
         private IPatientsService? _patientsService;
         private DoctorsViewModel _doctorsViewModel;
-        private int _doctorId;
         private bool _isNewPatient;
         private bool _isMedCardSelected;
         private Gender _patientGender = 0;
@@ -157,7 +158,7 @@ namespace MedApp.ViewModels
 
         #region HospitalizationTypesList
 
-        private IEnumerable<string> _hospitalizationTypesList = new List<string>{"Направление", "СМП"};
+        private IEnumerable<string> _hospitalizationTypesList = new List<string> { "Направление", "СМП" };
 
         public IEnumerable<string> HospitalizationTypesList
         {
@@ -303,7 +304,7 @@ namespace MedApp.ViewModels
             set
             {
                 Set(ref _selectedMedCardIndex, value);
-                _isMedCardSelected = _selectedGenderIndex>0;
+                _isMedCardSelected = _selectedGenderIndex > 0;
             }
         }
 
@@ -386,7 +387,8 @@ namespace MedApp.ViewModels
         {
             if (_isNewPatient)
             {
-                var answer = MessageBox.Show("Вы уверены, что хотите закрыть окно создания новой записи? Все изменения удалятся!",
+                var answer = MessageBox.Show(
+                    "Вы уверены, что хотите закрыть окно создания новой записи? Все изменения удалятся!",
                     "Внимание", MessageBoxButton.YesNo, MessageBoxImage.Question, MessageBoxResult.No);
                 if (answer != MessageBoxResult.Yes) return;
             }
@@ -407,7 +409,7 @@ namespace MedApp.ViewModels
 
         private void OnCancelCurrentPatientCommandExecuted()
         {
-           ResetMedCard();
+            ResetMedCard();
         }
 
         #endregion CancelCurrentPatient
@@ -439,7 +441,7 @@ namespace MedApp.ViewModels
 
         private void OnOpenExaminationCommandExecuted()
         {
-
+            OpenExamination();
         }
 
         #endregion OpenExamination
@@ -471,7 +473,7 @@ namespace MedApp.ViewModels
 
         private void OnAddExaminationCommandExecuted()
         {
-
+            CreateExamination();
         }
 
         #endregion AddExamination
@@ -490,7 +492,7 @@ namespace MedApp.ViewModels
         private void CreateCheckup()
         {
             var previousCheckup = Checkups.Count > 0 ? Checkups.Last() : null;
-            _windowService.OpenNewCheckupWindow(CurrentHospitalization.Id, _doctorId, previousCheckup);
+            _windowService.OpenNewCheckupWindow(CurrentHospitalization.Id, _authService.CurrentUser.Id, previousCheckup);
             try
             {
                 UpdateData();
@@ -500,6 +502,16 @@ namespace MedApp.ViewModels
                 _messageService.ShowError($"Ошибка загрузки данных: {e.Message}", "Ошибка");
                 CloseView();
             }
+        }
+
+        private void OpenExamination()
+        {
+            
+        }
+
+        private void CreateExamination()
+        {
+            _windowService.OpenNewExaminationWindow(CurrentHospitalization.Id);
         }
 
         private void CloseView()
@@ -581,10 +593,10 @@ namespace MedApp.ViewModels
             Treatments = new ObservableCollection<Treatment>(CurrentHospitalization.Treatments);
 
             //Load chambers for patient
-            AvailableChambers = _patientsService.GetDoctorsChambers(_doctorId, _patientGender);
+            AvailableChambers = _patientsService.GetDoctorsChambers(_authService.CurrentUser.Id, _patientGender);
 
             //Setting up checkups
-            var checkups = _isNewPatient ? null : _patientsService.GetPatientCheckups(CurrentHospitalization.Id);
+            var checkups = _isNewPatient ? null : _checkupService.GetPatientCheckups(CurrentHospitalization.Id);
             Checkups = checkups is null
                 ? new ObservableCollection<Checkup>()
                 : new ObservableCollection<Checkup>(checkups);
@@ -620,13 +632,9 @@ namespace MedApp.ViewModels
         /// </summary>
         public void PopUp(
             DoctorsViewModel doctorsViewModel,
-            IPatientsService patientsService, 
-            MedCard patient, 
-            int doctorId)
+            MedCard patient)
         {
             _doctorsViewModel = doctorsViewModel;
-            _patientsService = patientsService;
-            _doctorId = doctorId;
             CurrentPatient = patient;
 
             try
@@ -645,10 +653,18 @@ namespace MedApp.ViewModels
         /*Public methods------------------------------------------------------------------------------*/
         /*------------------------------------------------------------Ctor------------------*/
 
-        public PatientViewModel(IMessageService messageService, IWindowService windowService)
+        public PatientViewModel(
+            IMessageService messageService, 
+            IWindowService windowService,
+            IAuthService authService,
+            ICheckupService checkupService, 
+            IPatientsService patientsService)
         {
             _messageService = messageService;
             _windowService = windowService;
+            _authService = authService;
+            _checkupService = checkupService;
+            _patientsService = patientsService;
         }
         /*Ctor------------------------------------------------------------------------------*/
     }

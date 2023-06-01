@@ -16,7 +16,6 @@ namespace MedApp.Services
         private readonly IRepository<Hospitalization> _hospitalizationRepo;
         private readonly IRepository<User> _userRepo;
         private readonly IRepository<PatientInChamber> _patientInChamberRepo;
-        private readonly IRepository<Checkup> _checkupRepo;
 
         /// <summary>
         /// Returns all medcards from the database
@@ -118,43 +117,6 @@ namespace MedApp.Services
 
 
         /// <summary>
-        /// Saves new checkup entity
-        /// </summary>
-        public bool SaveNewCheckup(Checkup checkup, int hospitalizationId)
-        {
-            try
-            {
-                var hospitalization = _hospitalizationRepo.Items.FirstOrDefault(h => h.Id == hospitalizationId);
-
-                checkup.Hospitalization = hospitalization;
-
-                //Add checkup entity
-                var savedCheckup = _checkupRepo.Add(checkup);
-
-                _checkupRepo.SaveChanges();
-                return true;
-            }
-            catch
-            { return false; }
-        }
-
-        /// <summary>
-        /// Updates old checkup entity
-        /// </summary>
-        public bool SaveOldCheckup(Checkup checkup)
-        {
-            try
-            {
-                _checkupRepo.Update(checkup);
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Returns anamnesis vitae object by hospitalization id
         /// </summary>
         public AnamnesisVitae GetAnamnesisVitae(int hospitalizationId)
@@ -249,32 +211,12 @@ namespace MedApp.Services
             }
         }
 
-        /// <summary>
-        /// Returns list of "Checkup" entities for hospitalization
-        /// </summary>
-        public IEnumerable<Checkup>? GetPatientCheckups(int hospitalizationId)
-        {
-            try
-            {
-                var checkups = _hospitalizationRepo.Items.SelectMany(h => h.Checkups)
-                    .Where(c => c.HospitalizationId == hospitalizationId);
-                return checkups;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        public User GetDoctor(int doctorId) => _userRepo.Items.FirstOrDefault(u => u.Id == doctorId);
-
         public PatientService(IRepository<MedCard> medCardRepo,
             IRepository<Address> addressRepo,
             IRepository<AnamnesisVitae> anamnesisRepo,
             IRepository<Hospitalization> hospitalizationRepo,
             IRepository<User> userRepo,
-            IRepository<PatientInChamber> patientInChamberRepo,
-            IRepository<Checkup> checkupRepo)
+            IRepository<PatientInChamber> patientInChamberRepo)
         {
             _medCardRepo = medCardRepo;
             _addressRepo = addressRepo;
@@ -282,7 +224,6 @@ namespace MedApp.Services
             _hospitalizationRepo = hospitalizationRepo;
             _userRepo = userRepo;
             _patientInChamberRepo = patientInChamberRepo;
-            _checkupRepo = checkupRepo;
         }
     }
 }

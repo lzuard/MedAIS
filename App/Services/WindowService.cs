@@ -13,6 +13,7 @@ namespace MedApp.Services
     internal class WindowService: IWindowService
     {
         private readonly CheckupWindowViewModel _checkupWindowViewModel;
+        private readonly ExaminationWindowViewModel _examinationWindowViewModel;
 
         public void OpenExistingCheckupWindow(Checkup checkup)
         {
@@ -30,17 +31,20 @@ namespace MedApp.Services
 
         public void OpenExistingExamination(Examination examination)
         {
-            throw new NotImplementedException();
+            var window = new ExaminationWindow();
+            window.ShowDialog();
         }
 
         public void OpenNewExaminationWindow(int hospitalizationId)
         {
-            throw new NotImplementedException();
+            var window = new ExaminationWindow();
+            window.ShowDialog();
         }
 
-        public WindowService(CheckupWindowViewModel checkupWindowViewModel)
+        public WindowService(CheckupWindowViewModel checkupWindowViewModel, ExaminationWindowViewModel examinationWindowViewModel)
         {
             _checkupWindowViewModel = checkupWindowViewModel;
+            _examinationWindowViewModel = examinationWindowViewModel;
         }
 
     }

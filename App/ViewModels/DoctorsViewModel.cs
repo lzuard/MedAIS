@@ -62,7 +62,7 @@ namespace MedApp.ViewModels
                 else
                 {
                     MedCardVisibility = Visibility.Visible;
-                    _patientViewModel.PopUp(this, _patientService, CurrentPatient, CurrentUser.Id);
+                    _patientViewModel.PopUp(this, CurrentPatient);
                 }
             }
         }
@@ -137,7 +137,7 @@ namespace MedApp.ViewModels
         private void OnAddNewPatientCommandExecuted()
         {
             CurrentPatient = new MedCard();
-            _patientViewModel.PopUp(this, _patientService,CurrentPatient, CurrentUser.Id);
+            _patientViewModel.PopUp(this, CurrentPatient);
         }
 
         #endregion AddNewPatient

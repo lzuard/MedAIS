@@ -8,9 +8,10 @@ namespace MedApp.Services
     {
         public static IServiceCollection AddServices(this IServiceCollection services) => services
             .AddSingleton<IMessageService, MessageService>()
-            .AddTransient<IAuthService, AuthService>()
+            .AddSingleton<IAuthService, AuthService>()
             .AddTransient<IPatientsService, PatientService>()
             .AddTransient<IWindowService, WindowService>()
+            .AddTransient<ICheckupService, CheckupService>()
             .AddTransient<IEntitiesCollectionProvider<Department>,  EntityCollectionProvider<Department>>()
             .AddTransient<IEntitiesCollectionProvider<Position>,  EntityCollectionProvider<Position>>()
             .AddTransient<IEntitiesCollectionProvider<User>,  EntityCollectionProvider<User>>()

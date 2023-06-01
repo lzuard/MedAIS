@@ -13,7 +13,8 @@ namespace MedApp.ViewModels
 {
     internal class CheckupWindowViewModel : ViewModelBase
     {
-        private readonly IPatientsService _patientsService;
+        private readonly ICheckupService _checkupService;
+        private readonly IAuthService _authService;
         private Checkup _previousCheckup;
         private CheckupWindow _currentWindow;
         private int _hospitalizationId;
@@ -107,12 +108,12 @@ namespace MedApp.ViewModels
 
         private void SaveData()
         {
-            if(_doctorId!=0)
-                CurrentCheckup.User = _patientsService.GetDoctor(_doctorId);
+            if (_doctorId != 0)
+                CurrentCheckup.User = _authService.CurrentUser;
 
             bool saved = CurrentCheckup.Id == 0
-                ? _patientsService.SaveNewCheckup(CurrentCheckup, _hospitalizationId)
-                : _patientsService.SaveOldCheckup(CurrentCheckup);
+                ? _checkupService.SaveNewCheckup(CurrentCheckup, _hospitalizationId)
+                : _checkupService.SaveOldCheckup(CurrentCheckup);
 
             if (!saved)
             {
@@ -175,9 +176,10 @@ namespace MedApp.ViewModels
             _doctorId = doctorId;
         }
 
-        public CheckupWindowViewModel (IPatientsService patientsService)
+        public CheckupWindowViewModel ( ICheckupService checkupService, IAuthService authService)
         {
-            _patientsService = patientsService;
+            _checkupService = checkupService;
+            _authService = authService;
         }
     }
 }
