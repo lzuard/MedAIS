@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Исследование" Height="600" Width="500"
+        Title="Исследование" Height="600" Width="510"
         ResizeMode="NoResize"
         WindowStyle="ToolWindow"
         Background="{StaticResource MWhite}"
@@ -12,11 +12,11 @@
     <Window.Resources>
         <Style TargetType="{x:Type TextBox}">
             <Setter Property="FontSize" Value="24"/>
-            <Setter Property="Height" Value="150"/>
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="AcceptsReturn" Value="True"/>
             <Setter Property="AcceptsTab" Value="True"/>
-            <Setter Property="Height" Value="400"/>
+            <Setter Property="Height" Value="290"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
         <Style TargetType="{x:Type TextBlock}">
             <Setter Property="FontSize" Value="24"/>
@@ -41,7 +41,7 @@
                 Height="50"
                 BorderBrush="{StaticResource MBlue}"
                 BorderThickness="2">
-            <Grid Margin="40,0">
+            <Grid Margin="20,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
                     <ColumnDefinition/>
@@ -63,41 +63,46 @@
                         Command="{Binding SaveDataCommand}"/>
             </Grid>
         </Border>
-        <ScrollViewer>
-            <Grid Margin="10">
+        <Grid Margin="10" Height="600">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition Height="2*"/>
+                    <RowDefinition Height="10*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.5*"/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                
+
                 <TextBlock Grid.Row="0" Grid.Column="0" 
                            Text="Дата"/>
                 <DatePicker Grid.Row="0" Grid.Column="1"
-                            Text="01.01.2001"/>
+                            Text="{Binding CurrentExamination.Date}"/>
                 <TextBlock Grid.Row="1" Grid.Column="0"
                            Text="Отделение"/>
-                <ComboBox Grid.Row="1" Grid.Column="1"/>
+                <ComboBox Grid.Row="1" Grid.Column="1"
+                          ItemsSource="{Binding DepartmentsList}"
+                          SelectedIndex="{Binding SelectedDepartmentIndex}"/>
                 <TextBlock Grid.Row="2" Grid.Column="0"
                            Text="Специалист"/>
-                <ComboBox Grid.Row="2" Grid.Column="1"/>
+                <ComboBox Grid.Row="2" Grid.Column="1"
+                          ItemsSource="{Binding DoctorsList}"
+                          SelectedIndex="{Binding SelectedDoctorIndex}"/>
                 <TextBlock Grid.Row="3" Grid.Column="0"
                            Text="Кабинет"/>
-                <ComboBox Grid.Row="3" Grid.Column="1"/>
+                <ComboBox Grid.Row="3" Grid.Column="1"
+                          ItemsSource="{Binding CabinetsList}"
+                          SelectedIndex="{Binding SelectedCabinetIndex}"/>
                 <TextBlock Grid.Row="4" Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Text="Результат"
                            HorizontalAlignment="Center"/>
                 <TextBox Grid.Row="5" Grid.Column="0"
-                         Grid.ColumnSpan="2"/>
+                         Grid.ColumnSpan="2"
+                         Text="{Binding CurrentExamination.Result}"/>
             </Grid>
-        </ScrollViewer>
     </DockPanel>
 </Window>
