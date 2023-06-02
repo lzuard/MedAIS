@@ -46,6 +46,11 @@ namespace MedApp.Services.Interfaces
         public IEnumerable<Chamber> GetDoctorsChambers(int doctorId, Gender patientGender);
 
         /// <summary>
+        /// Returns all examinations of the specified hospitalization
+        /// </summary>
+        public IEnumerable<Examination> GetExaminations(int hospitalizationId);
+
+        /// <summary>
         /// Save new medcard entity
         /// </summary>
         public bool SaveNewPatient(MedCard newPatient, Address newAddress, Hospitalization newHospitalization, AnamnesisVitae newAnamnesisVitae, Chamber oldChamber);

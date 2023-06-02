@@ -211,6 +211,12 @@ namespace MedApp.Services
             }
         }
 
+        /// <summary>
+        /// Returns all examinations of specified hospitalization
+        /// </summary>
+        public IEnumerable<Examination> GetExaminations(int hospitalizationId) =>
+            _hospitalizationRepo.Items.FirstOrDefault(h => h.Id == hospitalizationId).Examinations.ToList();
+
         public PatientService(IRepository<MedCard> medCardRepo,
             IRepository<Address> addressRepo,
             IRepository<AnamnesisVitae> anamnesisRepo,

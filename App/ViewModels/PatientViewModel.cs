@@ -586,7 +586,8 @@ namespace MedApp.ViewModels
         private void UpdateData()
         {
             //Setting up Examinations
-            CurrentHospitalization.Examinations ??= new List<Examination>(); //TODO: examination var is NOT useless need Observable collection
+            CurrentHospitalization.Examinations ??= new List<Examination>();
+            Examinations = new ObservableCollection<Examination>(CurrentHospitalization.Examinations);
 
             //Setting up Treatments
             CurrentHospitalization.Treatments ??= new List<Treatment>();

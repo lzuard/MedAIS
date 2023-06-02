@@ -32,12 +32,14 @@ namespace MedApp.Services
         public void OpenExistingExamination(Examination examination)
         {
             var window = new ExaminationWindow();
+            _examinationWindowViewModel.OpenExistingExamination(window, examination);
             window.ShowDialog();
         }
 
         public void OpenNewExaminationWindow(int hospitalizationId)
         {
             var window = new ExaminationWindow();
+            _examinationWindowViewModel.OpenNewExamination(window,hospitalizationId);
             window.ShowDialog();
         }
 
