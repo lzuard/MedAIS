@@ -18,6 +18,7 @@ namespace MedData.Repositories
             .AddTransient<IRepository<Diagnoses>, DbRepository<Diagnoses>>()
             .AddTransient<IRepository<Diagnosis>, DbRepository<Diagnosis>>()
             .AddTransient<IRepository<Examination>, DbRepository<Examination>>()
+            .AddTransient<IRepository<ExaminationType>, DbRepository<ExaminationType>>()
             .AddTransient<IRepository<MedCard>, MedCardRepository>()
             .AddTransient<IRepository<Mkb>, DbRepository<Mkb>>()
             .AddTransient<IRepository<PatientInChamber>, PatientInChambersRepository>()
