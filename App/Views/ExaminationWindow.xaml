@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Исследование" Height="600" Width="510"
+        Title="Исследование" Height="610" Width="600"
         ResizeMode="NoResize"
         WindowStyle="ToolWindow"
         Background="{StaticResource MWhite}"
@@ -15,7 +15,7 @@
             <Setter Property="TextWrapping" Value="Wrap"/>
             <Setter Property="AcceptsReturn" Value="True"/>
             <Setter Property="AcceptsTab" Value="True"/>
-            <Setter Property="Height" Value="290"/>
+            <Setter Property="Height" Value="275"/>
             <Setter Property="VerticalAlignment" Value="Top"/>
         </Style>
         <Style TargetType="{x:Type TextBlock}">
@@ -33,7 +33,7 @@
             <Setter Property="FontSize" Value="24"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
             <Setter Property="HorizontalAlignment" Value="Left"/>
-            <Setter Property="Width" Value="300"/>
+            <Setter Property="Width" Value="375"/>
         </Style>
     </Window.Resources>
     <DockPanel>
@@ -53,18 +53,19 @@
                         Width="150"
                         Height="40"
                         HorizontalAlignment="Left"
-                        Command="{Binding CloseWindowCommand}"/>
+                        Command="{Binding CloseCommand}"/>
                 <Button Grid.Column="2"
                         Content="Сохранить"
                         Template="{StaticResource RoundButtonTemplate}"
                         Width="150"
                         Height="40"
                         HorizontalAlignment="Right"
-                        Command="{Binding SaveDataCommand}"/>
+                        Command="{Binding SaveCommand}"/>
             </Grid>
         </Border>
         <Grid Margin="10" Height="600">
                 <Grid.RowDefinitions>
+                    <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
@@ -90,17 +91,25 @@
                            Text="Специалист"/>
                 <ComboBox Grid.Row="2" Grid.Column="1"
                           ItemsSource="{Binding DoctorsList}"
-                          SelectedIndex="{Binding SelectedDoctorIndex}"/>
+                          SelectedIndex="{Binding SelectedDoctorIndex}"
+                          Visibility="{Binding DoctorVisibility}"/>
                 <TextBlock Grid.Row="3" Grid.Column="0"
                            Text="Кабинет"/>
                 <ComboBox Grid.Row="3" Grid.Column="1"
                           ItemsSource="{Binding CabinetsList}"
-                          SelectedIndex="{Binding SelectedCabinetIndex}"/>
+                          SelectedIndex="{Binding SelectedCabinetIndex}"
+                          Visibility="{Binding CabinetsVisibility}"/>
                 <TextBlock Grid.Row="4" Grid.Column="0"
+                           Text="Тип"/>
+                <ComboBox Grid.Row="4" Grid.Column="1"
+                          ItemsSource="{Binding ExaminationTypesList}"
+                          SelectedIndex="{Binding SelectedExaminationIndex}"
+                          Visibility="{Binding ExaminationTypeVisibility}"/>
+            <TextBlock Grid.Row="5" Grid.Column="0"
                            Grid.ColumnSpan="2"
                            Text="Результат"
                            HorizontalAlignment="Center"/>
-                <TextBox Grid.Row="5" Grid.Column="0"
+                <TextBox Grid.Row="6" Grid.Column="0"
                          Grid.ColumnSpan="2"
                          Text="{Binding CurrentExamination.Result}"/>
             </Grid>
