@@ -25,6 +25,11 @@ namespace MedData.Interfaces
         T Add(T entity);
 
         /// <summary>
+        /// Add range of entities
+        /// </summary>
+        void AddRange(IEnumerable<T> entities);
+
+        /// <summary>
         /// Async add entity to repository and returns it
         /// </summary>
         Task<T> AddAsync(T entity, CancellationToken cancel = default);

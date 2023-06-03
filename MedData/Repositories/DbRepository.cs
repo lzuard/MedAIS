@@ -37,6 +37,14 @@ namespace MedData.Repositories
             return entity;
         }
 
+        public void AddRange(IEnumerable<T> entities)
+        {
+            if (entities is null) throw new ArgumentNullException(nameof(entities));
+            _context.AddRange(entities);
+            if(AutoSaveChanges)
+                _context.SaveChanges();
+        }
+
         public async Task<T> AddAsync(T entity, CancellationToken cancel = default)
         {
             if (entity is null) throw new ArgumentNullException(nameof(entity));
