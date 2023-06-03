@@ -24,5 +24,8 @@ namespace MedApp.ViewModels
 
         public ExaminationWindowViewModel ExaminationWindowViewModel =>
             App.Services.GetRequiredService<ExaminationWindowViewModel>();
+
+        public DiagnosisWindowViewModel DiagnosisWindowViewModel =>
+            App.Services.GetRequiredService<DiagnosisWindowViewModel>();
     }
 }
