@@ -37,6 +37,11 @@ namespace MedData.Entities
         public string EtiologyPathogenesis { get; set; }
 
         /// <summary>
+        /// If this diagnosis is main
+        /// </summary>
+        public bool IsMain { get; set; }
+
+        /// <summary>
         /// EF navigation property
         /// </summary>
         public Mkb Mkb { get; set; }
