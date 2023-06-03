@@ -16,13 +16,15 @@ namespace MedApp.ViewModels
     internal class AdminViewModel :ViewModelBase
     {
         private MainWindowViewModel _mainWindow;
-        private IAuthService _authService;
-        private IEntitiesCollectionProvider<Department> _departmentProvider;
-        private IEntitiesCollectionProvider<Position> _positionProvider;
-        private IEntitiesCollectionProvider<User> _userProvider;
-        private IEntitiesCollectionProvider<Chamber> _chamberProvider;
-        private IEntitiesCollectionProvider<Cabinet> _cabinetProvider;
-        private IEntitiesCollectionProvider<Mkb> _mkbProvider;
+        private readonly IAuthService _authService;
+        private readonly IMessageService _messageService;
+        private readonly ICsvImporterService _csvImporterService;
+        private readonly IEntitiesCollectionProvider<Department> _departmentProvider;
+        private readonly IEntitiesCollectionProvider<Position> _positionProvider;
+        private readonly IEntitiesCollectionProvider<User> _userProvider;
+        private readonly IEntitiesCollectionProvider<Chamber> _chamberProvider;
+        private readonly IEntitiesCollectionProvider<Cabinet> _cabinetProvider;
+        private readonly IEntitiesCollectionProvider<Mkb> _mkbProvider;
 
         #region Properties
 
@@ -135,12 +137,11 @@ namespace MedApp.ViewModels
             saved &= _mkbProvider.WriteValues(MKBs);
 
             if (saved) 
-                MessageBox.Show("Данные сохранены", "Успех", MessageBoxButton.OK, MessageBoxImage.Asterisk);
+                _messageService.ShowNotification("Данные сохранены", "Успех");
             else
-                MessageBox.Show("Данные не были сохранены", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                _messageService.ShowError("Данные не были сохранены", "Ошибка");
         }
         #endregion
-
         #region UpdateData
         private ICommand _updateCommand;
 
@@ -152,18 +153,65 @@ namespace MedApp.ViewModels
 
         private void OnUpdateCommandExecuted()
         {
-            Departments = _departmentProvider.GetValues();
-            Positions = _positionProvider.GetValues();
-            Users = _userProvider.GetValues();
-            Chambers = _chamberProvider.GetValues();
-            Cabinets = _cabinetProvider.GetValues();
-            MKBs = _mkbProvider.GetValues();
+           UpdateData();
         }
         #endregion
+
+        #region ImportMkb command
+
+        private ICommand _importMkbCommand;
+
+        public ICommand ImportMkbCommand => _importMkbCommand
+            ??= new LambdaCommand(OnImportMkbCommandExecuted, CanImportMkbCommandExecute);
+
+        private bool CanImportMkbCommandExecute() => true;
+
+        private void OnImportMkbCommandExecuted()
+        {
+            ImportMkb();
+        }
+
+        #endregion ImportMkb
         #endregion Commands
 
-        public void Activate(MainWindowViewModel mainWindowViewModel, 
+        private void ImportMkb()
+        {
+            var filepath = _messageService.ShowFilePicker("Файл CSV", "|*.csv");
+
+            var imported = _csvImporterService.LoadMkb(filepath);
+
+            if (imported)
+            {
+                _messageService.ShowNotification("Файл загружен успешно","Успех");
+                UpdateData();
+            }
+            else
+            {
+                _messageService.ShowError("Ошибка загрузки файла", "Ошибка");
+            }
+        }
+
+        private void UpdateData()
+        {
+            _departments = _departmentProvider.GetValues();
+            _positions = _positionProvider.GetValues();
+            _users = _userProvider.GetValues();
+            _chambers = _chamberProvider.GetValues();
+            _cabinets = _cabinetProvider.GetValues();
+            _mkbs = _mkbProvider.GetValues();
+        }
+
+        public void Activate(MainWindowViewModel mainWindowViewModel)
+        {
+            _mainWindow = mainWindowViewModel;
+            _userName = _authService.CurrentUser.GetNameAndPosition();
+            UpdateData();
+        }
+
+        public AdminViewModel(
             IAuthService authService,
+            IMessageService messageService,
+            ICsvImporterService csvImporterService,
             IEntitiesCollectionProvider<Department> departmentProvider,
             IEntitiesCollectionProvider<Position> positionProvider,
             IEntitiesCollectionProvider<User> userProvider,
@@ -177,18 +225,9 @@ namespace MedApp.ViewModels
             _chamberProvider = chambersProvider;
             _cabinetProvider = cabinetProvider;
             _mkbProvider = mkbProvider;
-
-            _mainWindow = mainWindowViewModel;
             _authService = authService;
-
-            _userName = _authService.CurrentUser.GetNameAndPosition();
-
-            _departments = _departmentProvider.GetValues();
-            _positions = _positionProvider.GetValues();
-            _users = _userProvider.GetValues();
-            _chambers = _chamberProvider.GetValues();
-            _cabinets = _cabinetProvider.GetValues();
-            _mkbs = _mkbProvider.GetValues(); 
+            _messageService = messageService;
+            _csvImporterService = csvImporterService;
         }
     }
 }

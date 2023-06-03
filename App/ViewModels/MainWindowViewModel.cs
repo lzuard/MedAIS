@@ -11,12 +11,7 @@ namespace MedApp.ViewModels
         private readonly IAuthService _authService;
         private readonly IPatientsService _patientsService;
 
-        private readonly IEntitiesCollectionProvider<Department> _departmentProvider;
-        private readonly IEntitiesCollectionProvider<Position> _positionProvider; 
-        private readonly IEntitiesCollectionProvider<User> _userProvider;
-        private readonly IEntitiesCollectionProvider<Chamber> _chamberProvider;
-        private readonly IEntitiesCollectionProvider<Cabinet> _cabinetProvider;
-        private readonly IEntitiesCollectionProvider<Mkb> _mkbProvider;             
+              
 
         private readonly AuthViewModel _authViewModel;
         private readonly DoctorsViewModel _doctorsViewModel;
@@ -99,13 +94,7 @@ namespace MedApp.ViewModels
                     CurrentViewModel = _doctorsViewModel;
                     break;
                 case 2:
-                    _adminViewModel.Activate(this, _authService,
-                        _departmentProvider,
-                        _positionProvider,
-                        _userProvider,
-                        _chamberProvider,
-                        _cabinetProvider,
-                        _mkbProvider);
+                    _adminViewModel.Activate(this);
                     CurrentViewModel = _adminViewModel;
                     break;
                 default:
@@ -132,15 +121,6 @@ namespace MedApp.ViewModels
         {
             _authService = authService;
             _patientsService = patientsService;
-
-            _departmentProvider = departmentProvider;
-            _positionProvider = positionProvider;
-            _userProvider = userProvider;
-            _chamberProvider = chambersProvider;
-            _cabinetProvider = cabinetProvider;
-            _mkbProvider = mkbProvider;
-
-
 
             _authViewModel = authViewModel;
             _doctorsViewModel = doctorsViewModel;
