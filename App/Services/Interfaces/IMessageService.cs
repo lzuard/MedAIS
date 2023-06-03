@@ -8,5 +8,9 @@ namespace MedApp.Services.Interfaces
 
         public MessageBoxResult ShowQuestion(string message, string header,
             MessageBoxResult defaultAnswer = MessageBoxResult.No);
+
+        public void ShowNotification(string message, string header);
+
+        public string ShowFilePicker(string hint, string filter);
     }
 }
