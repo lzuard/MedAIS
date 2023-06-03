@@ -2,6 +2,7 @@
 using MedData.Entities;
 using MedData.Interfaces;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace MedApp.Services.Interfaces
 {
@@ -12,7 +13,10 @@ namespace MedApp.Services.Interfaces
         private readonly IRepository<User> _userRepo;
         private readonly IRepository<Cabinet> _cabinetRepository;
         private readonly IRepository<ExaminationType> _examinationTypeRepo;
+        private readonly IRepository<Hospitalization> _hospitalizationRepo;
 
+        public IEnumerable<Examination> GetExaminations(int hospitalizationId) =>
+            _examinationRepo.Items.Where(e => e.HospitalizationId == hospitalizationId);
 
         /// <summary>
         /// Get list of departments
@@ -41,10 +45,11 @@ namespace MedApp.Services.Interfaces
         /// <summary>
         /// Save new examination entity
         /// </summary>
-        public bool SaveNewExamination(Examination examination)
+        public bool SaveNewExamination(Examination examination, int hospitalizationId)
         {
             try
             {
+                examination.Hospitalization = _hospitalizationRepo.Items.FirstOrDefault(h => h.Id == hospitalizationId);
                 _examinationRepo.Add(examination);
                 _examinationRepo.SaveChanges();
                 return true;
@@ -77,13 +82,15 @@ namespace MedApp.Services.Interfaces
             IRepository<Department> departmentRepo,
             IRepository<User> userRepo,
             IRepository<Cabinet> cabinetRepository,
-            IRepository<ExaminationType> examinationTypeRepo)
+            IRepository<ExaminationType> examinationTypeRepo,
+            IRepository<Hospitalization> hospitalizationRepo)
         {
             _examinationRepo = examinationRepo;
             _departmentRepo = departmentRepo;
             _userRepo = userRepo;
             _cabinetRepository = cabinetRepository;
             _examinationTypeRepo = examinationTypeRepo;
+            _hospitalizationRepo = hospitalizationRepo;
         }
     }
 }

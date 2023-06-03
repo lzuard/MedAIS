@@ -19,6 +19,7 @@ namespace MedApp.ViewModels
         private readonly IExaminationsService _examinationsService;
         private ExaminationWindow? _currentWindow;
         private bool _isNewExamination;
+        private int _hospitalizationId;
         /*Private properties------------------------------------------------------------------------------*/
 
         /*------------------------------------------------------------Binding properties------------------*/
@@ -235,7 +236,7 @@ namespace MedApp.ViewModels
             CurrentExamination.ExaminationType = ExaminationTypesList.ElementAt(SelectedExaminationIndex);
 
             var saved = _isNewExamination
-                ? _examinationsService.SaveNewExamination(CurrentExamination)
+                ? _examinationsService.SaveNewExamination(CurrentExamination, _hospitalizationId)
                 : _examinationsService.SaveOldExamination(CurrentExamination);
 
             if (saved) 
@@ -274,6 +275,14 @@ namespace MedApp.ViewModels
             }
         }
 
+        private void UpdateView()
+        {
+            SelectedDepartmentIndex = DepartmentsList.FirstIndexOf(CurrentExamination.Cabinet.Department);
+            SelectedDoctorIndex = DoctorsList.FirstIndexOf(CurrentExamination.User);
+            SelectedCabinetIndex = CabinetsList.FirstIndexOf(CurrentExamination.Cabinet);
+            SelectedExaminationIndex = ExaminationTypesList.FirstIndexOf(CurrentExamination.ExaminationType);
+        }
+
         /*Private methods------------------------------------------------------------------------------*/
         /*------------------------------------------------------------Public methods------------------*/
 
@@ -282,6 +291,7 @@ namespace MedApp.ViewModels
             _currentWindow = currentWindow;
             _isNewExamination = false;
             CurrentExamination = examination;
+            UpdateView();
         }
 
         public void OpenNewExamination(ExaminationWindow currentWindow, int hospitalizationId)
@@ -289,7 +299,7 @@ namespace MedApp.ViewModels
             _currentWindow = currentWindow;
             _isNewExamination = true;
             CurrentExamination = new Examination();
-            CurrentExamination.HospitalizationId=hospitalizationId;
+            _hospitalizationId=hospitalizationId;
             SelectedDepartmentIndex = -1;
         }
 

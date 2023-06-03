@@ -781,6 +781,7 @@
                                           AutoGenerateColumns="False"
                                           FontSize="28"
                                           ItemsSource="{Binding Examinations}"
+                                          SelectedIndex="{Binding SelectedExaminationIndex}"
                                           IsReadOnly="True">
                                     <DataGrid.Columns>
                                             <DataGridTemplateColumn Header="Дата">

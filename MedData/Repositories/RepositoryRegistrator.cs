@@ -25,7 +25,7 @@ namespace MedData.Repositories
             .AddTransient<IRepository<Position>, DbRepository<Position>>()
             .AddTransient<IRepository<Transaction>, DbRepository<Transaction>>()
             .AddTransient<IRepository<User>, UserRepository>()
-            .AddTransient<IRepository<Hospitalization>, DbRepository<Hospitalization>>()
+            .AddTransient<IRepository<Hospitalization>, HospitalizationRepository>()
             ;
     }
 }

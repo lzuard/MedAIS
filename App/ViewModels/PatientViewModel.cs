@@ -21,6 +21,7 @@ namespace MedApp.ViewModels
         private readonly IAuthService _authService;
         private readonly ICheckupService _checkupService;
         private IPatientsService? _patientsService;
+        private readonly IExaminationsService _examinationsService;
         private DoctorsViewModel _doctorsViewModel;
         private bool _isNewPatient;
         private bool _isMedCardSelected;
@@ -506,12 +507,21 @@ namespace MedApp.ViewModels
 
         private void OpenExamination()
         {
-            
+            _windowService.OpenExistingExamination(Examinations.ElementAt(SelectedExaminationIndex));
         }
 
         private void CreateExamination()
         {
             _windowService.OpenNewExaminationWindow(CurrentHospitalization.Id);
+            try
+            {
+                UpdateData();
+            }
+            catch (Exception e)
+            {
+                _messageService.ShowError($"Ошибка загрузки данных: {e.Message}", "Ошибка");
+                CloseView();
+            }
         }
 
         private void CloseView()
@@ -585,10 +595,6 @@ namespace MedApp.ViewModels
         /// </summary>
         private void UpdateData()
         {
-            //Setting up Examinations
-            CurrentHospitalization.Examinations ??= new List<Examination>();
-            Examinations = new ObservableCollection<Examination>(CurrentHospitalization.Examinations);
-
             //Setting up Treatments
             CurrentHospitalization.Treatments ??= new List<Treatment>();
             Treatments = new ObservableCollection<Treatment>(CurrentHospitalization.Treatments);
@@ -601,6 +607,12 @@ namespace MedApp.ViewModels
             Checkups = checkups is null
                 ? new ObservableCollection<Checkup>()
                 : new ObservableCollection<Checkup>(checkups);
+
+            //Setting up Examinations
+            var examinations = _isNewPatient ? null : _examinationsService.GetExaminations(CurrentHospitalization.Id);
+            Examinations = examinations is null
+                ? new ObservableCollection<Examination>()
+                : new ObservableCollection<Examination>(examinations);
 
         }
 
@@ -659,13 +671,15 @@ namespace MedApp.ViewModels
             IWindowService windowService,
             IAuthService authService,
             ICheckupService checkupService, 
-            IPatientsService patientsService)
+            IPatientsService patientsService,
+            IExaminationsService examinationsService)
         {
             _messageService = messageService;
             _windowService = windowService;
             _authService = authService;
             _checkupService = checkupService;
             _patientsService = patientsService;
+            _examinationsService = examinationsService;
         }
         /*Ctor------------------------------------------------------------------------------*/
     }
