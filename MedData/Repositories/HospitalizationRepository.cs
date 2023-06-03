@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MedData.Data;
 using MedData.Entities;
+using MedData.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 
 namespace MedData.Repositories

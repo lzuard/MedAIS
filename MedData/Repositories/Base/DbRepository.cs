@@ -3,7 +3,7 @@ using MedData.Entities.Base;
 using MedData.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
-namespace MedData.Repositories
+namespace MedData.Repositories.Base
 {
     public class DbRepository<T> : IRepository<T> where T : Entity, new()
     {
@@ -41,7 +41,7 @@ namespace MedData.Repositories
         {
             if (entities is null) throw new ArgumentNullException(nameof(entities));
             _context.AddRange(entities);
-            if(AutoSaveChanges)
+            if (AutoSaveChanges)
                 _context.SaveChanges();
         }
 

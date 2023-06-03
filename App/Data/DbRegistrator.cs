@@ -1,13 +1,8 @@
 ﻿using MedData.Data;
-using MedData.Repositories;
+using MedData.Repositories.Base;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MedApp.Data
 {
@@ -20,7 +15,7 @@ namespace MedApp.Data
                 optionsBuilder.UseNpgsql(configuration.GetConnectionString("Postgres"));
                 return new ApplicationContext(optionsBuilder.Options);
             })
-            .AddRepostoriesInDb()
+            .AddRepositoriesInDb()
             ;
             //.AddDbContext<ApplicationContext>(opt =>
             //{
