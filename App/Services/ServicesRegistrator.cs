@@ -14,6 +14,7 @@ namespace MedApp.Services
             .AddTransient<ICheckupService, CheckupService>()
             .AddTransient<ICsvImporterService, CsvImporterService>()
             .AddTransient<IExaminationsService, ExaminationsService>()
+            .AddTransient<IDiagnosisService, DiagnosisService>()
             .AddTransient<IEntitiesCollectionProvider<Department>,  EntityCollectionProvider<Department>>()
             .AddTransient<IEntitiesCollectionProvider<Position>,  EntityCollectionProvider<Position>>()
             .AddTransient<IEntitiesCollectionProvider<User>,  EntityCollectionProvider<User>>()

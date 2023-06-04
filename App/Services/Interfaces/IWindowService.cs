@@ -11,5 +11,9 @@ namespace MedApp.Services.Interfaces
         public void OpenExistingExamination(Examination examination);
 
         public void OpenNewExaminationWindow(int  hospitalizationId);
+
+        public void OpenDiagnosisWindow(Hospitalization hospitalization);
+
+        public Mkb OpenMkbListWindow();
     }
 }
