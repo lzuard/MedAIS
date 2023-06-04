@@ -195,6 +195,7 @@
                                         <Button Grid.Row="4"
                                                 Grid.Column="1"
                                                 Template="{StaticResource RoundButtonTemplate}"
+                                                Command="{Binding OpenDiagnosisCommand}"
                                                 Margin="10"
                                                 FontSize="20"
                                                 Content="?"/>

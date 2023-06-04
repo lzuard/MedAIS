@@ -479,11 +479,32 @@ namespace MedApp.ViewModels
 
         #endregion AddExamination
 
+        #region OpenDiagnosis command
+
+        private ICommand _openDiagnosisCommand;
+
+        public ICommand OpenDiagnosisCommand => _openDiagnosisCommand
+            ??= new LambdaCommand(OnOpenDiagnosisCommandExecuted, CanOpenDiagnosisCommandExecute);
+
+        private bool CanOpenDiagnosisCommandExecute() => true;
+
+        private void OnOpenDiagnosisCommandExecuted()
+        {
+            OpenDiagnosis();
+        }
+
+        #endregion OpenDiagnosis
+
 
         #endregion Commands
 
         /*Commands------------------------------------------------------------------------------*/
         /*------------------------------------------------------------Commands methods------------------*/
+
+        private void OpenDiagnosis()
+        {
+            _windowService.OpenDiagnosisWindow(CurrentHospitalization);
+        }
 
         private void OpenCheckup()
         {
