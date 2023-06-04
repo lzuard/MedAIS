@@ -27,5 +27,8 @@ namespace MedApp.ViewModels
 
         public DiagnosisWindowViewModel DiagnosisWindowViewModel =>
             App.Services.GetRequiredService<DiagnosisWindowViewModel>();
+
+        public MkbListWindowViewModel MkbListWindowViewModel =>
+            App.Services.GetRequiredService<MkbListWindowViewModel>();
     }
 }
