@@ -4,10 +4,116 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MedApp.Views"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
         DataContext="{Binding DiagnosisWindowViewModel, Source={StaticResource Locator}}"
-        Title="Диагнозы" Height="450" Width="800">
+        Title="Диагнозы" Height="450" Width="800"
+        Background="{StaticResource MWhite}">
+    <Window.Resources>
+        <Style x:Key="BigTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Height" Value="200"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="AcceptsReturn" Value="True"/>
+            <Setter Property="AcceptsTab" Value="False"/>
+        </Style>
+    </Window.Resources>
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0"
+                  AutoGenerateColumns="False"
+                  ItemsSource="{Binding DiagnosisList}"
+                  SelectedIndex="{Binding SelectedDiagnosisIndex}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Дата">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker FontSize="24"
+                                        VerticalAlignment="Center"
+                                        Text="{Binding Date}"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridCheckBoxColumn Header="Основной диагноз"
+                                        Binding="{Binding IsMain}"/>
+                <DataGridTemplateColumn Header="Код МКБ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="{Binding Mkb.Code}"
+                                         FontSize="24"
+                                         IsReadOnly="True"/>
+                                <Button Content=">"
+                                        Command="{Binding DataContext.OpenMkbListCommand, 
+                                    RelativeSource={RelativeSource 
+                                    AncestorType={x:Type Window}}}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Расшифровка кода"
+                                    FontSize="24"
+                                    Width="*"
+                                    Binding="{Binding Mkb.Description}"/>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Grid DataContext="{Binding}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Column="0"
+                                   Grid.Row="0"
+                                   FontSize="24"
+                                   Text="Синдромный диагноз"/>
+                        <TextBox Grid.Column="0"
+                                 Grid.Row="1"
+                                 Style="{StaticResource BigTextBox}"
+                                 Text="{Binding SyndromicDiagnosis}"/>
+                        <TextBlock Grid.Column="1"
+                                   Grid.Row="0"
+                                   FontSize="24"
+                                   Text="Клинический диагноз"/>
+                        <TextBox Grid.Column="1"
+                                 Grid.Row="1"
+                                 Style="{StaticResource BigTextBox}"
+                                 Text="{Binding .ClinicalDiagnosis}"/>
+                        <TextBlock Grid.Column="2"
+                                   Grid.Row="0"
+                                   FontSize="24"
+                                   Text="Обоснование"/>
+                        <TextBox Grid.Column="2"
+                                 Grid.Row="1"
+                                 Style="{StaticResource BigTextBox}"
+                                 Text="{Binding Rationale}"/>
+                        <TextBlock Grid.Column="3"
+                                   Grid.Row="0"
+                                   FontSize="24"
+                                   Text="Этиология и патогенез"/>
+                        <TextBox Grid.Column="3"
+                                 Grid.Row="1"
+                                 Style="{StaticResource BigTextBox}"
+                                 Text="{Binding EtiologyPathogenesis}"/>
+                    </Grid>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        <StackPanel Grid.Row="1">
+            <Button Content="Exit"
+                    Command="{Binding CloseCommand}"/>
+            <Button Content ="Save"
+                    Command="{Binding SaveCommand}"/>
+        </StackPanel>
     </Grid>
 </Window>
