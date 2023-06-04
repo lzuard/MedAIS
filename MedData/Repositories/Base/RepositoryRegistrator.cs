@@ -15,8 +15,7 @@ namespace MedData.Repositories.Base
             .AddTransient<IRepository<Chamber>, DbRepository<Chamber>>()                    //Chamber
             .AddTransient<IRepository<Checkup>, DbRepository<Checkup>>()                    //Checkup
             .AddTransient<IRepository<Department>, DbRepository<Department>>()              //Department
-            .AddTransient<IRepository<Diagnosis>, DbRepository<Diagnosis>>()                //Diagnoses
-            .AddTransient<IRepository<Diagnoses>, DbRepository<Diagnoses>>()                //Diagnosis
+            .AddTransient<IRepository<Diagnosis>, DbRepository<Diagnosis>>()                //Diagnosis
             .AddTransient<IRepository<ExaminationType>, DbRepository<ExaminationType>>()    //ExaminationType
             .AddTransient<IRepository<Mkb>, DbRepository<Mkb>>()                            //Mkb
             .AddTransient<IRepository<Position>, DbRepository<Position>>()                  //Position

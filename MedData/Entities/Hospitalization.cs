@@ -53,7 +53,7 @@ namespace MedData.Entities
         /// <summary>
         /// EF navigation property
         /// </summary>
-        public ICollection<Diagnoses> Diagnoses { get; set; }
+        public ICollection<Diagnosis> Diagnosis { get; set; }
 
         /// <summary>
         /// EF navigation property

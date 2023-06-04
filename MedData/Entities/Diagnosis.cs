@@ -11,6 +11,11 @@ namespace MedData.Entities
         public int MkbId { get; set; }
 
         /// <summary>
+        /// Id of the hospitalization
+        /// </summary>
+        public int HospitalizationId { get; set; }
+
+        /// <summary>
         /// Date when a doctor made this diagnosis
         /// </summary>
         public DateTime Date { get; set; }
@@ -49,6 +54,6 @@ namespace MedData.Entities
         /// <summary>
         /// EF navigation property
         /// </summary>
-        public ICollection<Diagnoses> Diagnoses { get; set; }
+        public Hospitalization Hospitalization { get; set; }
     }
 }
