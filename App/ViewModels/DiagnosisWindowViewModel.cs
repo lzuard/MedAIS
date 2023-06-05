@@ -103,10 +103,11 @@ namespace MedApp.ViewModels
             var result = _windowService.OpenMkbListWindow();
             if (result is not null)
             {
-                DiagnosisList.ElementAt(SelectedDiagnosisIndex).Mkb = result;
-                //var diagnosis = new Diagnosis();
-                //diagnosis.Mkb = result;
-                //_diagnosisList.Add(diagnosis);
+                try
+                {
+                    DiagnosisList.ElementAt(SelectedDiagnosisIndex).Mkb = result;
+                }
+                catch {}
             }
         }
 
