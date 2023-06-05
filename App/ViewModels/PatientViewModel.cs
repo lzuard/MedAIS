@@ -642,6 +642,7 @@ namespace MedApp.ViewModels
         /// </summary>
         private void InitView()
         {
+
             //Hide useless view elements on new patient creation
             OldPatientElementsVisibility = _isNewPatient ? Visibility.Hidden : Visibility.Visible;
 
