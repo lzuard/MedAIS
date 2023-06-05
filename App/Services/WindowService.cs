@@ -65,10 +65,10 @@ namespace MedApp.Services
             return _mkbListWindowViewModel.GetSelectedMKb();
         }
 
-        public void OpenMoveWindow()
+        public void OpenMoveWindow(Hospitalization hospitalization)
         {
             var window = new MoveWindow();
-            _moveWindowViewModel.OpenWindow(window);
+            _moveWindowViewModel.OpenWindow(window, hospitalization);
             window.ShowDialog();
         }
 

@@ -16,6 +16,6 @@ namespace MedApp.Services.Interfaces
 
         public Mkb OpenMkbListWindow();
 
-        public void OpenMoveWindow();
+        public void OpenMoveWindow(Hospitalization hospitalization);
     }
 }
