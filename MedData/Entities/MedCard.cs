@@ -65,10 +65,6 @@ namespace MedData.Entities
         /// </summary>
         public Address Address { get; set; }
 
-        /// <summary>
-        /// EF navigation property
-        /// </summary>
-        public ICollection<Allergy> Allergies { get; set; }
 
         /// <summary>
         /// EF navigation property

@@ -6,8 +6,6 @@ namespace MedData.Data
     public class ApplicationContext : DbContext
     {
         public DbSet<Address> Addresses { get; set; }
-        public DbSet<Allergen> Allergens { get; set; }
-        public DbSet<Allergy> Allergies { get; set; }
         public DbSet<AnamnesisVitae> AnamnesisVitae { get; set; }
         public DbSet<Cabinet> Cabinets { get; set; }
         public DbSet<Chamber> Chambers { get; set; }
