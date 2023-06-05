@@ -8,8 +8,7 @@ namespace MedData.Repositories
     internal class MedCardRepository : DbRepository<MedCard>
     {
         public override IQueryable<MedCard> Items => base.Items
-            .Include(i => i.Address)
-            .Include(i => i.PatientInChambers);
+            .Include(i => i.Address);
 
         public MedCardRepository(ApplicationContext context) : base(context) { }
     }

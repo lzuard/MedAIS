@@ -26,11 +26,6 @@ namespace MedData.Entities
         public string Complaints { get; set; }
 
         /// <summary>
-        /// Patient's illness anamnesis
-        /// </summary>
-        //public string AnamnesisMorbi { get; set; }
-
-        /// <summary>
         /// Short diagnosis
         /// </summary>
         public string ShortDiagnosis { get; set; }
@@ -74,5 +69,10 @@ namespace MedData.Entities
         /// EF navigation property
         /// </summary>
         public ICollection<Transaction> Transactions { get; set; }
+
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
+        public ICollection<PatientInChamber> PatientInChambers { get; set; }
     }
 }

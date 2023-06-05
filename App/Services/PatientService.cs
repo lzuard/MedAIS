@@ -48,6 +48,17 @@ namespace MedApp.Services
                 //Set isActive property for hospitalization true
                 newHospitalization.IsActive = true;
 
+                //Create new Patient In Chamber object to connect patient and chamber
+                var newPatientInChamber = new PatientInChamber()
+                {
+                    Hospitalization = newHospitalization,
+                    Chamber = oldChamber
+                };
+
+                //TODO: change the way new patient saves
+                //Save new patient in chamber object
+                var savedPatientInChamber = _patientInChamberRepo.Add(newPatientInChamber);
+
                 //Save new hospitalization object
                 var savedHospitalization = _hospitalizationRepo.Add(newHospitalization);
 
@@ -60,16 +71,6 @@ namespace MedApp.Services
                 //Add new medcard object
                 if (newPatient != _medCardRepo.Add(newPatient))
                     throw new Exception();
-
-                //Create new Patient In Chamber object to connect patient and chamber
-                var newPatientInChamber = new PatientInChamber()
-                {
-                     MedCard = newPatient,
-                     Chamber = oldChamber
-                };
-
-                //Save new patient in chamber object
-                var savedPatientInChamber = _patientInChamberRepo.Add(newPatientInChamber);
 
                 //Save changes
                 _medCardRepo.SaveChanges();
@@ -94,13 +95,17 @@ namespace MedApp.Services
             try
             {
                 //TODO: implement treatment saving
+                //TODO: changed the order patient in chamber saves
                 newHospitalization.Treatments.AddItems(newTreatments.Where(t => t.Id ==0));
+
+
+
                 _hospitalizationRepo.Update(newHospitalization);
                 _addressRepo.Update(newAddress);
                 _anamnesisRepo.Update(newAnamnesisVitae);
                 var newPatientInChambers = new PatientInChamber()
                 {
-                    MedCard = newPatient,
+                    Hospitalization = newHospitalization,
                     Chamber = newChamber
                 };
                 _patientInChamberRepo.Add(newPatientInChambers);
@@ -139,10 +144,14 @@ namespace MedApp.Services
         {
             try
             {
-                var doctorsMedcards = _medCardRepo.Items
-                    .Where(i => i.PatientInChambers.Any(j => j.Chamber.UserId == doctorId) &&
-                                i.Hospitalizations.Any(h => h.IsActive))
-                    .ToList();
+                //TODO: changed the way medcards loads
+                var doctorsMedcards = _hospitalizationRepo.Items.Where(h =>
+                        h.PatientInChambers.Any(j => j.Chamber.UserId == doctorId) && h.IsActive)
+                    .Select(h => h.MedCard).ToList();
+                //var doctorsMedcards = _medCardRepo.Items
+                //    .Where(i => i.PatientInChambers.Any(j => j.Chamber.UserId == doctorId) &&
+                //                i.Hospitalizations.Any(h => h.IsActive))
+                //    .ToList();
                 return doctorsMedcards;
             }
             catch

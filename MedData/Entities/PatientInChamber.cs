@@ -6,9 +6,9 @@ namespace MedData.Entities
     public class PatientInChamber : Entity
     {
         /// <summary>
-        /// Id of the medical card (patient)
+        /// Id of the Hospitalization (patient)
         /// </summary>
-        public int MedCardId { get; set; }
+        public int HospitalizationId { get; set; }
 
         /// <summary>
         /// Id of the chamber
@@ -18,7 +18,7 @@ namespace MedData.Entities
         /// <summary>
         /// EF navigation property
         /// </summary>
-        public MedCard MedCard { get; set; }
+        public Hospitalization Hospitalization { get; set; }
 
         /// <summary>
         /// EF navigation property

@@ -69,11 +69,6 @@ namespace MedData.Entities
         /// <summary>
         /// EF navigation property
         /// </summary>
-        public ICollection<PatientInChamber> PatientInChambers { get; set; }
-
-        /// <summary>
-        /// EF navigation property
-        /// </summary>
         public ICollection<Hospitalization> Hospitalizations { get; set; }
 
         public override string ToString()
