@@ -20,11 +20,6 @@ namespace MedData.Entities
         /// </summary>
         public ICollection<User> Users { get; set; }
 
-        /// <summary>
-        /// EF navigation property
-        /// </summary>
-        public ICollection<Chamber> Chambers { get; set; }
-
         public override string ToString()
         {
             return Name;

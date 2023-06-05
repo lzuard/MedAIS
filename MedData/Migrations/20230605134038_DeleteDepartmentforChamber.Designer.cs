@@ -3,6 +3,7 @@ using System;
 using MedData.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MedData.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    partial class ApplicationContextModelSnapshot : ModelSnapshot
+    [Migration("20230605134038_DeleteDepartmentforChamber")]
+    partial class DeleteDepartmentforChamber
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -131,6 +134,9 @@ namespace MedData.Migrations
                     b.Property<int>("BedCount")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("DepartmentId")
+                        .HasColumnType("integer");
+
                     b.Property<int>("Gender")
                         .HasColumnType("integer");
 
@@ -142,6 +148,8 @@ namespace MedData.Migrations
                         .HasColumnType("integer");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("UserId");
 
@@ -626,6 +634,10 @@ namespace MedData.Migrations
 
             modelBuilder.Entity("MedData.Entities.Chamber", b =>
                 {
+                    b.HasOne("MedData.Entities.Department", null)
+                        .WithMany("Chambers")
+                        .HasForeignKey("DepartmentId");
+
                     b.HasOne("MedData.Entities.User", "User")
                         .WithMany("Chambers")
                         .HasForeignKey("UserId")
@@ -828,6 +840,8 @@ namespace MedData.Migrations
             modelBuilder.Entity("MedData.Entities.Department", b =>
                 {
                     b.Navigation("Cabinets");
+
+                    b.Navigation("Chambers");
 
                     b.Navigation("Users");
                 });

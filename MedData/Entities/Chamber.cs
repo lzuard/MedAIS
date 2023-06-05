@@ -6,10 +6,6 @@ namespace MedData.Entities
 {
     public class Chamber : Entity
     {
-        /// <summary>
-        /// Chambers department id
-        /// </summary>
-        public int DepartmentId { get; set; }
 
         /// <summary>
         /// Doctors id
@@ -30,11 +26,6 @@ namespace MedData.Entities
         /// Bed count in this chamber
         /// </summary>
         public int BedCount { get; set; }
-
-        /// <summary>
-        /// EF navigation property
-        /// </summary>
-        public Department Department { get; set; }
 
         /// <summary>
         /// EF navigation property
