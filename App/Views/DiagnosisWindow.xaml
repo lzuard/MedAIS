@@ -3,11 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MedApp.Views"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         mc:Ignorable="d"
+ 
         DataContext="{Binding DiagnosisWindowViewModel, Source={StaticResource Locator}}"
-        Title="Диагнозы" Height="450" Width="800"
+        WindowState="Maximized"
+        Title="Диагнозы" 
+        ResizeMode="NoResize"
+        Height="1080" Width="1920"
         Background="{StaticResource MWhite}">
     <Window.Resources>
         <Style x:Key="BigTextBox" TargetType="{x:Type TextBox}">
@@ -21,13 +23,15 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="10*"/>
+            <RowDefinition Height="20*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <DataGrid Grid.Row="0"
+                  FontSize="24"
                   AutoGenerateColumns="False"
                   ItemsSource="{Binding DiagnosisList}"
-                  SelectedIndex="{Binding SelectedDiagnosisIndex}">
+                  SelectedIndex="{Binding SelectedDiagnosisIndex}"
+                  Background="{StaticResource MWhite}">
             <DataGrid.Columns>
                 <DataGridTemplateColumn Header="Дата">
                     <DataGridTemplateColumn.CellTemplate>
@@ -50,7 +54,9 @@
                                 <Button Content=">"
                                         Command="{Binding DataContext.OpenMkbListCommand, 
                                     RelativeSource={RelativeSource 
-                                    AncestorType={x:Type Window}}}"/>
+                                    AncestorType={x:Type Window}}}"
+                                        Width="40"
+                                        Background="{StaticResource MWhite}"/>
                             </StackPanel>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -109,11 +115,24 @@
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
-        <StackPanel Grid.Row="1">
-            <Button Content="Exit"
-                    Command="{Binding CloseCommand}"/>
-            <Button Content ="Save"
-                    Command="{Binding SaveCommand}"/>
-        </StackPanel>
+        <Grid Grid.Row="1"
+              Background="{StaticResource MBlue}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0"
+                    Content="Закрыть"
+                    Command="{Binding CloseCommand}"
+                    Template="{StaticResource RoundButtonTemplate}"
+                    Width="300"
+                    Margin="3"/>
+            <Button Grid.Column="1"
+                    Content ="Сохранить"
+                    Command="{Binding SaveCommand}"
+                    Template="{StaticResource RoundButtonTemplate}"
+                    Width="300"
+                    Margin="3"/>
+        </Grid>
     </Grid>
 </Window>
