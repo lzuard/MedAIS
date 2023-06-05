@@ -8,8 +8,303 @@
 
         DataContext="{Binding MoveWindowViewModel ,Source={StaticResource Locator}}"
 
-        Title="Перемещение пациента" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="Перемещение пациента" 
+        Height="971" Width="900"
+        Background="{StaticResource MWhite}">
+    <Window.Resources>
+        <!--Button-->
+        <Style TargetType="{x:Type Button}">
+            <Setter Property="Template" Value="{StaticResource RoundButtonTemplate}"/>
+            <Setter Property="Margin" Value="40,1"/>
+            <Setter Property="FontSize" Value="22"/>
+        </Style>
+        <!--TextBlock-->
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="Margin" Value="10,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+        </Style>
+        <!--BigTextBox-->
+        <Style x:Key="BigTextBox" TargetType="{x:Type TextBox}">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Height" Value="200"/>
+            <Setter Property="Margin" Value="10,2"/>
+        </Style>
+        <!--ComboBox-->
+        <Style TargetType="{x:Type ComboBox}">
+            <Setter Property="Margin" Value="10,1,1,1"/>
+            <Setter Property="FontSize" Value="24"/>
+        </Style>
+    </Window.Resources>
+    <Border Margin="5"
+            BorderThickness="5"
+            BorderBrush="{StaticResource MBlue}"
+            CornerRadius="40">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"/>
+                <RowDefinition Height="10*"/>
+                <RowDefinition Height="1.2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+
+            <!--#region top left rectangle -->
+            <Border Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="4"
+                    BorderThickness="3"
+                    BorderBrush="{StaticResource MBlue}"
+                    CornerRadius="30,0,0,0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.8*"/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.5*"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="Лягушки-квакушки" Height="2" Width="3" Background="{StaticResource MWhite}"
+                             Margin="3" FontSize="1" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0" Grid.ColumnSpan="2"
+                               Margin="40,0"
+                               Text="Откуда" HorizontalAlignment="Center"/>
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               Text="Отделение"/>
+                    <ComboBox Grid.Row="2"
+                              Grid.Column="0" Grid.ColumnSpan="2"
+                              ItemsSource="{Binding FromDepartmentList}"
+                              IsEnabled="False"/>
+                    <TextBlock Grid.Row="3"
+                               Grid.Column="0"
+                               Text="Врач"/>
+                    <ComboBox Grid.Row="4"
+                              Grid.Column="0" Grid.ColumnSpan="2"
+                              ItemsSource="{Binding FromUserList}"
+                              IsEnabled="False"/>
+                    <TextBlock Grid.Row="5"
+                               Grid.Column="0"
+                               Text="Палата"/>
+                    <ComboBox Grid.Row="5"
+                              Grid.Column="1"
+                              ItemsSource="{Binding FromChamberList}"
+                              IsEnabled="False"/>
+                </Grid>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region top right rectangle -->
+            <Border Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="4"
+                    BorderThickness="3"
+                    BorderBrush="{StaticResource MBlue}"
+                    CornerRadius="0,30,0,0">
+                <Grid>
+                   <Grid.RowDefinitions>
+                       <RowDefinition Height="0.2*"/>
+                       <RowDefinition/>
+                   </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Margin="40,0"
+                               Text="Куда" 
+                               HorizontalAlignment="Center"/>
+                    <TabControl Grid.Row="1" 
+                                Background="{StaticResource MWhite}" 
+                                BorderThickness="0" 
+                                Margin="0,-6,0,0" 
+                                Padding="0,-10,0,0"
+                                SelectedIndex="1">
+                        <TabItem Visibility="Hidden">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.5*"/>
+                                    <ColumnDefinition/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Grid.Column="0"
+                                           Text="Отделение"/>
+                                <ComboBox Grid.Row="1"
+                                          Grid.Column="0" Grid.ColumnSpan="2"
+                                          ItemsSource="{Binding FromDepartmentList}"/>
+                                <TextBlock Grid.Row="2"
+                                           Grid.Column="0"
+                                           Text="Врач"/>
+                                <ComboBox Grid.Row="3"
+                                          Grid.Column="0" Grid.ColumnSpan="2"
+                                          ItemsSource="{Binding FromUserList}"/>
+                                <TextBlock Grid.Row="4"
+                                           Grid.Column="0"
+                                           Text="Палата"/>
+                                <ComboBox Grid.Row="4"
+                                          Grid.Column="1"
+                                          ItemsSource="{Binding FromChamberList}"/>
+                            </Grid>
+                        </TabItem>
+                        <TabItem Visibility="Hidden">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition/>
+                                    <RowDefinition/>
+                                </Grid.RowDefinitions>
+                                <TextBlock Grid.Row="0"
+                                           Text="Выписать пациента:"/>
+                                <StackPanel Grid.Row="1">
+                                    <RadioButton Content="Выписка" FontSize="20" GroupName="Group"/>
+                                    <RadioButton Content="Отказ от лечения" FontSize="20" GroupName="Group"/>
+                                    <RadioButton Content="Смерть" FontSize="20" GroupName="Group"/>
+                                </StackPanel>
+                            </Grid>
+                        </TabItem>
+                    </TabControl>
+                </Grid>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region bottom left rectangle -->
+            <Border Grid.Row="1"
+                    Grid.Column="0"
+                    Margin="4"
+                    BorderThickness="3"
+                    BorderBrush="{StaticResource MBlue}">
+                <Grid>
+
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="40,0"
+                               Text="Основной диагноз" 
+                               HorizontalAlignment="Center"/>
+                    <ScrollViewer Grid.Row="1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/> 
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.3*"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0"
+                                       Grid.Column="0"
+                                       Text="A00.0"/>
+                            <Viewbox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" MaxHeight="39">
+                                <TextBlock Text="a"/>
+                            </Viewbox>
+                            <TextBlock Grid.Row="1"
+                                       Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="Синдромный диагноз"
+                                       HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="2"
+                                     Grid.Column="0" Grid.ColumnSpan="2"
+                                     Style="{StaticResource BigTextBox}"
+                                     Text="1111"/>
+                            <TextBlock Grid.Row="3"
+                                       Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="Клинический диагноз"
+                                       HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="4"
+                                     Grid.Column="0" Grid.ColumnSpan="2"
+                                     Style="{StaticResource BigTextBox}"
+                                     Text="1111"/>
+                            <TextBlock Grid.Row="5"
+                                       Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="Обоснование"
+                                       HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="6"
+                                     Grid.Column="0" Grid.ColumnSpan="2"
+                                     Style="{StaticResource BigTextBox}"
+                                     Text="1111"/>
+                            <TextBlock Grid.Row="7"
+                                       Grid.Column="0" Grid.ColumnSpan="2"
+                                       Text="Этиология и патогенез"
+                                       HorizontalAlignment="Center"/>
+                            <TextBox Grid.Row="8"
+                                     Grid.Column="0" Grid.ColumnSpan="2"
+                                     Style="{StaticResource BigTextBox}"
+                                     Text="1111"/>
+                        </Grid>
+                    </ScrollViewer>
+                </Grid>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region bottom right rectangle -->
+            <Border Grid.Row="1"
+                    Grid.Column="1"
+                    Margin="4"
+                    BorderThickness="3"
+                    BorderBrush="{StaticResource MBlue}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="0.1*"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0"
+                               Text="СПОР"
+                               HorizontalAlignment="Center"/>
+                    <TextBox Grid.Row="1"
+                             Style="{StaticResource BigTextBox}"
+                             Text="1111"
+                             Height="490"/>
+                </Grid>
+            </Border>
+            <!--#endregion-->
+
+            <!--#region Control panel-->
+            <Border Grid.Row="2"
+                    Grid.Column="0" Grid.ColumnSpan="2"
+                    Margin="4"
+                    BorderThickness="3"
+                    BorderBrush="{StaticResource MBlue}"
+                    CornerRadius="0,0,30,30">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Content="Закрыть"
+                            Command="{Binding CloseCommand}"/>
+                    <Button Grid.Column="1"
+                            Content="{Binding SwitchButtonContent}"
+                            Command="{Binding SwitchCommand}"/>
+                    <Button Grid.Column="2"
+                            Content="Сохранить"
+                            Command="{Binding SaveCommand}"/>
+                </Grid>
+            </Border>
+            <!--#endregion-->
+
+        </Grid>
+    </Border>
 </Window>
