@@ -16,6 +16,7 @@ namespace MedApp.ViewModels
             .AddSingleton<ExaminationWindowViewModel>()
             .AddSingleton<DiagnosisWindowViewModel>()
             .AddSingleton<MkbListWindowViewModel>()
+            .AddSingleton<MoveWindowViewModel>()
         ;
     }
 }

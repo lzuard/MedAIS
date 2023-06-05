@@ -30,5 +30,7 @@ namespace MedApp.ViewModels
 
         public MkbListWindowViewModel MkbListWindowViewModel =>
             App.Services.GetRequiredService<MkbListWindowViewModel>();
+
+        public MoveWindowViewModel MoveWindowViewModel => App.Services.GetRequiredService<MoveWindowViewModel>();
     }
 }
