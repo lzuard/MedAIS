@@ -16,6 +16,7 @@ namespace MedApp.Services
         private readonly ExaminationWindowViewModel _examinationWindowViewModel;
         private readonly DiagnosisWindowViewModel _diagnosisWindowViewModel;
         private readonly MkbListWindowViewModel _mkbListWindowViewModel;
+        private readonly MoveWindowViewModel _moveWindowViewModel;
 
         public void OpenExistingCheckupWindow(Checkup checkup)
         {
@@ -64,16 +65,25 @@ namespace MedApp.Services
             return _mkbListWindowViewModel.GetSelectedMKb();
         }
 
+        public void OpenMoveWindow()
+        {
+            var window = new MoveWindow();
+            _moveWindowViewModel.OpenWindow(window);
+            window.ShowDialog();
+        }
+
         public WindowService(
             CheckupWindowViewModel checkupWindowViewModel, 
             ExaminationWindowViewModel examinationWindowViewModel, 
             DiagnosisWindowViewModel diagnosisWindowViewModel,
-            MkbListWindowViewModel mkbListWindowViewModel)
+            MkbListWindowViewModel mkbListWindowViewModel,
+            MoveWindowViewModel moveWindowViewModel)
         {
             _checkupWindowViewModel = checkupWindowViewModel;
             _examinationWindowViewModel = examinationWindowViewModel;
             _diagnosisWindowViewModel = diagnosisWindowViewModel;
             _mkbListWindowViewModel = mkbListWindowViewModel;
+            _moveWindowViewModel = moveWindowViewModel;
         }
 
     }

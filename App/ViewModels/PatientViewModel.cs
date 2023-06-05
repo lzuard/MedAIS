@@ -495,11 +495,32 @@ namespace MedApp.ViewModels
 
         #endregion OpenDiagnosis
 
+        #region OpenMoveWindow command
+
+        private ICommand _openMoveWindowCommand;
+
+        public ICommand OpenMoveWindowCommand => _openMoveWindowCommand
+            ??= new LambdaCommand(OnOpenMoveWindowCommandExecuted, CanOpenMoveWindowCommandExecute);
+
+        private bool CanOpenMoveWindowCommandExecute() => true;
+
+        private void OnOpenMoveWindowCommandExecuted()
+        {
+            OpenMoveWindow();
+        }
+
+        #endregion OpenMoveWindow
+
 
         #endregion Commands
 
         /*Commands------------------------------------------------------------------------------*/
         /*------------------------------------------------------------Commands methods------------------*/
+
+        private void OpenMoveWindow()
+        {
+            _windowService.OpenMoveWindow();
+        }
 
         private void OpenDiagnosis()
         {

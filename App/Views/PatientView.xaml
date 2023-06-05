@@ -180,7 +180,8 @@
                                                 Template="{StaticResource RoundButtonTemplate}"
                                                 Margin="10"
                                                 FontSize="20"
-                                                Content=">"/>
+                                                Content=">"
+                                                Command="{Binding OpenMoveWindowCommand}"/>
                                     <ComboBox Grid.Row="3"
                                                   Grid.Column="2"
                                                   FontSize="24"
