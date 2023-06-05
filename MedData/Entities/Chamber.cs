@@ -35,7 +35,7 @@ namespace MedData.Entities
         /// <summary>
         /// EF navigation property
         /// </summary>
-        public ICollection<PatientInChamber> PatientsInChamber { get; set; }
+        public ICollection<Hospitalization> Hospitalizations { get; set; }
 
         /// <summary>
         /// EF navigation property

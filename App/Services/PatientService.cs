@@ -15,7 +15,6 @@ namespace MedApp.Services
         private readonly IRepository<AnamnesisVitae> _anamnesisRepo;
         private readonly IRepository<Hospitalization> _hospitalizationRepo;
         private readonly IRepository<User> _userRepo;
-        private readonly IRepository<PatientInChamber> _patientInChamberRepo;
 
         /// <summary>
         /// Returns all medcards from the database
@@ -44,20 +43,12 @@ namespace MedApp.Services
                 //Add anamnesis vitae to new hospitalization
                 newHospitalization.AnamnesisVitae = savedAnamnesisVitae;
                 newHospitalization.Treatments = new List<Treatment>();
+                newHospitalization.Chamber = oldChamber;
 
                 //Set isActive property for hospitalization true
                 newHospitalization.IsActive = true;
 
-                //Create new Patient In Chamber object to connect patient and chamber
-                var newPatientInChamber = new PatientInChamber()
-                {
-                    Hospitalization = newHospitalization,
-                    Chamber = oldChamber
-                };
-
                 //TODO: change the way new patient saves
-                //Save new patient in chamber object
-                var savedPatientInChamber = _patientInChamberRepo.Add(newPatientInChamber);
 
                 //Save new hospitalization object
                 var savedHospitalization = _hospitalizationRepo.Add(newHospitalization);
@@ -97,18 +88,12 @@ namespace MedApp.Services
                 //TODO: implement treatment saving
                 //TODO: changed the order patient in chamber saves
                 newHospitalization.Treatments.AddItems(newTreatments.Where(t => t.Id ==0));
-
-
+                newHospitalization.Chamber = newChamber;
 
                 _hospitalizationRepo.Update(newHospitalization);
                 _addressRepo.Update(newAddress);
                 _anamnesisRepo.Update(newAnamnesisVitae);
-                var newPatientInChambers = new PatientInChamber()
-                {
-                    Hospitalization = newHospitalization,
-                    Chamber = newChamber
-                };
-                _patientInChamberRepo.Add(newPatientInChambers);
+               
                 _medCardRepo.Update(newPatient);
 
                 _medCardRepo.SaveChanges();
@@ -145,9 +130,11 @@ namespace MedApp.Services
             try
             {
                 //TODO: changed the way medcards loads
-                var doctorsMedcards = _hospitalizationRepo.Items.Where(h =>
-                        h.PatientInChambers.Any(j => j.Chamber.UserId == doctorId) && h.IsActive)
-                    .Select(h => h.MedCard).ToList();
+                var doctorsMedcards = _hospitalizationRepo.Items.Where(h=> h.IsActive && h.Chamber.UserId==doctorId)
+                    .Select(h=> h.MedCard).ToList();
+                /* var doctorsMedcards = _hospitalizationRepo.Items.Where(h =>
+                         h.PatientInChambers.Any(j => j.Chamber.UserId == doctorId) && h.IsActive)
+                     .Select(h => h.MedCard).ToList();*/
                 //var doctorsMedcards = _medCardRepo.Items
                 //    .Where(i => i.PatientInChambers.Any(j => j.Chamber.UserId == doctorId) &&
                 //                i.Hospitalizations.Any(h => h.IsActive))
@@ -230,15 +217,13 @@ namespace MedApp.Services
             IRepository<Address> addressRepo,
             IRepository<AnamnesisVitae> anamnesisRepo,
             IRepository<Hospitalization> hospitalizationRepo,
-            IRepository<User> userRepo,
-            IRepository<PatientInChamber> patientInChamberRepo)
+            IRepository<User> userRepo)
         {
             _medCardRepo = medCardRepo;
             _addressRepo = addressRepo;
             _anamnesisRepo = anamnesisRepo;
             _hospitalizationRepo = hospitalizationRepo;
             _userRepo = userRepo;
-            _patientInChamberRepo = patientInChamberRepo;
         }
     }
 }

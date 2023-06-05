@@ -23,7 +23,6 @@ namespace MedData.Repositories.Base
             .AddTransient<IRepository<Hospitalization>, HospitalizationRepository>()        //Hospitalization
             .AddTransient<IRepository<Examination>, ExaminationRepository>()                //Examination
             .AddTransient<IRepository<MedCard>, MedCardRepository>()                        //MedCard
-            .AddTransient<IRepository<PatientInChamber>, PatientInChambersRepository>()     //PatientInChamber
-            ;
+        ;
     }
 }

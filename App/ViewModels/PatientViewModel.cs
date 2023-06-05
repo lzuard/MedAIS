@@ -519,7 +519,7 @@ namespace MedApp.ViewModels
 
         private void OpenMoveWindow()
         {
-            _windowService.OpenMoveWindow();
+            _windowService.OpenMoveWindow(CurrentHospitalization);
         }
 
         private void OpenDiagnosis()

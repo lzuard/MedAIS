@@ -15,7 +15,6 @@ namespace MedData.Data
         public DbSet<Hospitalization> Hospitalizations { get; set; }
         public DbSet<MedCard> MedCards { get; set; }
         public DbSet<Mkb> Mkb { get; set; }
-        public DbSet<PatientInChamber> PatientInChambers { get; set; }
         public DbSet<Position> Positions { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<Treatment> Treatments { get; set; }

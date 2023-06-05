@@ -11,6 +11,11 @@ namespace MedData.Entities
         public int MedCardId { get; set; }
 
         /// <summary>
+        /// Patient's chamber
+        /// </summary>
+        public int ChamberId { get; set; }
+
+        /// <summary>
         /// Date when hospitalization started
         /// </summary>
         public DateTime HospitalizationDate { get; set; }
@@ -48,6 +53,11 @@ namespace MedData.Entities
         /// <summary>
         /// EF navigation property
         /// </summary>
+        public Chamber Chamber { get; set; }
+
+        /// <summary>
+        /// EF navigation property
+        /// </summary>
         public ICollection<Diagnosis> Diagnosis { get; set; }
 
         /// <summary>
@@ -69,10 +79,5 @@ namespace MedData.Entities
         /// EF navigation property
         /// </summary>
         public ICollection<Transaction> Transactions { get; set; }
-
-        /// <summary>
-        /// EF navigation property
-        /// </summary>
-        public ICollection<PatientInChamber> PatientInChambers { get; set; }
     }
 }
